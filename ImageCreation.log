@@ -487,3 +487,4 @@
 {"level":"INFO","time":"2023-12-17T18:17:43.730+0800","caller":"logger/logger.go:67","msg":"/","status":200,"method":"GET","path":"/","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0","errors":"","cost":0.0020006}
 {"level":"INFO","time":"2023-12-17T18:17:45.683+0800","caller":"logger/logger.go:67","msg":"/image/index","status":200,"method":"GET","path":"/image/index","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0","errors":"","cost":0.002197}
 {"level":"DEBUG","time":"2023-12-17T18:19:29.981+0800","caller":"ImageCreation/main.go:29","msg":"logger init success..."}
+{"level":"DEBUG","time":"2023-12-17T18:27:29.005+0800","caller":"ImageCreation/main.go:29","msg":"logger init success..."}
