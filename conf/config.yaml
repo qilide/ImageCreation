@@ -1,0 +1,35 @@
+name: "ImageCreation"
+title: "图片摄影创作"
+mode: "dev"
+port: 4000
+version: "v0.0.1"
+
+log:
+  level: "debug"
+  filename: "ImageCreation.log"
+  max_size: 200
+  max_age: 30
+  max_backips: 7
+
+mysql:
+  host: "127.0.0.1"
+  port: 3306
+  user: "root"
+  password: "lide123."
+  dbname: "imagecreation"
+  max_open_conns: 200
+  max_idle_conns: "50"
+
+redis:
+  host: "127.0.0.1"
+  port: 6379
+  password: ""
+  db: 5
+  pool_size: 100
+
+email:
+  user: "1019528265@qq.com"
+  pass: "umiueaxacsknbbig"
+  host: "smtp.qq.com"
+  port: 465
+  rename: "ImageCreation"

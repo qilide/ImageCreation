@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>摄影创作</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- Favicons -->
+    <link href="../static/assets/img/favicon.png" rel="icon">
+    <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+</head>
+<body class="body">
+<div class="content">
+    <div class="form sign-in login">
+        <h2>欢迎回来</h2>
+        <div style="width: 10px;height: 60px"></div>
+        <label>
+            <span>用户名</span>
+            <input type="text" name="username" id="nameL"/>
+        </label>
+        <div style="width: 10px;height: 30px"></div>
+        <label>
+            <span>密码</span>
+            <input type="password" name="password" id="passwordL"/>
+        </label>
+        <div style="width: 10px;height: 30px"></div>
+        <!--        <p class="forgot-pass"><a href="javascript:">忘记密码？</a></p>-->
+        <button type="submit" class="submit" value="登录" id="login">登 录</button>
+        <div style="text-align: center;margin-top: 5px" id="msgL"></div>
+    </div>
+    <div class="sub-cont">
+        <div class="img">
+            <div class="img__text m--up">
+                <h2>还未注册？</h2>
+                <p>立即注册，发现大量机会！</p>
+            </div>
+            <div class="img__text m--in">
+                <h2>已有帐号？</h2>
+                <p>有帐号就登录吧，好久不见了！</p>
+            </div>
+            <div class="img__btn">
+                <span class="m--up">注 册</span>
+                <span class="m--in">登 录</span>
+            </div>
+        </div>
+        <div class="form sign-up signup">
+            <h2>立即注册</h2>
+            <label>
+                <span>用户名</span>
+                <input type="text" id="name"/>
+            </label>
+            <label>
+                <span>邮箱</span>
+                <input type="email" id="email"/>
+            </label>
+            <label>
+                <span>验证码</span>
+                <input type="email" name="code" id="code"/>
+            </label>
+            <label>
+                <span>密码</span>
+                <input type="password" id="password"/>
+            </label>
+            <div style="text-align: center;margin-top: 5px;margin-bottom: 2px" id="msg"></div>
+            <button type="submit" class="submit" id="getcode">获取验证码</button>
+            <button type="submit" class="submit" id="register">注 册</button>
+        </div>
+    </div>
+</div>
+
+
+<script src="../static/js/script.js"></script>
+<script src="../static/assets/js/jquery.min.js"></script>
+<script>
+    window.sessionStorage.setItem('token', '');
+    if (window.sessionStorage.getItem('reload')) {
+        location.reload();
+        window.sessionStorage.setItem('reload', '');
+    }
+    $(function () {
+        // 登录
+        $('.signupbtn').click(function () {
+            $('.login').css('transform', 'rotateY(180deg)');
+            $('.signup').css('transform', 'rotateY(0deg)');
+            $('.head').html('用户注册');
+            $('#nameL').val('');
+            $('#passwordL').val('');
+            $('#msgL').text('');
+        });
+
+        // 注册
+        $('.loginbtn').click(function () {
+            $('.login').css('transform', 'rotateY(0deg)');
+            $('.signup').css('transform', 'rotateY(-180deg)');
+            $('.head').html('用户登录');
+            $('#name').val('');
+            $('#password').val('');
+            $('#email').val('');
+            $('#code').val('');
+            $('#msg').text('')
+        });
+
+        // 验证码
+        $('.codebtn').click(function () {
+            $('.login').css('transform', 'rotateY(0deg)');
+            $('.signup').css('transform', 'rotateY(-180deg)');
+            $('.head').html('验证码');
+            $('#email').val('');
+            $('#msg').text('')
+        });
+
+        $('#login').click(function () {
+            let username = $('#nameL').val();
+            let password = $('#passwordL').val();
+            if (!username) {
+                $('#msgL').text('请输入用户名！');
+                return;
+            }
+            if (!password) {
+                $('#msgL').text('请输入密码！');
+                return;
+            }
+            username = username.trim();
+            password = password.trim();
+            let formData = new FormData();
+            formData.append('username', username);
+            formData.append('password', password);
+            $.ajax({
+                url: `/account/login`,
+                type: 'post',
+                data: formData,
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                success: function (res) {
+                    const {
+                        msg,
+                        code,
+                        data
+                    } = res;
+                    if (code === 200) {
+                        $('#msgL').text(msg);
+                        window.sessionStorage.setItem('token', data.username);
+                        realJump('/')
+                    } else {
+                        $('#msgL').text(msg);
+                    }
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+        });
+
+        // 获取验证码
+        $('#getcode').click(function () {
+            let email = $('#email').val();
+            if (!email) {
+                $('#msg').text('请输入邮箱！');
+                return;
+            }
+            email.trim();
+            const regx = /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
+            if (!regx.test(email)) {
+                $('#msg').text('邮箱格式错误！');
+                return;
+            }
+            let formData = new FormData();
+            formData.append('email', email);
+            $.ajax({
+                url: `/account/mail/`,
+                type: 'post',
+                data: formData,
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                success: function (res) {
+                    const {
+                        code,
+                        msg
+                    } = res;
+                    $('#msg').text(msg);
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+        });
+
+        $('#register').click(function () {
+            let username = $('#name').val();
+            let password = $('#password').val();
+            let email = $('#email').val();
+            let code = $('#code').val();
+            if (!username) {
+                $('#msg').text('请输入用户名！');
+                return;
+            }
+            if (!email) {
+                $('#msg').text('请输入邮箱！');
+                return;
+            }
+            email.trim();
+            const regx = /^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
+            if (!regx.test(email)) {
+                $('#msg').text('邮箱格式错误！');
+                return;
+            }
+            if (!code) {
+                $('#msg').text('请输入验证码！');
+                return;
+            }
+            if (!password) {
+                $('#msg').text('请输入密码！');
+                return;
+            }
+            username = username.trim();
+            password = password.trim();
+            email = email.trim();
+            code = code.trim();
+            let formData1 = new FormData();
+            formData1.append('username', username);
+            formData1.append('password', password);
+            formData1.append('email', email);
+            formData1.append('code', code);
+            $.ajax({
+                url: `/account/register`,
+                type: 'post',
+                data: formData1,
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                success: function (res) {
+                    const {
+                        code,
+                        msg,
+                        data
+                    } = res;
+                    $('#msg').text(msg);
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+        })
+
+        function realJump(href) {
+            if (href === './login.html') {
+                window.sessionStorage.setItem('reload', 'reload');
+            }
+            let a = document.createElement('a');
+            document.body.appendChild(a);
+            a.href = href;
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // 注销
+        function loginout() {
+            const username = window.sessionStorage.getItem('token');
+            if (!username) {
+                realJump('./login.html');
+            }
+            $.ajax({
+                url: `${ip}/logout?username=${username}`,
+                type: 'get',
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                success: function (res) {
+                    const {
+                        code
+                    } = res;
+                    if (code === 200) {
+                        realJump('./login.html');
+                        window.sessionStorage.setItem('token', '');
+                    } else {
+                        realJump('./login.html');
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                    realJump('./login.html');
+                }
+            });
+        }
+    });
+</script>
+</body>
+
+</html>
