@@ -394,7 +394,7 @@ const docTemplate = `{
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "用于显示主页图片",
+                "description": "用于显示图片详细信息",
                 "consumes": [
                     "application/json"
                 ],
@@ -402,18 +402,18 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "显示主页图片"
+                    "显示图片详细信息"
                 ],
-                "summary": "显示主页图片",
+                "summary": "显示图片详细信息",
                 "responses": {
                     "200": {
-                        "description": "获取主页图片成功",
+                        "description": "获取图片详细信息成功",
                         "schema": {
                             "$ref": "#/definitions/response.Information"
                         }
                     },
                     "401": {
-                        "description": "获取主页图片失败",
+                        "description": "获取图片详细信息失败",
                         "schema": {
                             "$ref": "#/definitions/response.Information"
                         }

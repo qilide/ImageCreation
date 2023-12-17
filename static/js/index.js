@@ -19,7 +19,7 @@ $(function () {
               <img src="${imageUrl}" style="max-width:100%;height:100%" alt="${imageName}">
               <div class="gallery-links d-flex align-items-center justify-content-center">
                 <a href="${imageUrl}" title="${imageName}" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
-                <a href="/gallery-single" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <a href="/image/info?id=${imageId}" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div>
           `;

@@ -7,6 +7,8 @@ import (
 
 // ImageRoute 图片路由
 func ImageRoute(ImageGroup *gin.RouterGroup) {
-	//用户注销
+	//获取主页图片
 	ImageGroup.GET("/index", image.ShowIndexImage)
+	//获取图片详细信息
+	ImageGroup.GET("/info", image.ShowImageInfo)
 }

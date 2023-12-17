@@ -12,3 +12,8 @@ type ShowImage struct {
 func (si ShowImage) IndexImage() ([]models.Image, error) {
 	return mysql.GetIndexImage()
 }
+
+// ImageInfo 获取图片详细信息
+func (si ShowImage) ImageInfo(id int64) (models.Image, error) {
+	return mysql.GetImageInfo(id)
+}
