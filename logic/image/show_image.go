@@ -14,6 +14,6 @@ func (si ShowImage) IndexImage() ([]models.Image, error) {
 }
 
 // ImageInfo 获取图片详细信息
-func (si ShowImage) ImageInfo(id int64) (models.Image, error) {
+func (si ShowImage) ImageInfo(id int64) (models.Image, models.UserInformation, error) {
 	return mysql.GetImageInfo(id)
 }

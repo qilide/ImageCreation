@@ -6,7 +6,6 @@ $(function () {
         success: function(response) {
             const images = response.data; // 假设后端返回一个名为 "images" 的数组，包含图片信息
             const imageGallery = $('#imageGallery');
-            console.log(images);
             // 在页面上动态生成图片展示区域
             images.forEach(imageInfo => {
                 const imageUrl = imageInfo.path;
@@ -19,7 +18,7 @@ $(function () {
               <img src="${imageUrl}" style="max-width:100%;height:100%" alt="${imageName}">
               <div class="gallery-links d-flex align-items-center justify-content-center">
                 <a href="${imageUrl}" title="${imageName}" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
-                <a href="/image/info?id=${imageId}" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                <a href="/gallery-single?id=${imageId}" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
             </div>
           `;

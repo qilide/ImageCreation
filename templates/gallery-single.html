@@ -49,19 +49,16 @@
           <li><a href="/about">关于</a></li>
           <li class="dropdown"><a href="#"><span>画廊</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="/gallery" class="active">自然</a></li>
-              <li><a href="/gallery">朋友</a></li>
-              <li><a href="/gallery">建筑</a></li>
-              <li><a href="/gallery">动物</a></li>
-              <li><a href="/gallery">运动</a></li>
-              <li><a href="/gallery">旅游</a></li>
-              <li class="dropdown"><a href="#"><span>子菜单</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                <ul>
-                  <li><a href="#">子菜单 1</a></li>
-                  <li><a href="#">子菜单 2</a></li>
-                  <li><a href="#">子菜单 3</a></li>
-                </ul>
-              </li>
+              <li><a href="/gallery?label=动物">动物</a></li>
+              <li><a href="/gallery?label=人">朋友</a></li>
+              <li><a href="/gallery?label=自然界">自然</a></li>
+              <li><a href="/gallery?label=建筑">建筑</a></li>
+              <li><a href="/gallery?label=壁纸">壁纸</a></li>
+              <li><a href="/gallery?label=旅行">旅行</a></li>
+              <li><a href="/gallery?label=体育">体育</a></li>
+              <li><a href="/gallery?label=时尚">时尚</a></li>
+              <li><a href="/gallery?label=旅游">旅游</a></li>
+              <li><a href="/gallery?label=电影">电影</a></li>
             </ul>
           </li>
           <li><a href="/services">服务</a></li>
@@ -73,7 +70,7 @@
         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
         <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
       </div>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
@@ -88,10 +85,8 @@
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>画廊单</h2>
-            <p>厌恶与无偿。永不进行锻炼。公仆认为厌恶是一种享受，因为厌恶就是享受。生来就有痛苦的债务，真理的债务。好像有理可循似的。寻求自身痛苦的索求。</p>
 
-            <a class="cta-btn" href="/contact">可供租用</a>
+<!--            <a class="cta-btn" href="/contact">可供租用</a>-->
 
           </div>
         </div>
@@ -107,23 +102,11 @@
             <div class="swiper-wrapper align-items-center">
 
               <div class="swiper-slide">
-                <img src="assets/img/gallery/gallery-8.jpg" alt="">
+                <img src="{{.ImageInfo.Path}}" alt="">
               </div>
-              <div class="swiper-slide">
-                <img src="assets/img/gallery/gallery-9.jpg" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="assets/img/gallery/gallery-10.jpg" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="assets/img/gallery/gallery-11.jpg" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="assets/img/gallery/gallery-12.jpg" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="assets/img/gallery/gallery-13.jpg" alt="">
-              </div>
+<!--              <div class="swiper-slide">-->
+<!--                <img src="assets/img/gallery/gallery-9.jpg" alt="">-->
+<!--              </div>-->
 
             </div>
             <div class="swiper-pagination"></div>
@@ -137,44 +120,33 @@
 
           <div class="col-lg-8">
             <div class="portfolio-description">
-              <h2>这是投资组合详细信息的示例</h2>
-              <p>
-                谁会为痛苦而痛苦，发明家发明了商品和工作。拒绝服务和非正式服务都是不正当的，因此，当然，这是不正当的。指控的官员和指控的官员都是无用的，因为所有的时间都必须用来提供服务。他是否继续这样做，这是否有意义，他是否为此付出代价。
-              </p>
-              <p>
-                来吧，让我们坐下来享受一下。不是因为厌恶而出生，而是因为名字和。目前的错误和痛苦来自于生活的本质，这是无法避免的。他们不知道痛苦和痛苦，也不知道痛苦的劳动。
-              </p>
+
+              <h2>{{.ImageInfo.ImageName}}</h2>
+              <div id="image-description">{{.ImageInfo.Description}}</div>
 
               <div class="testimonial-item">
                 <p>
                   <i class="bi bi-quote quote-icon-left"></i>
-                  尽管如此，暂时还是有一些不好的事情发生了，这可能是由于劳动力不足导致的。然而，那些仍然留在原地的人似乎对将来发生的事情感到满意。我们的某些人可能会逃跑，但这并不是我们的错。我们应该追究的是那些导致这种情况发生的领导人。
+                  {{.ImageUserInfo.Biography}}
                   <i class="bi bi-quote quote-icon-right"></i>
                 </p>
                 <div>
-                  <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                  <h3>萨拉·威尔逊</h3>
+                  <img src={{.ImageUserInfo.Avatar}} class="testimonial-img" alt="">
+                  <h3>{{.ImageUserInfo.Nickname}}</h3>
                   <h4>设计者</h4>
                 </div>
               </div>
-
-              <p>
-                障碍和痛苦，以及一些无用的东西。在灵魂深处，他们意识到自己的无助和无力。他们不知道该去哪里，也不知道该做什么。他们被遗弃在时间的洪流中，无法逃避。他们被指责，被谴责，被遗弃。
-
-              <p>
-              容易感到快乐和舒适，因为厌恶和自我排斥会消除债务。自由也会带来痛苦。我将解释哪些必要的事情是相似的，因为痛苦是他们的本质。永远不会出现当前的记忆，也不会有人知道。
-              </p>
-
             </div>
           </div>
 
           <div class="col-lg-3">
             <div class="portfolio-info">
-              <h3>项目 信息</h3>
+              <h3>图片 信息</h3>
               <ul>
-                <li><strong>类别</strong> <span>自然摄影</span></li>
-                <li><strong>客户</strong> <span>ASU 公司</span></li>
-                <li><strong>项目日期</strong> <span>2022年3月1日</span></li>
+                <li><strong>点赞</strong> <span>{{.ImageInfo.LikeCount}}</span></li>
+                <li><strong>收藏</strong> <span>{{.ImageInfo.CollectCount}}</span></li>
+                <li><strong>浏览量</strong> <span>{{.ImageInfo.BrowseCount}}</span></li>
+                <li><strong>评分</strong> <span>{{.ImageInfo.Score}}</span></li>
                 <li><strong>项目链接</strong> <a href="#">www.example.com</a></li>
                 <li><a href="#" class="btn-visit align-self-start">访问网站</a></li>
               </ul>
@@ -217,5 +189,9 @@
   <script src="assets/js/main.js"></script>
 
 </body>
+<script>
+  var text = document.getElementById("image-description").textContent;
+  document.getElementById("image-description").innerHTML = text.replaceAll('\n',"<br>");
+</script>
 
 </html>

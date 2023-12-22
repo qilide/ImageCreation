@@ -3,7 +3,9 @@ package image
 import (
 	"ImageCreation/controller/response"
 	"ImageCreation/logic/image"
+	"ImageCreation/models"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"strconv"
 )
 
@@ -27,6 +29,11 @@ func ShowIndexImage(c *gin.Context) {
 	return
 }
 
+type Info struct {
+	ImageInfo     models.Image
+	ImageUserInfo models.UserInformation
+}
+
 // ShowImageInfo 显示图片详细信息
 // @Summary 显示图片详细信息
 // @Description 用于显示图片详细信息
@@ -41,10 +48,11 @@ func ShowImageInfo(c *gin.Context) {
 	imageId := c.Query("id")
 	id, _ := strconv.ParseInt(imageId, 10, 64)
 	var si image.ShowImage
-	if imageInfo, err := si.ImageInfo(id); err != nil {
-		response.Json(c, 401, "获取图片详细信息失败", imageInfo)
+	if imageInfo, imageUserInfo, err := si.ImageInfo(id); err != nil {
+		c.HTML(http.StatusOK, "gallery-single.html", Info{imageInfo, imageUserInfo})
+		//response.Json(c, 200, "获取图片详细信息成功", imageInfo)
 	} else {
-		response.Json(c, 200, "获取图片详细信息成功", imageInfo)
+		c.HTML(http.StatusOK, "gallery-single.html", Info{imageInfo, imageUserInfo})
 	}
 	return
 }

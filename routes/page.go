@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"ImageCreation/controller/image"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -25,9 +26,7 @@ func PageRoute(Page *gin.RouterGroup) {
 		c.HTML(http.StatusOK, "gallery.html", gin.H{})
 	})
 	//画廊单体
-	Page.GET("gallery-single", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "gallery-single.html", gin.H{})
-	})
+	Page.GET("gallery-single", image.ShowImageInfo)
 	//内置页
 	Page.GET("sample-inner-page", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "sample-inner-page.html", gin.H{})

@@ -2,6 +2,7 @@ package mysql
 
 import (
 	"ImageCreation/models"
+	"strconv"
 	"time"
 )
 
@@ -33,8 +34,11 @@ func CreateUser(id int, username string, password string, email string, createTi
 // CreateUserInformation 创建用户详细数据
 func CreateUserInformation(userID int) error {
 	user := models.UserInformation{
-		UserID:   userID,
-		IsActive: 1,
+		UserID:    userID,
+		IsActive:  1,
+		Nickname:  "匿名用户" + strconv.Itoa(userID),
+		Biography: "生活是一部令人着迷的故事，而你是其中独一无二的篇章。在这个广袤的舞台上，你是自己故事的作者，用坚韧和温暖编织出独特的篇章，将每一刻都演绎成无比精彩的章节",
+		Avatar:    "assets/img/testimonials/testimonials-2.jpg",
 	}
 	return db.Table("user_information").Create(&user).Error
 }
