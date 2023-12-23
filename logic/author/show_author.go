@@ -14,6 +14,6 @@ func (sa ShowAuthor) AllAuthors() ([]models.UserInformation, error) {
 }
 
 // AuthorInfo 获取摄影者详细信息
-func (sa ShowAuthor) AuthorInfo(id int64) (models.UserInformation, error) {
+func (sa ShowAuthor) AuthorInfo(id int64) (models.UserInformation, []models.Image, error) {
 	return mysql.GetAuthorInfo(id)
 }

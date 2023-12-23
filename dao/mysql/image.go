@@ -1,6 +1,8 @@
 package mysql
 
-import "ImageCreation/models"
+import (
+	"ImageCreation/models"
+)
 
 // GetIndexImage 获取所有图片信息
 func GetIndexImage() ([]models.Image, error) {

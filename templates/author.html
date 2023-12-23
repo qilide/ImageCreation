@@ -207,96 +207,71 @@
       <div class="container">
 
         <div class="section-header">
-          <h2>客户见证</h2>
-          <p>他们在说什么</p>
+          <h2>用户见证</h2>
+          <p>摄影大师</p>
         </div>
 
         <div class="slides-3 swiper">
           <div class="swiper-wrapper">
 
+            {{ range $idx,$user := slice . 10 15 }}
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  我们必须采取行动，直到我们能够获得更好的结果。我们必须坚持不懈地努力，直到我们能够达到我们的目标。我们必须采取行动，直到我们能够获得更好的结果。我们必须坚持不懈地努力，直到我们能够达到我们的目标。
-                </p>
-                <div class="profile mt-auto">
-                  <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>索尔·古德曼</h3>
-                  <h4>首席执行官兼创始人</h4>
-                </div>
+                <a href="/mine?id={{$user.UserID}}" class="details-link">
+                  <div class="stars">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                  <p>
+                    {{$user.Biography}}
+                  </p>
+                  <div class="profile mt-auto">
+                    <img src="{{$user.Avatar}}" class="testimonial-img" alt="">
+                    <h3>{{$user.Nickname}}</h3>
+                    <h4>{{$user.Address}}</h4>
+                  </div>
+                </a>
               </div>
             </div><!-- End testimonial item -->
+            {{ end }}
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  我们必须采取行动，直到我们能够获得更好的结果。我们必须坚持不懈地努力，直到我们能够达到我们的目标。我们必须采取行动，直到我们能够获得更好的结果。我们必须坚持不懈地努力，直到我们能够达到我们的目标。
-                </p>
-                <div class="profile mt-auto">
-                  <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                  <h3>萨拉·维尔森</h3>
-                  <h4>设计师</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  我们必须采取行动，直到我们能够获得更好的结果。我们必须坚持不懈地努力，直到我们能够达到我们的目标。我们必须采取行动，直到我们能够获得更好的结果。我们必须坚持不懈地努力，直到我们能够达到我们的目标。
-                </p>
-                <div class="profile mt-auto">
-                  <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                  <h3>杰娜·卡利斯</h3>
-                  <h4>店主</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  我们必须采取行动，直到我们能够获得更好的结果。我们必须坚持不懈地努力，直到我们能够达到我们的目标。我们必须采取行动，直到我们能够获得更好的结果。我们必须坚持不懈地努力，直到我们能够达到我们的目标。
-                </p>
-                <div class="profile mt-auto">
-                  <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                  <h3>马特·布兰登</h3>
-                  <h4>特约人员</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  我们必须采取行动，直到我们能够获得更好的结果。我们必须坚持不懈地努力，直到我们能够达到我们的目标。我们必须采取行动，直到我们能够获得更好的结果。我们必须坚持不懈地努力，直到我们能够达到我们的目标。
-                </p>
-                <div class="profile mt-auto">
-                  <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                  <h3>约翰·拉尔森</h3>
-                  <h4>企业家</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
 
           </div>
           <div class="swiper-pagination"></div>
         </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials1" class="testimonials">
+      <div class="container">
+
+        <div class="section-header">
+          <h2>欢迎观看</h2>
+          <p>优秀作者</p>
+        </div>
+
+          <div class="container-fluid">
+            <div class="row gy-4 justify-content-center">
+              {{ range $idx,$user := . }}
+                <div class="testimonial-item">
+                  <a href="/mine?id={{$user.UserID}}" class="details-link">
+                  <div class="stars">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                  <p>
+                    {{$user.Biography}}
+                  </p>
+                  <div class="profile mt-auto">
+                    <img src="{{$user.Avatar}}" class="testimonial-img" alt="">
+                    <h3>{{$user.Nickname}}</h3>
+                    <h4>{{$user.Address}}</h4>
+                  </div>
+                  </a>
+                </div>
+              {{ end }}
+            </div>
+          </div>
 
       </div>
     </section><!-- End Testimonials Section -->

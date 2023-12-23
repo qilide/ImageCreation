@@ -2,10 +2,16 @@ package author
 
 import (
 	"ImageCreation/logic/author"
+	"ImageCreation/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
 )
+
+type AuthorInfo struct {
+	UserInfo  models.UserInformation
+	ImageInfo []models.Image
+}
 
 // ShowAuthors 显示所有摄影师信息
 // @Summary 显示所有摄影师信息
@@ -42,10 +48,10 @@ func ShowAuthorInfo(c *gin.Context) {
 	userId := c.Query("id")
 	id, _ := strconv.ParseInt(userId, 10, 64)
 	var sa author.ShowAuthor
-	if AuthorInfo, err := sa.AuthorInfo(id); err != nil {
+	if authorInfo, imageInfo, err := sa.AuthorInfo(id); err != nil {
 		c.HTML(http.StatusOK, "mine.html", err)
 	} else {
-		c.HTML(http.StatusOK, "mine.html", AuthorInfo)
+		c.HTML(http.StatusOK, "mine.html", AuthorInfo{authorInfo, imageInfo})
 	}
 	return
 }

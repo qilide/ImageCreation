@@ -9,6 +9,11 @@ import (
 	"strconv"
 )
 
+type Info struct {
+	ImageInfo     models.Image
+	ImageUserInfo models.UserInformation
+}
+
 // ShowIndexImage 显示主页图片
 // @Summary 显示主页图片
 // @Description 用于显示主页图片
@@ -27,11 +32,6 @@ func ShowIndexImage(c *gin.Context) {
 		response.Json(c, 200, "获取主页图片成功", imageInfos)
 	}
 	return
-}
-
-type Info struct {
-	ImageInfo     models.Image
-	ImageUserInfo models.UserInformation
 }
 
 // ShowImageInfo 显示图片详细信息
