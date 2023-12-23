@@ -17,3 +17,8 @@ func (si ShowImage) IndexImage() ([]models.Image, error) {
 func (si ShowImage) ImageInfo(id int64) (models.Image, models.UserInformation, error) {
 	return mysql.GetImageInfo(id)
 }
+
+// GalleryImage 展示主题图片
+func (si ShowImage) GalleryImage(label string) ([]models.Image, error) {
+	return mysql.GetGalleryImage(label)
+}

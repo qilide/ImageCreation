@@ -5,7 +5,7 @@ import "ImageCreation/models"
 // GetIndexImage 获取所有图片信息
 func GetIndexImage() ([]models.Image, error) {
 	var image []models.Image
-	err := db.Table("image").Where("is_active = 1").Order("score DESC").Limit(16).Find(&image).Error
+	err := db.Table("image").Where("is_active = 1").Order("score DESC").Limit(20).Find(&image).Error
 	return image, err
 }
 
@@ -16,4 +16,11 @@ func GetImageInfo(id int64) (models.Image, models.UserInformation, error) {
 	err := db.Table("image").Where("is_active = 1").Where("id = ? ", id).Find(&image).Error
 	err = db.Table("user_information").Where("is_active = 1").Where("user_id = ? ", image.UserID).Find(&userInfo).Error
 	return image, userInfo, err
+}
+
+// GetGalleryImage 获取主题图片信息
+func GetGalleryImage(label string) ([]models.Image, error) {
+	var image []models.Image
+	err := db.Table("image").Where("is_active = 1").Where("label= ?", label).Order("score DESC").Find(&image).Error
+	return image, err
 }
