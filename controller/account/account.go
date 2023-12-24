@@ -7,6 +7,7 @@ import (
 	"ImageCreation/pkg/jwt"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -55,7 +56,7 @@ func UserLogin(c *gin.Context) {
 			response.LoginJson(c, 200, "更新时间失败", "", "")
 			return
 		}
-		response.LoginJson(c, http.StatusOK, "登陆成功", user, token)
+		response.LoginJson(c, http.StatusOK, "登陆成功", strconv.Itoa(user.ID), token)
 		return
 	}
 }

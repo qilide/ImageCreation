@@ -64,7 +64,7 @@
           <li><a href="/author">摄影师</a></li>
           <li><a href="/creation">创作</a></li>
           <li><a href="/contact">联系</a></li>
-          <li><a href="/mine">我的</a></li>
+          <li><a href="/mine" id="mine">我的</a></li>
           <li style="margin-left: 25px;">
             <div class="input-group input-group-sm mb-3" style="margin-top: 15px">
               <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
@@ -155,6 +155,16 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="/static/assets/js/jquery.min.js"></script>
+  <script>
+    window.onload = function() {
+      let token = window.sessionStorage.getItem('token');
+      if (token !== "") {
+        console.log("token1:"+token);
+        console.log("/mine?id=" + token);
+        document.getElementById('mine').href = "/mine?id=" + token;
+      }
+    };
+  </script>
 
 </body>
 

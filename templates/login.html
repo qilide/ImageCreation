@@ -136,11 +136,12 @@
                     const {
                         msg,
                         code,
-                        data
+                        data,
+                        token
                     } = res;
                     if (code === 200) {
                         $('#msgL').text(msg);
-                        window.sessionStorage.setItem('token', data.username);
+                        window.sessionStorage.setItem('token', data);
                         realJump('/')
                     } else {
                         $('#msgL').text(msg);

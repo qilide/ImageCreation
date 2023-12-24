@@ -32,7 +32,7 @@ func PageRoute(Page *gin.RouterGroup) {
 	})
 	//创作
 	Page.GET("creation", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "sample-inner-page.html", gin.H{})
+		c.HTML(http.StatusOK, "creation.html", gin.H{})
 	})
 	//登录页面
 	Page.GET("login", func(c *gin.Context) {

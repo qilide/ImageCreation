@@ -3,6 +3,7 @@ package author
 import (
 	"ImageCreation/logic/author"
 	"ImageCreation/models"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -47,6 +48,11 @@ func ShowAuthors(c *gin.Context) {
 func ShowAuthorInfo(c *gin.Context) {
 	userId := c.Query("id")
 	id, _ := strconv.ParseInt(userId, 10, 64)
+	if id == 0 {
+		fmt.Println("-----")
+		c.HTML(http.StatusOK, "reminder-login.html", "")
+		return
+	}
 	var sa author.ShowAuthor
 	if authorInfo, imageInfo, err := sa.AuthorInfo(id); err != nil {
 		c.HTML(http.StatusOK, "mine.html", err)
