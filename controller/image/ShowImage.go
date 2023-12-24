@@ -43,7 +43,7 @@ func ShowIndexImage(c *gin.Context) {
 // @Security ApiKeyAuth
 // @Success 200 {object}  response.Information "获取图片详细信息成功"
 // @failure 401 {object}  response.Information "获取图片详细信息失败"
-// @Router /image/index [GET]
+// @Router /gallery-single [GET]
 func ShowImageInfo(c *gin.Context) {
 	imageId := c.Query("id")
 	id, _ := strconv.ParseInt(imageId, 10, 64)
@@ -66,7 +66,7 @@ func ShowImageInfo(c *gin.Context) {
 // @Security ApiKeyAuth
 // @Success 200 {object}  response.Information "获取主题图片信息成功"
 // @failure 401 {object}  response.Information "获取主题图片信息失败"
-// @Router /image/index [GET]
+// @Router /gallery [GET]
 func ShowGalleryImage(c *gin.Context) {
 	label := c.Query("label")
 	var si image.ShowImage

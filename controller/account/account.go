@@ -256,3 +256,30 @@ func UserModifyInformation(c *gin.Context) {
 		return
 	}
 }
+
+// SendContactMail 发送联系邮件
+// @Summary 发送联系邮件
+// @Description 用户发送联系邮件
+// @Tags 发送联系邮件
+// @Accept application/json
+// @Produce application/json
+// @Param object body ContactMailBinder false "发送联系邮件参数"
+// @Security ApiKeyAuth
+// @Success 200 {object}  response.Information "发送联系邮件成功"
+// @failure 401 {object}  response.Information "发送联系邮件失败"
+// @Router /account/contact/mail [POST]
+func SendContactMail(c *gin.Context) {
+	name := c.PostForm("name")
+	email := c.PostForm("email")
+	subject := c.PostForm("subject")
+	message := c.PostForm("message")
+	var gm account.Account
+	err := gm.ContactMail(name, email, subject, message)
+	if err != nil {
+		response.Json(c, 200, "信息发送失败，请稍后重试！", err)
+	} else {
+		response.Json(c, 200, "您的信息已发送。非常感谢。", "")
+	}
+	return
+
+}

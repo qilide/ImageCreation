@@ -36,3 +36,10 @@ type ModifyInformationBinder struct {
 	Style       string `json:"style"`
 	Posts       string `json:"posts"`
 }
+
+type ContactMailBinder struct {
+	Name    string `json:"name"`
+	Email   string `json:"email"`
+	Subject string `json:"subject"`
+	Message string `json:"message"`
+}

@@ -7,6 +7,50 @@
         "version": "1.0"
     },
     "paths": {
+        "/account/contact/mail": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用户发送联系邮件",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "发送联系邮件"
+                ],
+                "summary": "发送联系邮件",
+                "parameters": [
+                    {
+                        "description": "发送联系邮件参数",
+                        "name": "object",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/account.ContactMailBinder"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "发送联系邮件成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "发送联系邮件失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
         "/account/delete": {
             "get": {
                 "security": [
@@ -378,7 +422,41 @@
                 }
             }
         },
-        "/image/index": {
+        "/author": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于所有摄影师信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "显示所有摄影师信息"
+                ],
+                "summary": "显示所有摄影师信息",
+                "responses": {
+                    "200": {
+                        "description": "获取所有摄影师信息成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "获取所有摄影师信息失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
+        "/gallery": {
             "get": {
                 "security": [
                     {
@@ -411,9 +489,128 @@
                     }
                 }
             }
+        },
+        "/gallery-single": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于显示图片详细信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "显示图片详细信息"
+                ],
+                "summary": "显示图片详细信息",
+                "responses": {
+                    "200": {
+                        "description": "获取图片详细信息成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "获取图片详细信息失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
+        "/image/index": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于显示主页图片",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "显示主页图片"
+                ],
+                "summary": "显示主页图片",
+                "responses": {
+                    "200": {
+                        "description": "获取主页图片成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "获取主页图片失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
+        "/mine": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于摄影师详细信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "显示摄影师详细信息"
+                ],
+                "summary": "显示摄影师详细信息",
+                "responses": {
+                    "200": {
+                        "description": "获取摄影师详细信息成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "获取摄影师详细信息失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "account.ContactMailBinder": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "subject": {
+                    "type": "string"
+                }
+            }
+        },
         "account.LoginBinder": {
             "type": "object",
             "properties": {

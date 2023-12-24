@@ -1,4 +1,15 @@
 definitions:
+  account.ContactMailBinder:
+    properties:
+      email:
+        type: string
+      message:
+        type: string
+      name:
+        type: string
+      subject:
+        type: string
+    type: object
   account.LoginBinder:
     properties:
       password:
@@ -82,6 +93,33 @@ info:
   title: 图片摄影创作社交网站
   version: "1.0"
 paths:
+  /account/contact/mail:
+    post:
+      consumes:
+      - application/json
+      description: 用户发送联系邮件
+      parameters:
+      - description: 发送联系邮件参数
+        in: body
+        name: object
+        schema:
+          $ref: '#/definitions/account.ContactMailBinder'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 发送联系邮件成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 发送联系邮件失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 发送联系邮件
+      tags:
+      - 发送联系邮件
   /account/delete:
     get:
       consumes:
@@ -314,7 +352,28 @@ paths:
       summary: 新用户注册
       tags:
       - 注册
-  /image/index:
+  /author:
+    get:
+      consumes:
+      - application/json
+      description: 用于所有摄影师信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取所有摄影师信息成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 获取所有摄影师信息失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 显示所有摄影师信息
+      tags:
+      - 显示所有摄影师信息
+  /gallery:
     get:
       consumes:
       - application/json
@@ -335,4 +394,67 @@ paths:
       summary: 显示主题图片信息
       tags:
       - 显示图片详细信息
+  /gallery-single:
+    get:
+      consumes:
+      - application/json
+      description: 用于显示图片详细信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取图片详细信息成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 获取图片详细信息失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 显示图片详细信息
+      tags:
+      - 显示图片详细信息
+  /image/index:
+    get:
+      consumes:
+      - application/json
+      description: 用于显示主页图片
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取主页图片成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 获取主页图片失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 显示主页图片
+      tags:
+      - 显示主页图片
+  /mine:
+    get:
+      consumes:
+      - application/json
+      description: 用于摄影师详细信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取摄影师详细信息成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 获取摄影师详细信息失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 显示摄影师详细信息
+      tags:
+      - 显示摄影师详细信息
 swagger: "2.0"

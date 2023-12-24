@@ -92,10 +92,8 @@
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>服务</h2>
+            <h2>摄影师</h2>
             <p>厌恶与无偿。永不进行锻炼。公仆认为厌恶是一种享受，因为厌恶就是享受。生来就有痛苦的债务，真理的债务。好像有理可循似的。寻求自身痛苦的索求。</p>
-
-            <a class="cta-btn" href="/contact">可供租用</a>
 
           </div>
         </div>
@@ -214,7 +212,7 @@
         <div class="slides-3 swiper">
           <div class="swiper-wrapper">
 
-            {{ range $idx,$user := slice . 10 15 }}
+            {{ range $idx,$user := slice . 0 10 }}
             <div class="swiper-slide">
               <div class="testimonial-item">
                 <a href="/mine?id={{$user.UserID}}" class="details-link">
@@ -253,7 +251,7 @@
 
           <div class="container-fluid">
             <div class="row gy-4 justify-content-center">
-              {{ range $idx,$user := . }}
+              {{ range $idx,$user := slice . 10 20 }}
                 <div class="testimonial-item">
                   <a href="/mine?id={{$user.UserID}}" class="details-link">
                   <div class="stars">

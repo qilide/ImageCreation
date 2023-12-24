@@ -71,6 +71,11 @@ func (gm Account) Mail(email string) (string, error) {
 	return code, nil
 }
 
+// ContactMail 接收注册验证码逻辑处理函数
+func (gm Account) ContactMail(name string, email string, subject string, message string) error {
+	return email2.SendContactMail(name, email, subject, message)
+}
+
 // Logout 注销逻辑处理函数
 func (la Account) Logout(username string) interface{} {
 	var tr redis.TokenRedis

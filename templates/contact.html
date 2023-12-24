@@ -92,8 +92,8 @@
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>联系</h2>
-            <p>厌恶与无偿。永不进行锻炼。公仆认为厌恶是一种享受，因为厌恶就是享受。生来就有痛苦的债务，真理的债务。好像有理可循似的。寻求自身痛苦的索求。</p>
+            <h2>欢迎联系我们！</h2>
+            <p>欢迎来到我们的图片摄影网站！我们专注于分享高品质的图片，涵盖各种主题和风格。如果你对我们的图片感兴趣，或者有任何问题或建议，欢迎通过电子邮件与我们联系。我们期待着收到你的来信，并尽快回复。</p>
 
           </div>
         </div>
@@ -141,28 +141,24 @@
         <div class="row justify-content-center mt-4">
 
           <div class="col-lg-9">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <div class="php-email-form">
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                  <input type="text" name="name" class="form-control" id="name" placeholder="请输入你的名字" required>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                  <input type="email" class="form-control" name="email" id="email" placeholder="请输入你要发送的邮箱" required>
                 </div>
               </div>
               <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="请输入主题" required>
               </div>
               <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                <textarea class="form-control" name="message" rows="5" id="message" placeholder="请输入信息" required></textarea>
               </div>
-              <div class="my-3">
-                <div class="loading">加载</div>
-                <div class="error-message"></div>
-                <div class="sent-message">您的信息已发送。非常感谢。</div>
-              </div>
-              <div class="text-center"><button type="submit">发送信息</button></div>
-            </form>
+              <div style="text-align: center;margin-top: 5px;margin-bottom: 2px" id="msg"></div>
+              <div class="text-center send-email"><button type="submit">发送信息</button></div>
+            </div>
           </div><!-- End Contact Form -->
 
         </div>
@@ -200,6 +196,45 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="/static/assets/js/jquery.min.js"></script>
+  <script>
+    $(function () {
+      // 发送联系邮件
+      $('.send-email').click(function () {
+        let name = $('#name').val();
+        let email = $('#email').val();
+        let subject = $('#subject').val();
+        let message = $('#message').val();
+        name = name.trim();
+        email = email.trim();
+        subject = subject.trim();
+        message = message.trim();
+        let formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('subject', subject);
+        formData.append('message', message);
+        $.ajax({
+          url: `/account/contact/mail`,
+          type: 'post',
+          data: formData,
+          contentType: false,
+          processData: false,
+          dataType: 'json',
+          success: function (res) {
+            const {
+              code,
+              msg,
+              data
+            } = res;
+              $('#msg').text(msg);
+          },
+          error: function (error) {
+            console.log(error)
+          }
+        });
+      });
+    });
+  </script>
 
 </body>
 

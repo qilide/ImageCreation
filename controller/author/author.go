@@ -22,7 +22,7 @@ type AuthorInfo struct {
 // @Security ApiKeyAuth
 // @Success 200 {object}  response.Information "获取所有摄影师信息成功"
 // @failure 401 {object}  response.Information "获取所有摄影师信息失败"
-// @Router /image/index [GET]
+// @Router /author [GET]
 func ShowAuthors(c *gin.Context) {
 	var sa author.ShowAuthor
 	if AuthorsInfo, err := sa.AllAuthors(); err != nil {
@@ -43,7 +43,7 @@ func ShowAuthors(c *gin.Context) {
 // @Security ApiKeyAuth
 // @Success 200 {object}  response.Information "获取摄影师详细信息成功"
 // @failure 401 {object}  response.Information "获取摄影师详细信息失败"
-// @Router /image/index [GET]
+// @Router /mine [GET]
 func ShowAuthorInfo(c *gin.Context) {
 	userId := c.Query("id")
 	id, _ := strconv.ParseInt(userId, 10, 64)

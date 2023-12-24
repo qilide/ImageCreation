@@ -13,6 +13,8 @@ func AccountRoute(AccountGroup *gin.RouterGroup) {
 	AccountGroup.POST("/register", account.UserRegister)
 	//获得验证码
 	AccountGroup.POST("/mail", account.GetMail)
+	//发送联系邮件
+	AccountGroup.POST("/contact/mail", account.SendContactMail)
 	//用户注销
 	AccountGroup.GET("/logout", account.UserLogout)
 	//删除账号
