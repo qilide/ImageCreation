@@ -27,7 +27,7 @@ type AuthorInfo struct {
 func ShowAuthors(c *gin.Context) {
 	var sa author.ShowAuthor
 	if AuthorsInfo, err := sa.AllAuthors(); err != nil {
-		c.HTML(http.StatusOK, "author.html", err)
+		c.HTML(http.StatusOK, "errors.html", err)
 		//response.Json(c, 200, "获取图片详细信息成功", imageInfo)
 	} else {
 		c.HTML(http.StatusOK, "author.html", AuthorsInfo)
@@ -55,7 +55,7 @@ func ShowAuthorInfo(c *gin.Context) {
 	}
 	var sa author.ShowAuthor
 	if authorInfo, imageInfo, err := sa.AuthorInfo(id); err != nil {
-		c.HTML(http.StatusOK, "mine.html", err)
+		c.HTML(http.StatusOK, "errors.html", err)
 	} else {
 		c.HTML(http.StatusOK, "mine.html", AuthorInfo{authorInfo, imageInfo})
 	}

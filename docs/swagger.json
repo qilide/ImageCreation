@@ -591,6 +591,40 @@
                     }
                 }
             }
+        },
+        "/search": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于搜索图片",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "搜索图片"
+                ],
+                "summary": "搜索图片",
+                "responses": {
+                    "200": {
+                        "description": "搜索图片成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "搜索图片失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {

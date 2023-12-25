@@ -22,6 +22,8 @@ func PageRoute(Page *gin.RouterGroup) {
 	Page.GET("gallery", image.ShowGalleryImage)
 	//画廊单体
 	Page.GET("gallery-single", image.ShowImageInfo)
+	//搜索
+	Page.GET("search", image.SearchImage)
 	//内置页
 	Page.GET("sample-inner-page", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "sample-inner-page.html", gin.H{})

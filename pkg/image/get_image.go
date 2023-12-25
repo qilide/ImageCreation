@@ -56,7 +56,7 @@ func main() {
 
 	//CollBackUserInformation()
 	//CleanImage()
-	UpdateUserToImage()
+	//UpdateUserToImage()
 
 	page := 10
 	pageCount := "30"

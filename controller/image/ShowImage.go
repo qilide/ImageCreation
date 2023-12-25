@@ -4,6 +4,7 @@ import (
 	"ImageCreation/controller/response"
 	"ImageCreation/logic/image"
 	"ImageCreation/models"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -49,7 +50,7 @@ func ShowImageInfo(c *gin.Context) {
 	id, _ := strconv.ParseInt(imageId, 10, 64)
 	var si image.ShowImage
 	if imageInfo, imageUserInfo, err := si.ImageInfo(id); err != nil {
-		c.HTML(http.StatusOK, "gallery-single.html", err)
+		c.HTML(http.StatusOK, "errors.html", err)
 	} else {
 		//response.Json(c, 200, "获取图片详细信息成功", imageInfo)
 		c.HTML(http.StatusOK, "gallery-single.html", Info{imageInfo, imageUserInfo})
@@ -71,10 +72,33 @@ func ShowGalleryImage(c *gin.Context) {
 	label := c.Query("label")
 	var si image.ShowImage
 	if imageInfo, err := si.GalleryImage(label); err != nil {
-		c.HTML(http.StatusOK, "gallery.html", err)
+		c.HTML(http.StatusOK, "errors.html", err)
 	} else {
 		//response.Json(c, 200, "获取图片详细信息成功", imageInfo)
 		c.HTML(http.StatusOK, "gallery.html", imageInfo)
+	}
+	return
+}
+
+// SearchImage 搜索图片
+// @Summary 搜索图片
+// @Description 用于搜索图片
+// @Tags 搜索图片
+// @Accept application/json
+// @Produce application/json
+// @Security ApiKeyAuth
+// @Success 200 {object}  response.Information "搜索图片成功"
+// @failure 401 {object}  response.Information "搜索图片失败"
+// @Router /search [POST]
+func SearchImage(c *gin.Context) {
+	label := c.Query("search")
+	fmt.Println(label)
+	var si image.ShowImage
+	if imageInfo, err := si.GetSearchImage(label); err != nil {
+		c.HTML(http.StatusOK, "errors.html", err)
+	} else {
+		//response.Json(c, 200, "获取图片详细信息成功", imageInfo)
+		c.HTML(http.StatusOK, "search.html", imageInfo)
 	}
 	return
 }

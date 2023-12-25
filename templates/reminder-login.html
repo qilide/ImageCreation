@@ -65,10 +65,12 @@
           <li><a href="/contact">联系</a></li>
           <li><a href="/mine" id="mine">我的</a></li>
           <li style="margin-left: 25px;">
-            <div class="input-group input-group-sm mb-3" style="margin-top: 15px">
-              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-              <button class="btn btn-outline-secondary" type="button" id="button-addon2">搜索</button>
-            </div>
+            <form action="/search" method="GET">
+              <div class="input-group input-group-sm mb-3" style="margin-top: 15px">
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="search" required>
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">搜索</button>
+              </div>
+            </form>
           </li>
         </ul>
       </nav><!-- .navbar -->
@@ -136,8 +138,6 @@
     window.onload = function() {
       let token = window.sessionStorage.getItem('token');
       if (token !== "") {
-        console.log("token1:"+token);
-        console.log("/mine?id=" + token);
         document.getElementById('mine').href = "/mine?id=" + token;
       }
     };

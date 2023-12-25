@@ -457,4 +457,25 @@ paths:
       summary: 显示摄影师详细信息
       tags:
       - 显示摄影师详细信息
+  /search:
+    post:
+      consumes:
+      - application/json
+      description: 用于搜索图片
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 搜索图片成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 搜索图片失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 搜索图片
+      tags:
+      - 搜索图片
 swagger: "2.0"
