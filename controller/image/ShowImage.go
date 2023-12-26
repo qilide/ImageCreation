@@ -4,7 +4,6 @@ import (
 	"ImageCreation/controller/response"
 	"ImageCreation/logic/image"
 	"ImageCreation/models"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -92,7 +91,6 @@ func ShowGalleryImage(c *gin.Context) {
 // @Router /search [POST]
 func SearchImage(c *gin.Context) {
 	label := c.Query("search")
-	fmt.Println(label)
 	var si image.ShowImage
 	if imageInfo, err := si.GetSearchImage(label); err != nil {
 		c.HTML(http.StatusOK, "errors.html", err)

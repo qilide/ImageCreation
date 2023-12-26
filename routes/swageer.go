@@ -7,8 +7,7 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-//注册Swagger文档路由
-
+// InitSwagger 注册Swagger文档路由
 func InitSwagger(r *gin.Engine) *gin.Engine {
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	return r

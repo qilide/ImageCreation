@@ -46,7 +46,6 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/">主页</a></li>
-          <li><a href="/about">关于</a></li>
           <li class="dropdown"><a href="#" class="active"><span>画廊</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="/gallery?label=动物">动物</a></li>
@@ -110,7 +109,7 @@
       <div class="container-fluid">
 
         <div class="row gy-4 justify-content-center">
-            {{ range $idx,$image := . }}
+            {{ range $idx,$image := slice . 0 20 }}
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="gallery-item h-100">
                 <img src="{{$image.Path}}" style="max-width:100%;height:100%" alt="{{$image.ImageName}}">
