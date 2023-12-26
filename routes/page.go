@@ -40,4 +40,8 @@ func PageRoute(Page *gin.RouterGroup) {
 	Page.GET("login", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "login.html", gin.H{})
 	})
+	//登录页面
+	Page.GET("modify", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "modify.html", gin.H{})
+	})
 }

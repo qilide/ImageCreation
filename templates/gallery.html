@@ -63,7 +63,14 @@
           <li><a href="/author">摄影师</a></li>
           <li><a href="/creation">创作</a></li>
           <li><a href="/contact">联系</a></li>
-          <li><a href="/mine" id="mine">我的</a></li>
+          <li class="dropdown"><a href="#"><span>我的</span><i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="/mine" id="mine">我的信息</a></li>
+              <li><a href="/modify" id="modify">修改信息</a></li>
+              <li><a href="/login" id="loginLink">登录</a></li>
+              <li><a href="/login" id="logoutLink">注销</a></li>
+            </ul>
+          </li>
           <li style="margin-left: 25px;">
             <form action="/search" method="GET">
               <div class="input-group input-group-sm mb-3" style="margin-top: 15px">
@@ -161,6 +168,23 @@
       let token = window.sessionStorage.getItem('token');
       if (token !== "") {
         document.getElementById('mine').href = "/mine?id=" + token;
+        document.getElementById('modify').href = "/modify?id=" + token;
+      }
+      // 找到登录和注销的链接元素
+      const loginLink = document.getElementById('loginLink');
+      const logoutLink = document.getElementById('logoutLink');
+      if (token) {
+        // 如果token存在，则显示注销，隐藏登录
+        loginLink.style.display = 'none';
+        logoutLink.style.display = 'block';
+        // 添加处理注销逻辑的代码
+        logoutLink.addEventListener('click', () => {
+          window.sessionStorage.removeItem('token');
+        });
+      } else {
+        // 如果token不存在，则显示登录，隐藏注销
+        loginLink.style.display = 'block';
+        logoutLink.style.display = 'none';
       }
     };
   </script>
