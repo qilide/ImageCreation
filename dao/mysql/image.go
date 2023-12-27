@@ -21,8 +21,10 @@ func GetImageInfo(id int64) (models.Image, models.UserInformation, error) {
 }
 
 // GetGalleryImage 获取主题图片信息
-func GetGalleryImage(label string) ([]models.Image, error) {
+func GetGalleryImage(label string, page int64) ([]models.Image, int, error) {
 	var image []models.Image
-	err := db.Table("image").Where("is_active = 1").Where("label= ?", label).Order("score DESC").Find(&image).Error
-	return image, err
+	var total int
+	err := db.Table("image").Where("is_active = 1").Where("label= ?", label).Order("score DESC").Limit(20).Offset((page - 1) * 20).Find(&image).Error
+	err = db.Table("image").Where("is_active = 1").Where("label= ?", label).Count(&total).Error
+	return image, total, err
 }

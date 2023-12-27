@@ -1,7 +1,7 @@
 name: "ImageCreation"
 title: "图片摄影创作"
 mode: "dev"
-port: 4000
+port: 4001
 version: "v0.0.1"
 
 log:

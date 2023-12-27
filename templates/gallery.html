@@ -101,10 +101,10 @@
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>自然 (16 图像)</h2>
+            {{ range $idx,$info := slice .Pages 0 1 }}<h2>{{$info.Label}}</h2>{{ end }}
             <p>憎恶和无法摆脱。永远不要锻炼。公职人员憎恶享乐，导致憎恶享乐。生来就有痛苦的真理。好像是合理的。生来就追求同样的痛苦。</p>
 
-            <a class="cta-btn" href="/contact">可供租用</a>
+            <a class="cta-btn" href="/">主页</a>
 
           </div>
         </div>
@@ -114,9 +114,8 @@
     <!-- ======= Gallery Section ======= -->
     <section id="gallery" class="gallery">
       <div class="container-fluid">
-
         <div class="row gy-4 justify-content-center">
-            {{ range $idx,$image := slice . 0 20 }}
+            {{ range $idx,$image := .ImageInfo}}
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="gallery-item h-100">
                 <img src="{{$image.Path}}" style="max-width:100%;height:100%" alt="{{$image.ImageName}}">
@@ -127,6 +126,14 @@
               </div>
             </div><!-- End Gallery Item -->
             {{ end }}
+
+          <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+              {{ range $idx,$info :=  .Pages }}
+              <li class="page-item"><a class="page-link" href="/gallery?label={{$info.Label}}&page={{$info.Page}}">{{$info.Page}}</a></li>
+              {{ end }}
+            </ul>
+          </nav>
 
         </div>
 

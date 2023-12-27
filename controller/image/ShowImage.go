@@ -14,6 +14,11 @@ type Info struct {
 	ImageUserInfo models.UserInformation
 }
 
+type Pages struct {
+	Page  int
+	Label string
+}
+
 // ShowIndexImage 显示主页图片
 // @Summary 显示主页图片
 // @Description 用于显示主页图片
@@ -69,12 +74,19 @@ func ShowImageInfo(c *gin.Context) {
 // @Router /gallery [GET]
 func ShowGalleryImage(c *gin.Context) {
 	label := c.Query("label")
+	page := c.Query("page")
+	if page == "" || len(page) == 0 {
+		page = "1"
+	}
 	var si image.ShowImage
-	if imageInfo, err := si.GalleryImage(label); err != nil {
+	if imageInfo, total, err := si.GalleryImage(label, page); err != nil {
 		c.HTML(http.StatusOK, "errors.html", err)
 	} else {
-		//response.Json(c, 200, "获取图片详细信息成功", imageInfo)
-		c.HTML(http.StatusOK, "gallery.html", imageInfo)
+		var pages []Pages
+		for i := 1; i < total/20+1; i++ {
+			pages = append(pages, Pages{Page: i, Label: label})
+		}
+		c.HTML(http.StatusOK, "gallery.html", gin.H{"ImageInfo": imageInfo, "Pages": pages})
 	}
 	return
 }

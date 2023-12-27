@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -38,8 +39,9 @@ func (si ShowImage) ImageInfo(id int64) (models.Image, models.UserInformation, e
 }
 
 // GalleryImage 展示主题图片
-func (si ShowImage) GalleryImage(label string) ([]models.Image, error) {
-	return mysql.GetGalleryImage(label)
+func (si ShowImage) GalleryImage(label string, page string) ([]models.Image, int, error) {
+	page1, _ := strconv.ParseInt(page, 10, 64)
+	return mysql.GetGalleryImage(label, page1)
 }
 
 // GetSearchImage 搜索图片

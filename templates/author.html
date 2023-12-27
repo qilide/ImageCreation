@@ -221,7 +221,7 @@
         <div class="slides-3 swiper">
           <div class="swiper-wrapper">
 
-            {{ range $idx,$user := slice . 0 10 }}
+            {{ range $idx,$user := slice .ExpertAuthors}}
             <div class="swiper-slide">
               <div class="testimonial-item">
                 <a href="/mine?id={{$user.UserID}}" class="details-link">
@@ -260,7 +260,7 @@
 
           <div class="container-fluid">
             <div class="row gy-4 justify-content-center">
-              {{ range $idx,$user := slice . 10 20 }}
+              {{ range $idx,$user := slice .ExcellentAuthors}}
                 <div class="testimonial-item">
                   <a href="/mine?id={{$user.UserID}}" class="details-link">
                   <div class="stars">
@@ -277,6 +277,15 @@
                   </a>
                 </div>
               {{ end }}
+
+              <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                  {{ range $idx,$info :=  .Pages }}
+                  <li class="page-item"><a class="page-link" href="/author?page={{$info}}">{{$info}}</a></li>
+                  {{ end }}
+                </ul>
+              </nav>
+
             </div>
           </div>
 

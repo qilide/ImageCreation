@@ -24,12 +24,22 @@ type AuthorInfo struct {
 // @failure 401 {object}  response.Information "获取所有摄影师信息失败"
 // @Router /author [GET]
 func ShowAuthors(c *gin.Context) {
+	page := c.Query("page")
+	if page == "" || len(page) == 0 {
+		page = "1"
+	}
 	var sa author.ShowAuthor
 	if AuthorsInfo, err := sa.AllAuthors(); err != nil {
 		c.HTML(http.StatusOK, "errors.html", err)
-		//response.Json(c, 200, "获取图片详细信息成功", imageInfo)
 	} else {
-		c.HTML(http.StatusOK, "author.html", AuthorsInfo)
+		var pages []int
+		for i := 1; i < len(AuthorsInfo)/10+1; i++ {
+			pages = append(pages, i)
+		}
+		page1, _ := strconv.Atoi(page)
+		excellentAuthors := AuthorsInfo[(page1-1)*10 : page1*10]
+		expertAuthors := AuthorsInfo[:6]
+		c.HTML(http.StatusOK, "author.html", gin.H{"ExpertAuthors": expertAuthors, "ExcellentAuthors": excellentAuthors, "Pages": pages})
 	}
 	return
 }
