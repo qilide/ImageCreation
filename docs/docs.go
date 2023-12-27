@@ -371,6 +371,12 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/response.Information"
                         }
+                    },
+                    "403": {
+                        "description": "头像保存失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
                     }
                 }
             }
@@ -594,6 +600,50 @@ const docTemplate = `{
                     },
                     "401": {
                         "description": "获取摄影师详细信息失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
+        "/modify": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于修改用户信息页面",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "修改用户信息页面"
+                ],
+                "summary": "修改用户信息页面",
+                "parameters": [
+                    {
+                        "description": "修改用户账号信息参数",
+                        "name": "object",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/account.ModifyBinder"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取修改用户信息页面成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "获取修改用户信息页面失败",
                         "schema": {
                             "$ref": "#/definitions/response.Information"
                         }

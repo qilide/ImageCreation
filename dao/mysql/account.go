@@ -13,6 +13,20 @@ func UserNameVerity(username string) (models.User, error) {
 	return user, err
 }
 
+// UserIDVerity 用户ID参数数据库查询
+func UserIDVerity(id int64) (models.User, error) {
+	var user models.User
+	err := db.Table("user").Where("is_active = ?", 1).Where("id = ?", id).Find(&user).Error
+	return user, err
+}
+
+// UserIDInfoVerity 用户ID参数详细信息数据库查询
+func UserIDInfoVerity(id int64) (models.UserInformation, error) {
+	var user models.UserInformation
+	err := db.Table("user_information").Where("is_active = ?", 1).Where("user_id = ?", id).Find(&user).Error
+	return user, err
+}
+
 // CreateUser 创建数据库数据
 func CreateUser(id int, username string, password string, email string, createTime time.Time) (models.User, error) {
 	user := models.User{
@@ -73,4 +87,13 @@ func DeleteAccount(username string) error {
 	db.Table("user_information").Where("user_id=?", user.ID).Find(&userInformation)
 	userInformation.IsActive = 0
 	return db.Table("user_information").Save(&userInformation).Error
+}
+
+// GetUserAccountInfo 获取用户账号和详细信息
+func GetUserAccountInfo(id int64) (models.User, models.UserInformation, error) {
+	var userAccount models.User
+	var userInfo models.UserInformation
+	err := db.Table("user").Where("is_active = 1").Where("id = ? ", id).Find(&userAccount).Error
+	err = db.Table("user_information").Where("is_active = 1").Where("user_id = ? ", id).Find(&userInfo).Error
+	return userAccount, userInfo, err
 }

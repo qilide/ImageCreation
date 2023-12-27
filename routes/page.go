@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"ImageCreation/controller/account"
 	"ImageCreation/controller/author"
 	"ImageCreation/controller/image"
 	"github.com/gin-gonic/gin"
@@ -40,8 +41,6 @@ func PageRoute(Page *gin.RouterGroup) {
 	Page.GET("login", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "login.html", gin.H{})
 	})
-	//登录页面
-	Page.GET("modify", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "modify.html", gin.H{})
-	})
+	//修改信息页面
+	Page.GET("modify", account.ModifyHtml)
 }

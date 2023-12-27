@@ -89,43 +89,47 @@ func (la Account) SetLastLogin(username string, lastLogin time.Time) error {
 }
 
 // SetAccount 修改用户账号信息
-func (la Account) SetAccount(information map[string]string) error {
+func (la Account) SetAccount(information map[string]string) (err error) {
 	var user models.User
+	if information["id"] != "" {
+		id, _ := strconv.ParseInt(information["id"], 10, 64)
+		user, err = mysql.UserIDVerity(id)
+		if err != nil {
+			return errors.New("该用户不存在")
+		}
+	} else {
+		return errors.New("该用户不存在")
+	}
 	for key, info := range information {
-		if info != "" || len(info) != 0 {
-			if key == "username" {
-				if _, err := mysql.UserNameVerity(info); err == nil {
-					return ExistUser
-				}
-				user.Username = info
-			}
-			if key == "password" {
-				pwd := middlewares.Encode(info)
-				user.Password = pwd
-			}
-			if key == "is_superuser" {
-				num, _ := strconv.Atoi(info)
-				user.IsSuperuser = num
-			}
-			if key == "update_time" {
-				layout := "2006-01-02 15:04:05" // 对应的时间格式
-				resultTime, _ := time.Parse(layout, info)
-				user.UpdateTime = resultTime
-			}
-			if key == "email" {
-				user.Email = info
-			}
-			if key == "phone" {
-				user.Phone = info
-			}
+		if key == "username" {
+			user.Username = info
+		}
+		if key == "password" {
+			pwd := middlewares.Encode(info)
+			user.Password = pwd
+		}
+		if key == "email" {
+			user.Email = info
+		}
+		if key == "phone" {
+			user.Phone = info
 		}
 	}
-	return nil
+	return mysql.UpdateAccount(user)
 }
 
 // SetUserInformation 修改用户详细信息
-func (la Account) SetUserInformation(information map[string]string) error {
+func (la Account) SetUserInformation(information map[string]string) (err error) {
 	var user models.UserInformation
+	if information["id"] != "" {
+		id, _ := strconv.ParseInt(information["id"], 10, 64)
+		user, err = mysql.UserIDInfoVerity(id)
+		if err != nil {
+			return errors.New("该用户不存在")
+		}
+	} else {
+		return errors.New("该用户不存在")
+	}
 	for key, info := range information {
 		if info != "" || len(info) != 0 {
 			if key == "nickname" {
@@ -138,12 +142,13 @@ func (la Account) SetUserInformation(information map[string]string) error {
 			if key == "sex" {
 				user.Sex = info
 			}
-			if key == "brith_date" {
-				layout := "2006-01-02 15:04:05" // 对应的时间格式
+			if key == "brithDate" {
+				layout := "2006-01-02" // 对应的时间格式
 				resultTime, _ := time.Parse(layout, info)
 				user.BrithDate = resultTime
 			}
 			if key == "avatar" { //修改
+
 				user.Avatar = info
 			}
 			if key == "biography" {
@@ -152,21 +157,17 @@ func (la Account) SetUserInformation(information map[string]string) error {
 			if key == "address" {
 				user.Address = info
 			}
-			if key == "description" {
-				user.Description = info
-			}
-			if key == "style" {
-				user.Style = info
-			}
-			if key == "posts" {
-				user.Posts = info
-			}
 		}
 	}
-	return nil
+	return mysql.UpdateUserInformation(user)
 }
 
 // DeleteAccount 删除账号
 func (la Account) DeleteAccount(username string) error {
 	return mysql.DeleteAccount(username)
+}
+
+// UserAccountInfo 获取用户账号和详细信息
+func (la Account) UserAccountInfo(id int64) (models.User, models.UserInformation, error) {
+	return mysql.GetUserAccountInfo(id)
 }

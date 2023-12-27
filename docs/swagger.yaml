@@ -312,6 +312,10 @@ paths:
           description: 请输入信息
           schema:
             $ref: '#/definitions/response.Information'
+        "403":
+          description: 头像保存失败
+          schema:
+            $ref: '#/definitions/response.Information'
       security:
       - ApiKeyAuth: []
       summary: 修改用户详细信息
@@ -457,6 +461,33 @@ paths:
       summary: 显示摄影师详细信息
       tags:
       - 显示摄影师详细信息
+  /modify:
+    get:
+      consumes:
+      - application/json
+      description: 用于修改用户信息页面
+      parameters:
+      - description: 修改用户账号信息参数
+        in: body
+        name: object
+        schema:
+          $ref: '#/definitions/account.ModifyBinder'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取修改用户信息页面成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 获取修改用户信息页面失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 修改用户信息页面
+      tags:
+      - 修改用户信息页面
   /search:
     post:
       consumes:
