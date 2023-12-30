@@ -471,6 +471,74 @@ const docTemplate = `{
                 }
             }
         },
+        "/browse": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于显示我的浏览图片",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "显示我的浏览图片"
+                ],
+                "summary": "显示我的浏览图片",
+                "responses": {
+                    "200": {
+                        "description": "获取我的浏览图片成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "获取我的浏览图片失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
+        "/collect": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于显示我的收藏图片",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "显示我的收藏图片"
+                ],
+                "summary": "显示我的收藏图片",
+                "responses": {
+                    "200": {
+                        "description": "获取我的收藏图片成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "获取我的收藏图片失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
         "/gallery": {
             "get": {
                 "security": [
@@ -573,6 +641,40 @@ const docTemplate = `{
                 }
             }
         },
+        "/like": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于显示我的点赞图片",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "显示我的点赞图片"
+                ],
+                "summary": "显示我的点赞图片",
+                "responses": {
+                    "200": {
+                        "description": "获取我的点赞图片成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "获取我的点赞图片失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
         "/mine": {
             "get": {
                 "security": [
@@ -644,6 +746,40 @@ const docTemplate = `{
                     },
                     "401": {
                         "description": "获取修改用户信息页面失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
+        "/score": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于显示我的评分图片",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "显示我的评分图片"
+                ],
+                "summary": "显示我的评分图片",
+                "responses": {
+                    "200": {
+                        "description": "获取我的评分图片成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "获取我的评分图片失败",
                         "schema": {
                             "$ref": "#/definitions/response.Information"
                         }

@@ -18,7 +18,8 @@ func Setup() *gin.Engine {
 	r.Static("/static", "./static")
 	r.LoadHTMLFiles("templates/index.html", "templates/contact.html", "templates/gallery.html", "templates/gallery-single.html", "templates/mine.html",
 		"templates/sample-inner-page.html", "templates/author.html", "templates/login.html", "templates/reminder-login.html", "templates/creation.html",
-		"templates/search.html", "templates/errors.html", "templates/modify.html")
+		"templates/search.html", "templates/errors.html", "templates/modify.html", "templates/like.html", "templates/collect.html",
+		"templates/score.html", "templates/browse.html")
 	r.Use(cors.Cors())
 	r.Use(logger.GinLogger(), logger.GinRecovery(true), sessions.Sessions("ImageCreation", store)) //使用日志记录路由信息
 	pprof.Register(r)                                                                              //注册pprof相关路由

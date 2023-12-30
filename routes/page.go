@@ -4,6 +4,7 @@ import (
 	"ImageCreation/controller/account"
 	"ImageCreation/controller/author"
 	"ImageCreation/controller/image"
+	"ImageCreation/controller/mine"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -43,4 +44,12 @@ func PageRoute(Page *gin.RouterGroup) {
 	})
 	//修改信息页面
 	Page.GET("modify", account.ModifyHtml)
+	//我的喜欢
+	Page.GET("like", mine.ShowImageLike)
+	//我的收藏
+	Page.GET("collect", mine.ShowImageCollect)
+	//我的评分
+	Page.GET("score", mine.ShowImageScore)
+	//我的浏览
+	Page.GET("browse", mine.ShowImageBrowse)
 }

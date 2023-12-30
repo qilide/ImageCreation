@@ -67,6 +67,10 @@
             <ul>
               <li><a href="/mine" id="mine">我的信息</a></li>
               <li><a href="/modify" id="modify">修改信息</a></li>
+              <li><a href="/like" id="like">我的点赞</a></li>
+              <li><a href="/collect" id="collect">我的收藏</a></li>
+              <li><a href="/score" id="score">我的评分</a></li>
+              <li><a href="/browse" id="browse">我的浏览</a></li>
               <li><a href="/login" id="loginLink">登录</a></li>
               <li><a href="/login" id="logoutLink">注销</a></li>
             </ul>
@@ -211,6 +215,10 @@
       if (token !== "") {
         document.getElementById('mine').href = "/mine?id=" + token;
         document.getElementById('modify').href = "/modify?id=" + token;
+        document.getElementById('like').href = "/like?id=" + token;
+        document.getElementById('collect').href = "/collect?id=" + token;
+        document.getElementById('score').href = "/score?id=" + token;
+        document.getElementById('browse').href = "/browse?id=" + token;
       }
       // 找到登录和注销的链接元素
       const loginLink = document.getElementById('loginLink');

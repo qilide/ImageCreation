@@ -28,3 +28,39 @@ func GetGalleryImage(label string, page int64) ([]models.Image, int, error) {
 	err = db.Table("image").Where("is_active = 1").Where("label= ?", label).Count(&total).Error
 	return image, total, err
 }
+
+// GetLikeImage 获取我的点赞图片
+func GetLikeImage(page int64) ([]models.Image, int, error) {
+	var image []models.Image
+	var total int
+	err := db.Table("image").Where("is_active = 1").Order("score DESC").Limit(20).Offset((page - 1) * 20).Find(&image).Error
+	err = db.Table("image").Where("is_active = 1").Count(&total).Error
+	return image, total, err
+}
+
+// GetCollectImage 获取我的收藏图片
+func GetCollectImage(page int64) ([]models.Image, int, error) {
+	var image []models.Image
+	var total int
+	err := db.Table("image").Where("is_active = 1").Order("score DESC").Limit(20).Offset((page - 1) * 20).Find(&image).Error
+	err = db.Table("image").Where("is_active = 1").Count(&total).Error
+	return image, total, err
+}
+
+// GetBrowseImage 获取我的浏览图片
+func GetBrowseImage(page int64) ([]models.Image, int, error) {
+	var image []models.Image
+	var total int
+	err := db.Table("image").Where("is_active = 1").Order("score DESC").Limit(20).Offset((page - 1) * 20).Find(&image).Error
+	err = db.Table("image").Where("is_active = 1").Count(&total).Error
+	return image, total, err
+}
+
+// GetScoreImage 获取我的评分图片
+func GetScoreImage(page int64) ([]models.Image, int, error) {
+	var image []models.Image
+	var total int
+	err := db.Table("image").Where("is_active = 1").Order("score DESC").Limit(20).Offset((page - 1) * 20).Find(&image).Error
+	err = db.Table("image").Where("is_active = 1").Count(&total).Error
+	return image, total, err
+}

@@ -377,6 +377,48 @@ paths:
       summary: 显示所有摄影师信息
       tags:
       - 显示所有摄影师信息
+  /browse:
+    get:
+      consumes:
+      - application/json
+      description: 用于显示我的浏览图片
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取我的浏览图片成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 获取我的浏览图片失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 显示我的浏览图片
+      tags:
+      - 显示我的浏览图片
+  /collect:
+    get:
+      consumes:
+      - application/json
+      description: 用于显示我的收藏图片
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取我的收藏图片成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 获取我的收藏图片失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 显示我的收藏图片
+      tags:
+      - 显示我的收藏图片
   /gallery:
     get:
       consumes:
@@ -440,6 +482,27 @@ paths:
       summary: 显示主页图片
       tags:
       - 显示主页图片
+  /like:
+    get:
+      consumes:
+      - application/json
+      description: 用于显示我的点赞图片
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取我的点赞图片成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 获取我的点赞图片失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 显示我的点赞图片
+      tags:
+      - 显示我的点赞图片
   /mine:
     get:
       consumes:
@@ -488,6 +551,27 @@ paths:
       summary: 修改用户信息页面
       tags:
       - 修改用户信息页面
+  /score:
+    get:
+      consumes:
+      - application/json
+      description: 用于显示我的评分图片
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取我的评分图片成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 获取我的评分图片失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 显示我的评分图片
+      tags:
+      - 显示我的评分图片
   /search:
     post:
       consumes:
