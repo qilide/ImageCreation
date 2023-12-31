@@ -24,15 +24,19 @@ type Pages struct {
 func ShowImageLike(c *gin.Context) {
 	userID := c.Query("id")
 	page := c.Query("page")
+	if userID == "" || userID == "null" || len(userID) == 0 {
+		c.HTML(http.StatusOK, "reminder-login.html", "")
+		return
+	}
 	if page == "" || len(page) == 0 {
 		page = "1"
 	}
 	var mii mine.MeImageInfo
-	if imageInfo, total, err := mii.MeLikeImage(page); err != nil {
+	if imageInfo, total, err := mii.MeLikeImage(userID, page); err != nil {
 		c.HTML(http.StatusOK, "errors.html", err)
 	} else {
 		var pages []Pages
-		for i := 1; i < total/20/20+1; i++ {
+		for i := 1; i < total/20+1; i++ {
 			pages = append(pages, Pages{Page: i, UserID: userID})
 		}
 		c.HTML(http.StatusOK, "like.html", gin.H{"ImageInfo": imageInfo, "Pages": pages})
@@ -53,15 +57,19 @@ func ShowImageLike(c *gin.Context) {
 func ShowImageCollect(c *gin.Context) {
 	userID := c.Query("id")
 	page := c.Query("page")
+	if userID == "" || userID == "null" || len(userID) == 0 {
+		c.HTML(http.StatusOK, "reminder-login.html", "")
+		return
+	}
 	if page == "" || len(page) == 0 {
 		page = "1"
 	}
 	var mii mine.MeImageInfo
-	if imageInfo, total, err := mii.MeCollectImage(page); err != nil {
+	if imageInfo, total, err := mii.MeCollectImage(userID, page); err != nil {
 		c.HTML(http.StatusOK, "errors.html", err)
 	} else {
 		var pages []Pages
-		for i := 1; i < total/20/20+1; i++ {
+		for i := 1; i < total/20+1; i++ {
 			pages = append(pages, Pages{Page: i, UserID: userID})
 		}
 		c.HTML(http.StatusOK, "collect.html", gin.H{"ImageInfo": imageInfo, "Pages": pages})
@@ -82,15 +90,19 @@ func ShowImageCollect(c *gin.Context) {
 func ShowImageBrowse(c *gin.Context) {
 	userID := c.Query("id")
 	page := c.Query("page")
+	if userID == "" || userID == "null" || len(userID) == 0 {
+		c.HTML(http.StatusOK, "reminder-login.html", "")
+		return
+	}
 	if page == "" || len(page) == 0 {
 		page = "1"
 	}
 	var mii mine.MeImageInfo
-	if imageInfo, total, err := mii.MeBrowseImage(page); err != nil {
+	if imageInfo, total, err := mii.MeBrowseImage(userID, page); err != nil {
 		c.HTML(http.StatusOK, "errors.html", err)
 	} else {
 		var pages []Pages
-		for i := 1; i < total/20/20+1; i++ {
+		for i := 1; i < total/20+1; i++ {
 			pages = append(pages, Pages{Page: i, UserID: userID})
 		}
 		c.HTML(http.StatusOK, "browse.html", gin.H{"ImageInfo": imageInfo, "Pages": pages})
@@ -111,15 +123,19 @@ func ShowImageBrowse(c *gin.Context) {
 func ShowImageScore(c *gin.Context) {
 	userID := c.Query("id")
 	page := c.Query("page")
+	if userID == "" || userID == "null" || len(userID) == 0 {
+		c.HTML(http.StatusOK, "reminder-login.html", "")
+		return
+	}
 	if page == "" || len(page) == 0 {
 		page = "1"
 	}
 	var mii mine.MeImageInfo
-	if imageInfo, total, err := mii.MeScoreImage(page); err != nil {
+	if imageInfo, total, err := mii.MeScoreImage(userID, page); err != nil {
 		c.HTML(http.StatusOK, "errors.html", err)
 	} else {
 		var pages []Pages
-		for i := 1; i < total/20/20+1; i++ {
+		for i := 1; i < total/20+1; i++ {
 			pages = append(pages, Pages{Page: i, UserID: userID})
 		}
 		c.HTML(http.StatusOK, "score.html", gin.H{"ImageInfo": imageInfo, "Pages": pages})

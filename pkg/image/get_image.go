@@ -57,6 +57,7 @@ func main() {
 	//CollBackUserInformation()
 	//CleanImage()
 	//UpdateUserToImage()
+	//SetImageInfo()
 
 	page := 10
 	pageCount := "30"
@@ -545,5 +546,66 @@ func UpdateUserToImage() {
 		if index > len(userIds)-1 {
 			index = 0
 		}
+	}
+}
+
+// SetImageInfo 设置添加图片点赞收藏等信息 263026749720231936
+func SetImageInfo() {
+	if err := Init(); err != nil {
+		fmt.Printf("Init mysql failed, err: %v\n", err)
+		return
+	}
+	var images []models.Image
+	db.Table("image").Order("RAND()").Limit(100).Find(&images)
+	for _, image := range images {
+		like := models.Like{
+			UserId:     263026749720231936,
+			ImageId:    image.ID,
+			IsLike:     1,
+			CreateTime: time.Now(),
+			UpdateTime: time.Now(),
+			IsActive:   1,
+		}
+		db.Table("like").Create(&like)
+	}
+	var images1 []models.Image
+	db.Table("image").Order("RAND()").Limit(100).Find(&images1)
+	for _, image := range images1 {
+		collect := models.Collect{
+			UserId:     263026749720231936,
+			ImageId:    image.ID,
+			IsCollect:  1,
+			CreateTime: time.Now(),
+			UpdateTime: time.Now(),
+			IsActive:   1,
+		}
+		db.Table("collect").Create(&collect)
+	}
+	var images2 []models.Image
+	db.Table("image").Order("RAND()").Limit(200).Find(&images2)
+	for _, image := range images2 {
+		browse := models.Browse{
+			UserId:   263026749720231936,
+			ImageId:  image.ID,
+			ViewTime: time.Now(),
+			IsActive: 1,
+		}
+		db.Table("browse").Create(&browse)
+	}
+	var images3 []models.Image
+	db.Table("image").Order("RAND()").Limit(100).Find(&images3)
+	for _, image := range images3 {
+		rand.Seed(time.Now().UnixNano())
+		// 生成随机数，范围在80到100之间
+		randomNum := rand.Intn(21) + 80
+		score := models.Score{
+			UserId:     263026749720231936,
+			ImageId:    image.ID,
+			Score:      randomNum,
+			CreateTime: time.Now(),
+			UpdateTime: time.Now(),
+			IsActive:   1,
+		}
+		db.Table("score").Create(&score)
 	}
 }
