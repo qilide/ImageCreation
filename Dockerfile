@@ -11,7 +11,7 @@ COPY . .
 RUN go build -o main .
 
 # 暴露容器的端口（Gin 默认端口为 8080）
-EXPOSE 4000
+EXPOSE 4001
 
 # 运行构建好的 Go 应用程序
 CMD ["./main"]

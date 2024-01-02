@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>摄影 - 画廊单体</title>
+  <title>摄影 - 图片信息</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -152,7 +152,7 @@
                 </p>
                 <div>
                   <img src={{.ImageUserInfo.Avatar}} class="testimonial-img" alt="">
-                  <h3>{{.ImageUserInfo.Nickname}}</h3>
+                  <a href="/mine?id={{.ImageUserInfo.UserID}}"><h3>{{.ImageUserInfo.Nickname}}</h3></a>
                   <h4>作者</h4>
                 </div>
               </div>

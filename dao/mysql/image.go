@@ -7,7 +7,7 @@ import (
 // GetIndexImage 获取所有图片信息
 func GetIndexImage() ([]models.Image, error) {
 	var image []models.Image
-	err := db.Table("image").Where("is_active = 1").Order("score DESC").Limit(20).Find(&image).Error
+	err := db.Table("image").Where("is_active = 1").Order("RAND()").Limit(20).Find(&image).Error
 	return image, err
 }
 
