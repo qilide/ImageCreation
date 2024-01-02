@@ -14,7 +14,7 @@ func ImageRoute(ImageGroup *gin.RouterGroup) {
 	//进行收藏功能
 	ImageGroup.POST("/collect", image.ImageCollect)
 	//进行评分功能
-	//ImageGroup.POST("/score", image.ShowIndexImage)
+	ImageGroup.POST("/score", image.ImageScore)
 	//进行浏览功能
 	ImageGroup.POST("/browse", image.ImageBrowse)
 	//查询当前用户对图片的操作

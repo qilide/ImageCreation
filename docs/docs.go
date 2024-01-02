@@ -743,6 +743,40 @@ const docTemplate = `{
                 }
             }
         },
+        "/image/score": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于图片进行评分操作",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片进行评分操作"
+                ],
+                "summary": "图片进行评分操作",
+                "responses": {
+                    "200": {
+                        "description": "评分成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "评分失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
         "/like": {
             "get": {
                 "security": [

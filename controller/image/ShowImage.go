@@ -171,35 +171,28 @@ func ImageCollect(c *gin.Context) {
 	return
 }
 
-//// ImageScore 图片进行评分操作
-//// @Summary 图片进行评分操作
-//// @Description 用于图片进行评分操作
-//// @Tags 图片进行评分操作
-//// @Accept application/json
-//// @Produce application/json
-//// @Security ApiKeyAuth
-//// @Success 200 {object}  response.Information "评分成功"
-//// @failure 401 {object}  response.Information "评分失败"
-//// @Router /image/score [POST]
-//func ImageScore(c *gin.Context) {
-//	userID := c.PostForm("userId")
-//	imageId := c.PostForm("imageId")
-//	isScore := c.PostForm("isScore")
-//	fmt.Println(userID)
-//	var si image.ShowImage
-//	if imageInfo, err := si.ImageToScore(userID, imageId, isScore); err != nil {
-//		response.Json(c, 200, "评分失败", err)
-//	} else {
-//		var msg string
-//		if isScore == "1" {
-//			msg = "评分成功"
-//		} else {
-//			msg = "取消评分成功"
-//		}
-//		response.Json(c, 200, msg, imageInfo)
-//	}
-//	return
-//}
+// ImageScore 图片进行评分操作
+// @Summary 图片进行评分操作
+// @Description 用于图片进行评分操作
+// @Tags 图片进行评分操作
+// @Accept application/json
+// @Produce application/json
+// @Security ApiKeyAuth
+// @Success 200 {object}  response.Information "评分成功"
+// @failure 401 {object}  response.Information "评分失败"
+// @Router /image/score [POST]
+func ImageScore(c *gin.Context) {
+	userID := c.PostForm("userId")
+	imageId := c.PostForm("imageId")
+	score := c.PostForm("score")
+	var si image.ShowImage
+	if imageInfo, err := si.ImageToScore(userID, imageId, score); err != nil {
+		response.Json(c, 200, "评分失败", err)
+	} else {
+		response.Json(c, 200, "评分成功", gin.H{"imageInfo": imageInfo, "score": score})
+	}
+	return
+}
 
 // ImageOperation 查询当前用户对图片的操作
 // @Summary 查询当前用户对图片的操作

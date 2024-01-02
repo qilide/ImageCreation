@@ -184,3 +184,27 @@ func UpdateImageBrowse(imageID int64) error {
 	image.BrowseCount += 1
 	return db.Table("image").Save(&image).Error
 }
+
+// CheckImageScore 检查是否有图片评分数据
+func CheckImageScore(userID, imageID int64) (models.Score, error) {
+	var score models.Score
+	err := db.Table("score").Where("user_id = ?", userID).Where("image_id = ?", imageID).Where("is_active = 1").Find(&score).Error
+	return score, err
+}
+
+// CreateImageScore 新建图片评分数据
+func CreateImageScore(score models.Score) error {
+	return db.Table("score").Create(&score).Error
+}
+
+// UpdateImageScore 修改图片评分数据
+func UpdateImageScore(score models.Score) error {
+	return db.Table("score").Save(&score).Error
+}
+
+// CheckImageAllScore 检查所有的图片评分数据
+func CheckImageAllScore(imageID int64) ([]models.Score, error) {
+	var scores []models.Score
+	err := db.Table("score").Where("image_id = ?", imageID).Where("is_active = 1").Find(&scores).Error
+	return scores, err
+}

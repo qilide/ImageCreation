@@ -545,6 +545,27 @@ paths:
       summary: 图片进行点赞操作
       tags:
       - 图片进行点赞操作
+  /image/score:
+    post:
+      consumes:
+      - application/json
+      description: 用于图片进行评分操作
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 评分成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 评分失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 图片进行评分操作
+      tags:
+      - 图片进行评分操作
   /like:
     get:
       consumes:

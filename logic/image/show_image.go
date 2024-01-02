@@ -120,6 +120,7 @@ func (si ShowImage) ImageToLike(userID, imageID, isLike string) (models.Image, e
 		if isLike1 != 0 {
 			image.LikeCount += int(isLike1)
 		}
+		image.UpdateTime = time.Now()
 		return mysql.UpdateImageInfo(image)
 	} else {
 		originIsLike := like.IsLike
@@ -138,6 +139,7 @@ func (si ShowImage) ImageToLike(userID, imageID, isLike string) (models.Image, e
 			}
 			image.LikeCount -= 1
 		}
+		image.UpdateTime = time.Now()
 		return mysql.UpdateImageInfo(image)
 	}
 }
@@ -167,6 +169,7 @@ func (si ShowImage) ImageToCollect(userID, imageID, isCollect string) (models.Im
 		if isCollect1 != 0 {
 			image.CollectCount += int(isCollect1)
 		}
+		image.UpdateTime = time.Now()
 		return mysql.UpdateImageInfo(image)
 	} else {
 		originIsCollect := collect.IsCollect
@@ -185,50 +188,53 @@ func (si ShowImage) ImageToCollect(userID, imageID, isCollect string) (models.Im
 			}
 			image.CollectCount -= 1
 		}
+		image.UpdateTime = time.Now()
 		return mysql.UpdateImageInfo(image)
 	}
 }
 
-//// ImageToScore 图片评分操作
-//func (si ShowImage) ImageToScore(userID, imageID, Score string) (models.Image, error) {
-//	userID1, _ := strconv.ParseInt(userID, 10, 64)
-//	imageID1, _ := strconv.ParseInt(imageID, 10, 64)
-//	Score1, _ := strconv.ParseFloat(Score, 10)
-//	image, err := mysql.GetImageSingleInfo(imageID1)
-//	if err != nil {
-//		return image, err
-//	}
-//	score, err := mysql.CheckImageScore(userID1, imageID1)
-//	if err != nil {
-//		newScore := models.Score{
-//			UserId:     int(userID1),
-//			ImageId:    int(imageID1),
-//			Score:      int(Score1),
-//			CreateTime: time.Now(),
-//			UpdateTime: time.Now(),
-//			IsActive:   1,
-//		}
-//		if err := mysql.CreateImageScore(newScore); err != nil {
-//			return image, err
-//		}
-//		if Score1 != 0 {
-//			image.Score += Score1
-//		}
-//		return mysql.UpdateImageInfo(image)
-//	} else {
-//		originIsScore := score.Score
-//		score.Score = int(Score1)
-//		if err := mysql.UpdateImageScore(score); err != nil {
-//			return image, err
-//		}
-//		if Score1 != 0 && originIsScore == 0 {
-//			image.Score += 1
-//		} else if Score1 == 0 && originIsScore == 1 {
-//			image.Score -= 1
-//		}
-//		return mysql.UpdateImageInfo(image)
-//	}
-//}
+// ImageToScore 图片评分操作
+func (si ShowImage) ImageToScore(userID, imageID, Score string) (models.Image, error) {
+	userID1, _ := strconv.ParseInt(userID, 10, 64)
+	imageID1, _ := strconv.ParseInt(imageID, 10, 64)
+	Score1, _ := strconv.ParseFloat(Score, 10)
+	image, err := mysql.GetImageSingleInfo(imageID1)
+	if err != nil {
+		return image, err
+	}
+	score, err := mysql.CheckImageScore(userID1, imageID1)
+	if err != nil {
+		newScore := models.Score{
+			UserId:     int(userID1),
+			ImageId:    int(imageID1),
+			Score:      int(Score1),
+			CreateTime: time.Now(),
+			UpdateTime: time.Now(),
+			IsActive:   1,
+		}
+		if err := mysql.CreateImageScore(newScore); err != nil {
+			return image, err
+		}
+	} else {
+		score.Score = int(Score1)
+		score.UpdateTime = time.Now()
+		if err := mysql.UpdateImageScore(score); err != nil {
+			return image, err
+		}
+	}
+	imageScores, err := mysql.CheckImageAllScore(imageID1)
+	if err != nil {
+		return image, err
+	}
+	totalScore := 0
+	for _, score1 := range imageScores {
+		totalScore += score1.Score
+	}
+	newScore := (float64(totalScore) + image.Score) / (float64(len(imageScores) + 1))
+	image.Score, _ = strconv.ParseFloat(fmt.Sprintf("%.2f", newScore), 10)
+	image.UpdateTime = time.Now()
+	return mysql.UpdateImageInfo(image)
+}
 
 // ImageToOperation 查询当前用户对图片的操作
 func (si ShowImage) ImageToOperation(userID, imageID string) (string, string, string) {
@@ -245,7 +251,7 @@ func (si ShowImage) ImageToOperation(userID, imageID string) (string, string, st
 	}
 	score, err := mysql.CheckImageIsScore(userID1, imageID1)
 	if err == nil || score.Score != 0 {
-		isScore = "score"
+		isScore = strconv.Itoa(score.Score)
 	}
 	return isLike, isCollect, isScore
 }
