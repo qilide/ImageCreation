@@ -112,3 +112,132 @@ func SearchImage(c *gin.Context) {
 	}
 	return
 }
+
+// ImageLike 图片进行点赞操作
+// @Summary 图片进行点赞操作
+// @Description 用于图片进行点赞操作
+// @Tags 图片进行点赞操作
+// @Accept application/json
+// @Produce application/json
+// @Security ApiKeyAuth
+// @Success 200 {object}  response.Information "点赞成功"
+// @failure 401 {object}  response.Information "点赞失败"
+// @Router /image/like [POST]
+func ImageLike(c *gin.Context) {
+	userID := c.PostForm("userId")
+	imageId := c.PostForm("imageId")
+	isLike := c.PostForm("isLike")
+	var si image.ShowImage
+	if imageInfo, err := si.ImageToLike(userID, imageId, isLike); err != nil {
+		response.Json(c, 200, "点赞失败", err)
+	} else {
+		var msg string
+		if isLike == "1" {
+			msg = "点赞成功"
+		} else {
+			msg = "取消点赞成功"
+		}
+		response.Json(c, 200, msg, imageInfo)
+	}
+	return
+}
+
+// ImageCollect 图片进行收藏操作
+// @Summary 图片进行收藏操作
+// @Description 用于图片进行收藏操作
+// @Tags 图片进行收藏操作
+// @Accept application/json
+// @Produce application/json
+// @Security ApiKeyAuth
+// @Success 200 {object}  response.Information "收藏成功"
+// @failure 401 {object}  response.Information "收藏失败"
+// @Router /image/collect [POST]
+func ImageCollect(c *gin.Context) {
+	userID := c.PostForm("userId")
+	imageId := c.PostForm("imageId")
+	isCollect := c.PostForm("isCollect")
+	var si image.ShowImage
+	if imageInfo, err := si.ImageToCollect(userID, imageId, isCollect); err != nil {
+		response.Json(c, 200, "收藏失败", err)
+	} else {
+		var msg string
+		if isCollect == "1" {
+			msg = "收藏成功"
+		} else {
+			msg = "取消收藏成功"
+		}
+		response.Json(c, 200, msg, imageInfo)
+	}
+	return
+}
+
+//// ImageScore 图片进行评分操作
+//// @Summary 图片进行评分操作
+//// @Description 用于图片进行评分操作
+//// @Tags 图片进行评分操作
+//// @Accept application/json
+//// @Produce application/json
+//// @Security ApiKeyAuth
+//// @Success 200 {object}  response.Information "评分成功"
+//// @failure 401 {object}  response.Information "评分失败"
+//// @Router /image/score [POST]
+//func ImageScore(c *gin.Context) {
+//	userID := c.PostForm("userId")
+//	imageId := c.PostForm("imageId")
+//	isScore := c.PostForm("isScore")
+//	fmt.Println(userID)
+//	var si image.ShowImage
+//	if imageInfo, err := si.ImageToScore(userID, imageId, isScore); err != nil {
+//		response.Json(c, 200, "评分失败", err)
+//	} else {
+//		var msg string
+//		if isScore == "1" {
+//			msg = "评分成功"
+//		} else {
+//			msg = "取消评分成功"
+//		}
+//		response.Json(c, 200, msg, imageInfo)
+//	}
+//	return
+//}
+
+// ImageOperation 查询当前用户对图片的操作
+// @Summary 查询当前用户对图片的操作
+// @Description 用于查询当前用户对图片的操作
+// @Tags 查询当前用户对图片的操作
+// @Accept application/json
+// @Produce application/json
+// @Security ApiKeyAuth
+// @Success 200 {object}  response.Information "查询成功"
+// @failure 401 {object}  response.Information "查询失败"
+// @Router /image/collect [POST]
+func ImageOperation(c *gin.Context) {
+	userID := c.PostForm("userId")
+	imageId := c.PostForm("imageId")
+	var si image.ShowImage
+	isLike, isCollect, isScore := si.ImageToOperation(userID, imageId)
+	response.Json(c, 200, "查询成功", gin.H{"isLike": isLike, "isCollect": isCollect, "isScore": isScore})
+	return
+}
+
+// ImageBrowse 图片进行浏览操作
+// @Summary 图片进行浏览操作
+// @Description 用于图片进行浏览操作
+// @Tags 图片进行浏览操作
+// @Accept application/json
+// @Produce application/json
+// @Security ApiKeyAuth
+// @Success 200 {object}  response.Information "浏览成功"
+// @failure 401 {object}  response.Information "浏览失败"
+// @Router /image/browse [POST]
+func ImageBrowse(c *gin.Context) {
+	userID := c.PostForm("userId")
+	imageId := c.PostForm("imageId")
+	var si image.ShowImage
+	if err := si.ImageToBrowse(userID, imageId); err != nil {
+		response.Json(c, 200, "浏览失败", err)
+	} else {
+		response.Json(c, 200, "浏览成功", "")
+	}
+	return
+}

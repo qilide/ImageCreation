@@ -607,6 +607,74 @@ const docTemplate = `{
                 }
             }
         },
+        "/image/browse": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于图片进行浏览操作",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片进行浏览操作"
+                ],
+                "summary": "图片进行浏览操作",
+                "responses": {
+                    "200": {
+                        "description": "浏览成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "浏览失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
+        "/image/collect": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于查询当前用户对图片的操作",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "查询当前用户对图片的操作"
+                ],
+                "summary": "查询当前用户对图片的操作",
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "查询失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
         "/image/index": {
             "get": {
                 "security": [
@@ -634,6 +702,40 @@ const docTemplate = `{
                     },
                     "401": {
                         "description": "获取主页图片失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
+        "/image/like": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于图片进行点赞操作",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片进行点赞操作"
+                ],
+                "summary": "图片进行点赞操作",
+                "responses": {
+                    "200": {
+                        "description": "点赞成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "点赞失败",
                         "schema": {
                             "$ref": "#/definitions/response.Information"
                         }

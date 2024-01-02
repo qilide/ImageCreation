@@ -94,3 +94,176 @@ func (si ShowImage) GetSearchImage(label string) (PhotoInfo, error) {
 	}
 	return responseData, err
 }
+
+// ImageToLike 图片点赞操作
+func (si ShowImage) ImageToLike(userID, imageID, isLike string) (models.Image, error) {
+	userID1, _ := strconv.ParseInt(userID, 10, 64)
+	imageID1, _ := strconv.ParseInt(imageID, 10, 64)
+	isLike1, _ := strconv.ParseInt(isLike, 10, 64)
+	image, err := mysql.GetImageSingleInfo(imageID1)
+	if err != nil {
+		return image, err
+	}
+	like, err := mysql.CheckImageLike(userID1, imageID1)
+	if err != nil {
+		newLike := models.Like{
+			UserId:     int(userID1),
+			ImageId:    int(imageID1),
+			IsLike:     int(isLike1),
+			CreateTime: time.Now(),
+			UpdateTime: time.Now(),
+			IsActive:   1,
+		}
+		if err := mysql.CreateImageLike(newLike); err != nil {
+			return image, err
+		}
+		if isLike1 != 0 {
+			image.LikeCount += int(isLike1)
+		}
+		return mysql.UpdateImageInfo(image)
+	} else {
+		originIsLike := like.IsLike
+		if isLike1 != 0 && originIsLike == 0 {
+			like.IsLike = int(isLike1)
+			like.UpdateTime = time.Now()
+			if err := mysql.UpdateImageLike(like); err != nil {
+				return image, err
+			}
+			image.LikeCount += 1
+		} else if isLike1 == 0 && originIsLike == 1 {
+			like.IsLike = int(isLike1)
+			like.UpdateTime = time.Now()
+			if err := mysql.UpdateImageLike(like); err != nil {
+				return image, err
+			}
+			image.LikeCount -= 1
+		}
+		return mysql.UpdateImageInfo(image)
+	}
+}
+
+// ImageToCollect 图片收藏操作
+func (si ShowImage) ImageToCollect(userID, imageID, isCollect string) (models.Image, error) {
+	userID1, _ := strconv.ParseInt(userID, 10, 64)
+	imageID1, _ := strconv.ParseInt(imageID, 10, 64)
+	isCollect1, _ := strconv.ParseInt(isCollect, 10, 64)
+	image, err := mysql.GetImageSingleInfo(imageID1)
+	if err != nil {
+		return image, err
+	}
+	collect, err := mysql.CheckImageCollect(userID1, imageID1)
+	if err != nil {
+		newCollect := models.Collect{
+			UserId:     int(userID1),
+			ImageId:    int(imageID1),
+			IsCollect:  int(isCollect1),
+			CreateTime: time.Now(),
+			UpdateTime: time.Now(),
+			IsActive:   1,
+		}
+		if err := mysql.CreateImageCollect(newCollect); err != nil {
+			return image, err
+		}
+		if isCollect1 != 0 {
+			image.CollectCount += int(isCollect1)
+		}
+		return mysql.UpdateImageInfo(image)
+	} else {
+		originIsCollect := collect.IsCollect
+		if isCollect1 != 0 && originIsCollect == 0 {
+			collect.IsCollect = int(isCollect1)
+			collect.UpdateTime = time.Now()
+			if err := mysql.UpdateImageCollect(collect); err != nil {
+				return image, err
+			}
+			image.CollectCount += 1
+		} else if isCollect1 == 0 && originIsCollect == 1 {
+			collect.IsCollect = int(isCollect1)
+			collect.UpdateTime = time.Now()
+			if err := mysql.UpdateImageCollect(collect); err != nil {
+				return image, err
+			}
+			image.CollectCount -= 1
+		}
+		return mysql.UpdateImageInfo(image)
+	}
+}
+
+//// ImageToScore 图片评分操作
+//func (si ShowImage) ImageToScore(userID, imageID, Score string) (models.Image, error) {
+//	userID1, _ := strconv.ParseInt(userID, 10, 64)
+//	imageID1, _ := strconv.ParseInt(imageID, 10, 64)
+//	Score1, _ := strconv.ParseFloat(Score, 10)
+//	image, err := mysql.GetImageSingleInfo(imageID1)
+//	if err != nil {
+//		return image, err
+//	}
+//	score, err := mysql.CheckImageScore(userID1, imageID1)
+//	if err != nil {
+//		newScore := models.Score{
+//			UserId:     int(userID1),
+//			ImageId:    int(imageID1),
+//			Score:      int(Score1),
+//			CreateTime: time.Now(),
+//			UpdateTime: time.Now(),
+//			IsActive:   1,
+//		}
+//		if err := mysql.CreateImageScore(newScore); err != nil {
+//			return image, err
+//		}
+//		if Score1 != 0 {
+//			image.Score += Score1
+//		}
+//		return mysql.UpdateImageInfo(image)
+//	} else {
+//		originIsScore := score.Score
+//		score.Score = int(Score1)
+//		if err := mysql.UpdateImageScore(score); err != nil {
+//			return image, err
+//		}
+//		if Score1 != 0 && originIsScore == 0 {
+//			image.Score += 1
+//		} else if Score1 == 0 && originIsScore == 1 {
+//			image.Score -= 1
+//		}
+//		return mysql.UpdateImageInfo(image)
+//	}
+//}
+
+// ImageToOperation 查询当前用户对图片的操作
+func (si ShowImage) ImageToOperation(userID, imageID string) (string, string, string) {
+	userID1, _ := strconv.ParseInt(userID, 10, 64)
+	imageID1, _ := strconv.ParseInt(imageID, 10, 64)
+	var isLike, isCollect, isScore string
+	like, err := mysql.CheckImageIsLike(userID1, imageID1)
+	if err == nil || like.IsLike != 0 {
+		isLike = "like"
+	}
+	collect, err := mysql.CheckImageIsCollect(userID1, imageID1)
+	if err == nil || collect.IsCollect != 0 {
+		isCollect = "collect"
+	}
+	score, err := mysql.CheckImageIsScore(userID1, imageID1)
+	if err == nil || score.Score != 0 {
+		isScore = "score"
+	}
+	return isLike, isCollect, isScore
+}
+
+// ImageToBrowse 查询当前用户对图片的操作
+func (si ShowImage) ImageToBrowse(userID, imageID string) error {
+	userID1, _ := strconv.ParseInt(userID, 10, 64)
+	imageID1, _ := strconv.ParseInt(imageID, 10, 64)
+	browse := models.Browse{
+		UserId:   int(userID1),
+		ImageId:  int(imageID1),
+		ViewTime: time.Now(),
+		IsActive: 1,
+	}
+	err := mysql.CreateImageBrowse(browse)
+	if err != nil {
+		return err
+	}
+	err = mysql.UpdateImageBrowse(imageID1)
+	return err
+}

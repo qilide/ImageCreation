@@ -461,6 +461,48 @@ paths:
       summary: 显示图片详细信息
       tags:
       - 显示图片详细信息
+  /image/browse:
+    post:
+      consumes:
+      - application/json
+      description: 用于图片进行浏览操作
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 浏览成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 浏览失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 图片进行浏览操作
+      tags:
+      - 图片进行浏览操作
+  /image/collect:
+    post:
+      consumes:
+      - application/json
+      description: 用于查询当前用户对图片的操作
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 查询成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 查询失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 查询当前用户对图片的操作
+      tags:
+      - 查询当前用户对图片的操作
   /image/index:
     get:
       consumes:
@@ -482,6 +524,27 @@ paths:
       summary: 显示主页图片
       tags:
       - 显示主页图片
+  /image/like:
+    post:
+      consumes:
+      - application/json
+      description: 用于图片进行点赞操作
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 点赞成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 点赞失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 图片进行点赞操作
+      tags:
+      - 图片进行点赞操作
   /like:
     get:
       consumes:
