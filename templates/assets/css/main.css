@@ -610,7 +610,7 @@ h6 {
   padding: 30px;
   margin: 40px 30px;
   background: var(--color-secondary);
-  min-height: 320px;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
   text-align: center;

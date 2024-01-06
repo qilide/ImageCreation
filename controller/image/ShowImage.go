@@ -203,7 +203,7 @@ func ImageScore(c *gin.Context) {
 // @Security ApiKeyAuth
 // @Success 200 {object}  response.Information "查询成功"
 // @failure 401 {object}  response.Information "查询失败"
-// @Router /image/collect [POST]
+// @Router /image/operation [POST]
 func ImageOperation(c *gin.Context) {
 	userID := c.PostForm("userId")
 	imageId := c.PostForm("imageId")

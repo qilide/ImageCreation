@@ -648,7 +648,7 @@ const docTemplate = `{
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "用于查询当前用户对图片的操作",
+                "description": "用于图片进行收藏操作",
                 "consumes": [
                     "application/json"
                 ],
@@ -656,18 +656,18 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "查询当前用户对图片的操作"
+                    "图片进行收藏操作"
                 ],
-                "summary": "查询当前用户对图片的操作",
+                "summary": "图片进行收藏操作",
                 "responses": {
                     "200": {
-                        "description": "查询成功",
+                        "description": "收藏成功",
                         "schema": {
                             "$ref": "#/definitions/response.Information"
                         }
                     },
                     "401": {
-                        "description": "查询失败",
+                        "description": "收藏失败",
                         "schema": {
                             "$ref": "#/definitions/response.Information"
                         }
@@ -736,6 +736,40 @@ const docTemplate = `{
                     },
                     "401": {
                         "description": "点赞失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
+        "/image/operation": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于查询当前用户对图片的操作",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "查询当前用户对图片的操作"
+                ],
+                "summary": "查询当前用户对图片的操作",
+                "responses": {
+                    "200": {
+                        "description": "查询成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "查询失败",
                         "schema": {
                             "$ref": "#/definitions/response.Information"
                         }
