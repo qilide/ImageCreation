@@ -352,7 +352,11 @@
     // 进行点赞
     $('#unlike').click(function () {
       if (token ==="" || !token){
-        $('#msg').text("请登录后重试");
+        let msg1 = $('#msg');
+        msg1.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg1.text(""); // 清空元素的文本内容
+        }, 5000); // 3000毫秒 = 3秒
         return
       }
       let formData = new FormData();
@@ -384,7 +388,11 @@
     // 取消点赞
     $('#to-like').click(function () {
       if (token ==="" || !token){
-        $('#msg').text("请登录后重试");
+        let msg1 = $('#msg');
+        msg1.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg1.text(""); // 清空元素的文本内容
+        }, 5000); // 3000毫秒 = 3秒
         return
       }
       let formData = new FormData();
@@ -418,7 +426,11 @@
     // 进行收藏
     $('#uncollect').click(function () {
       if (token ==="" || !token){
-        $('#msg').text("请登录后重试");
+        let msg1 = $('#msg');
+        msg1.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg1.text(""); // 清空元素的文本内容
+        }, 5000); // 3000毫秒 = 3秒
         return
       }
       let formData = new FormData();
@@ -450,7 +462,11 @@
     // 取消收藏
     $('#to-collect').click(function () {
       if (token ==="" || !token){
-        $('#msg').text("请登录后重试");
+        let msg1 = $('#msg');
+        msg1.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg1.text(""); // 清空元素的文本内容
+        }, 5000); // 3000毫秒 = 3秒
         return
       }
       let formData = new FormData();
@@ -485,7 +501,11 @@
     // 进行评分
     $('#scoreButton').click(function () {
       if (token ==="" || !token){
-        $('#msg').text("请登录后重试");
+        let msg1 = $('#msg');
+        msg1.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg1.text(""); // 清空元素的文本内容
+        }, 5000); // 3000毫秒 = 3秒
         return
       }
       scoreInput.style.display="block";
@@ -493,11 +513,19 @@
     $('#scoreCommit').click(function () {
       let scoreCount = $('#scoreCount').val();
       if (!scoreCount) {
-        $('#msg').text('请输入用户名！');
+        let msg1 = $('#msg');
+        msg1.text("请输入用户名！");
+        setTimeout(function clearContent() {
+          msg1.text(""); // 清空元素的文本内容
+        }, 5000); // 3000毫秒 = 3秒
         return;
       }
       if (isNaN(scoreCount) || scoreCount < 1 || scoreCount > 100) {
-        $('#msg').text('请输入1到100之间的评分！');
+        let msg1 = $('#msg');
+        msg1.text("请输入1到100之间的评分！");
+        setTimeout(function clearContent() {
+          msg1.text(""); // 清空元素的文本内容
+        }, 5000); // 3000毫秒 = 3秒
         return;
       }
       scoreCount = scoreCount.trim();
@@ -531,8 +559,6 @@
         }
       });
     });
-
-
   });
   var text = document.getElementById("image-description").textContent;
   document.getElementById("image-description").innerHTML = text.replaceAll('\n',"<br>");

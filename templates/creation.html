@@ -132,6 +132,7 @@
                     <button type="button" class="btn btn-outline-light col-lg-3" style="margin: 10px;height: 105%;">撤销</button>
                     <button type="button" class="btn btn-outline-light col-lg-3" style="margin: 10px;height: 105%;">保存</button>
                   </div>
+                  <div class="text-center" id="msg"></div>
                 </div>
               </div>
             </div><!-- End Page Header -->
@@ -343,6 +344,47 @@
         logoutLink.style.display = 'none';
       }
     };
+    // 上传文件
+    $('#inputGroupFileAddon04').click(function () {
+      let token = window.sessionStorage.getItem('token');
+      if (token === "" || !token){
+        let msg = $('#msg');
+        msg.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 3000毫秒 = 3秒
+        return
+      }
+      let image = $('#inputGroupFile04')[0].files[0];
+      let formData = new FormData();
+      formData.append('image', image);
+      formData.append('id', token);
+      $.ajax({
+        url: `/creation/upload/image`,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (res) {
+          const {
+            code,
+            msg,
+            data
+          } = res;
+          console.log(msg);
+          console.log(data);
+          let msg1 = $('#msg');
+          msg1.text("请登录后重试！");
+          setTimeout(function clearContent() {
+            msg1.text(""); // 清空元素的文本内容
+          }, 5000); // 3000毫秒 = 3秒
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      });
+    });
   </script>
 
 </body>
