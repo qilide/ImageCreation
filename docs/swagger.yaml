@@ -419,6 +419,31 @@ paths:
       summary: 显示我的收藏图片
       tags:
       - 显示我的收藏图片
+  /creation/upload/image:
+    post:
+      consumes:
+      - application/json
+      description: 用于上传创作图片
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 上传创作图片成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 上传创作图片失败
+          schema:
+            $ref: '#/definitions/response.Information'
+        "402":
+          description: 请上传文件
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 上传创作图片
+      tags:
+      - 上传创作图片
   /gallery:
     get:
       consumes:

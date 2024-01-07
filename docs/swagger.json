@@ -530,6 +530,46 @@
                 }
             }
         },
+        "/creation/upload/image": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于上传创作图片",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "上传创作图片"
+                ],
+                "summary": "上传创作图片",
+                "responses": {
+                    "200": {
+                        "description": "上传创作图片成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "上传创作图片失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "402": {
+                        "description": "请上传文件",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
         "/gallery": {
             "get": {
                 "security": [

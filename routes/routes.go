@@ -37,6 +37,7 @@ func Setup() *gin.Engine {
 	PageRoute(r.Group("/"))                         //页面模块路由
 	AccountRoute(r.Group("/account"))               //账户模块路由
 	ImageRoute(r.Group("/image"))                   //账户模块路由
+	CreationRoute(r.Group("/creation"))             //账户模块路由
 	r.Run(":" + strconv.Itoa(viper.GetInt("port"))) //运行路由
 	return r
 }
