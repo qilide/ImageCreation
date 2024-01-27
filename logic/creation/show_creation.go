@@ -5,6 +5,9 @@ import (
 	"ImageCreation/models"
 	"ImageCreation/pkg/snowflake"
 	"github.com/gin-gonic/gin"
+	image2 "image"
+	_ "image/jpeg" // 导入图片格式支持
+	_ "image/png"
 	"mime/multipart"
 	"os"
 	"strconv"
@@ -15,7 +18,7 @@ type ShowCreation struct {
 }
 
 // SetUploadImage 上传图片
-func (sc ShowCreation) SetUploadImage(c *gin.Context, userID string, image multipart.File, header *multipart.FileHeader) (models.Image, error) {
+func (sc ShowCreation) SetUploadImage(c *gin.Context, userID string, image multipart.File, header *multipart.FileHeader) (models.Image, image2.Config, error) {
 	var sf snowflake.Snowflake
 	id := sf.NextVal()
 	strInt64 := strconv.FormatInt(id, 10)
@@ -30,12 +33,17 @@ func (sc ShowCreation) SetUploadImage(c *gin.Context, userID string, image multi
 	if _, err := os.Stat(savePath); os.IsNotExist(err) {
 		err := os.Mkdir(savePath, 0755)
 		if err != nil {
-			return models.Image{}, err
+			return models.Image{}, image2.Config{}, err
 		}
 	}
 	err := c.SaveUploadedFile(header, savePath1)
 	if err != nil {
-		return models.Image{}, err
+		return models.Image{}, image2.Config{}, err
+	}
+	// 获取图片信息
+	img, _, err := image2.DecodeConfig(image)
+	if err != nil {
+		return models.Image{}, img, err
 	}
 	imageInfo := models.Image{
 		ID:         id16,
@@ -46,5 +54,6 @@ func (sc ShowCreation) SetUploadImage(c *gin.Context, userID string, image multi
 		IsActive:   1,
 		IsCreate:   1,
 	}
-	return mysql.CreateUploadImage(imageInfo)
+	info, err := mysql.CreateUploadImage(imageInfo)
+	return info, img, err
 }

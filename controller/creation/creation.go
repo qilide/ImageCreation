@@ -26,13 +26,17 @@ func UploadImage(c *gin.Context) {
 		return
 	}
 	var sc creation.ShowCreation
-	imageInfo, err := sc.SetUploadImage(c, userID, image, header)
+	imageInfo, img, err := sc.SetUploadImage(c, userID, image, header)
 	fmt.Println(imageInfo)
 	fmt.Println(err)
+	// 打印图片信息
+	fmt.Println("宽度:", img.Width, "像素")
+	fmt.Println("高度:", img.Height, "像素")
+	fmt.Println("颜色模式:", img.ColorModel)
 	if err != nil {
 		response.Json(c, 200, "上传创作图片失败", err)
 		return
 	}
-	response.Json(c, 200, "上传创作图片成功", imageInfo)
+	response.Json(c, 200, "上传创作图片成功", gin.H{"imageInfo": imageInfo, "img": img})
 	return
 }

@@ -121,6 +121,8 @@
                       </div>
                     </div>
                   </div>
+                  <br>
+                  <div class="text-center" id="image-info"></div>
                   <div class="text-center" id="msg"></div>
                   <br>
                   <div class="col-lg-10 text-center" style="margin: 40px 0">
@@ -347,16 +349,16 @@
     // 上传文件
     $('#inputGroupFileAddon04').click(function () {
       let token = window.sessionStorage.getItem('token');
+      console.log(token);
       let image = $('#inputGroupFile04')[0].files[0];
       let msg = $('#msg');
-      if (token === ""){
+      if (token === null){
         msg.text("请登录后重试！");
         setTimeout(function clearContent() {
           msg.text(""); // 清空元素的文本内容
         }, 5000); // 3000毫秒 = 3秒
         return
       }
-      console.log(image)
       if (image === undefined){
         msg.text("请上传文件后重试！");
         setTimeout(function clearContent() {
@@ -380,8 +382,10 @@
             msg,
             data
           } = res;
-          document.getElementById('creating-image').src = data.path;
-          window.sessionStorage.setItem('creat-image-id', data.id);
+          console.log(data);
+          document.getElementById('creating-image').src = data.imageInfo.path;
+          window.sessionStorage.setItem('origin-image-id', data.imageInfo.id);
+          $('#image-info').text("图片宽度："+data.img.Width+"像素，高度："+data.img.Height+"像素");
         },
         error: function (error) {
           console.log(error)
