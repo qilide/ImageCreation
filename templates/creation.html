@@ -122,6 +122,12 @@
                     </div>
                   </div>
                   <div class="text-center" id="image-info"></div>
+                  <div class="text-center" id="recognition-info" style="display: none"><br>
+                    <p class="text-center" id="recognition-base"></p>
+                    <p class="text-center" id="recognition-description"></p>
+                    <a class="text-center" id="recognition-baike-url" target="_blank"></a><br>
+                    <a class="text-center" id="recognition-image-url" target="_blank"></a>
+                  </div>
                   <div class="text-center" id="msg"></div>
                   <div class="text-center" style="display: none" id="current-image-id"></div>
                   <div class="col-lg-8 text-center" style="margin: 20px 0">
@@ -458,6 +464,66 @@
           window.sessionStorage.setItem('origin-image-id', data.imageInfo.id);
           $('#current-image-id').text(data.imageInfo.id);
           $('#image-info').text("图片宽度："+data.img.Width+"像素，高度："+data.img.Height+"像素");
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      });
+    });
+    // 通用物体和场景识别
+    $('.general-recognition').click(function () {
+      let token = window.sessionStorage.getItem('token');
+      let imageId = document.getElementById('current-image-id').textContent
+      let msg = $('#msg');
+      if (token === null){
+        msg.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      let imagePath = document.getElementById('creating-image').src;
+      console.log(imagePath);
+      if (imageId===null || imageId===""){
+        msg.text("请上传文件后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      msg.text("正在图像识别中。。。");
+      let formData = new FormData();
+      formData.append('userId', token);
+      formData.append('imageId', imageId);
+      formData.append('imagePath', imagePath);
+      $.ajax({
+        url: `/creation/general/recognition`,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (res) {
+          const {
+            code,
+            msg,
+            data
+          } = res;
+          console.log(data);
+          console.log(msg);
+          if (msg==="通用物体和场景识别成功"){
+            document.getElementById('recognition-info').style.display = "block";
+            $('#recognition-base').text("识别名称："+data.imageInfo.keyword+"；识别标签："+data.imageInfo.root+"；识别准确率："+data.imageInfo.score);
+            $('#recognition-baike-url').text("百度百科页面链接："+data.imageInfo.baike_url);
+            document.getElementById('recognition-baike-url').href = data.imageInfo.baike_url;
+            $('#recognition-image-url').text("百科图片链接："+data.imageInfo.image_url);
+            document.getElementById('recognition-image-url').href = data.imageInfo.image_url;
+            $('#recognition-description').text("百科内容描述："+data.imageInfo.description);
+          }
+          $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            $('#msg').text(""); // 清空元素的文本内容
+          }, 5000); // 5000毫秒 = 5秒
         },
         error: function (error) {
           console.log(error)

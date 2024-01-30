@@ -134,6 +134,94 @@ func (sc ShowCreation) ImageEnhancement(userId, imageId, imagePath, apiUrl, oper
 	return imageInfo, nil
 }
 
+// ImageGeneralRecognition 通用物体和场景识别
+func (sc ShowCreation) ImageGeneralRecognition(userId, imageId, imagePath string) (models.Recognition, error) {
+	url := "https://aip.baidubce.com/rest/2.0/image-classify/v2/advanced_general?access_token=" + GetAccessToken()
+	imageBase64, err := GetFileContentAsBase64(imagePath)
+	if err != nil {
+		return models.Recognition{}, err
+	}
+	payload := strings.NewReader(fmt.Sprintf("image=%s&baike_num=1", imageBase64))
+	client := &http.Client{}
+	req, err := http.NewRequest("POST", url, payload)
+	if err != nil {
+		return models.Recognition{}, err
+	}
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Add("Accept", "application/json")
+
+	res, err := client.Do(req)
+	if err != nil {
+		return models.Recognition{}, err
+	}
+	defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return models.Recognition{}, err
+	}
+	// 解析 JSON 数据
+	var data map[string]interface{}
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return models.Recognition{}, err
+	}
+	results, ok := data["result"].([]interface{})
+	if !ok {
+		return models.Recognition{}, errors.New("无法获取 result 数组")
+	}
+	var baikeURL, description, imageURL, score, root, keyword interface{}
+	// 遍历结果数组
+	for _, result := range results {
+		// 将每个元素断言为 map[string]interface{}
+		resultMap, ok := result.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		// 获取 "baike_info" map
+		baikeInfo, ok := resultMap["baike_info"].(map[string]interface{})
+		if ok {
+			// 在 baikeInfo 中获取需要的信息
+			baikeURL = baikeInfo["baike_url"]
+			description = baikeInfo["description"]
+			imageURL = baikeInfo["image_url"]
+			score = resultMap["score"]
+			root = resultMap["root"]
+			keyword = resultMap["keyword"]
+		} else {
+			continue
+		}
+	}
+	if root == nil || keyword == nil || score == nil {
+		return models.Recognition{}, err
+	}
+	var sf snowflake.Snowflake
+	id := sf.NextVal()
+	strInt64 := strconv.FormatInt(id, 10)
+	resultImageId, _ := strconv.Atoi(strInt64[:len(strInt64)-2])
+	userId1, err := strconv.ParseInt(userId, 10, 64)
+	imageId1, err := strconv.ParseInt(imageId, 10, 64)
+	imageRecognition := models.Recognition{
+		ID:          resultImageId,
+		UserId:      int(userId1),
+		ImageId:     int(imageId1),
+		Score:       score,
+		Root:        root,
+		BaikeUrl:    baikeURL,
+		ImageUrl:    imageURL,
+		Description: description,
+		Keyword:     keyword,
+		CreateTime:  time.Now(),
+		UpdateTime:  time.Now(),
+		IsActive:    1,
+	}
+	imageInfo, err := mysql.CreateGeneralRecognition(imageRecognition)
+	if err != nil {
+		return models.Recognition{}, err
+	}
+	return imageInfo, nil
+}
+
 // GetFileContentAsBase64 获取文件base64编码
 // param string  path 文件路径
 // return string base64编码信息，不带文件头

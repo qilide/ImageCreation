@@ -13,3 +13,9 @@ func CreateCreationImage(imageInfo models.Creation) (models.Creation, error) {
 	err := db.Table("creation").Create(&imageInfo).Error
 	return imageInfo, err
 }
+
+// CreateGeneralRecognition 新建通用物体和场景识别
+func CreateGeneralRecognition(imageInfo models.Recognition) (models.Recognition, error) {
+	err := db.Table("recognition").Create(&imageInfo).Error
+	return imageInfo, err
+}

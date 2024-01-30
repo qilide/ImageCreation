@@ -5,6 +5,7 @@ import (
 	"ImageCreation/logic/creation"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"net/url"
 	"strings"
 )
 
@@ -33,6 +34,41 @@ func UploadImage(c *gin.Context) {
 		return
 	}
 	response.Json(c, 200, "上传创作图片成功", gin.H{"imageInfo": imageInfo, "img": img})
+	return
+}
+
+// GeneralRecognition 通用物体和场景识别
+// @Summary 通用物体和场景识别
+// @Description 用于通用物体和场景识别
+// @Tags 通用物体和场景识别
+// @Accept application/json
+// @Produce application/json
+// @Security ApiKeyAuth
+// @Success 200 {object}  response.Information "通用物体和场景识别成功"
+// @failure 401 {object}  response.Information "通用物体和场景识别失败"
+// @Router /creation/zoom/pro [POST]
+func GeneralRecognition(c *gin.Context) {
+	userID := c.PostForm("userId")
+	imageID := c.PostForm("imageId")
+	imagePath := c.PostForm("imagePath")
+	prefix := "/static/"
+	index := strings.Index(imagePath, prefix)
+	// 提取路径部分
+	path := "./static/" + imagePath[index+len(prefix):]
+	decodedPath, err := url.QueryUnescape(path)
+	if err != nil {
+		fmt.Println("解码错误:", err)
+		response.Json(c, 200, "通用物体和场景识别失败", err)
+		return
+	}
+	var sc creation.ShowCreation
+	imageInfo, err := sc.ImageGeneralRecognition(userID, imageID, decodedPath)
+	if err != nil || imageInfo.Root == nil {
+		fmt.Println(err)
+		response.Json(c, 200, "通用物体和场景识别失败", err)
+		return
+	}
+	response.Json(c, 200, "通用物体和场景识别成功", gin.H{"imageInfo": imageInfo})
 	return
 }
 
