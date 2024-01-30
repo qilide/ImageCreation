@@ -419,6 +419,90 @@ paths:
       summary: 显示我的收藏图片
       tags:
       - 显示我的收藏图片
+  /creation/clarity/enhancement:
+    post:
+      consumes:
+      - application/json
+      description: 用于图像清晰度增强
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 图像清晰度增强成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 图像清晰度增强失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 图像清晰度增强
+      tags:
+      - 图像清晰度增强
+  /creation/color/enhancement:
+    post:
+      consumes:
+      - application/json
+      description: 用于图像色彩增强
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 图像色彩增强成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 图像色彩增强失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 图像色彩增强
+      tags:
+      - 图像色彩增强
+  /creation/contrast/enhancement:
+    post:
+      consumes:
+      - application/json
+      description: 用于图像对比度增强
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 图像对比度增强成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 图像对比度增强失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 图像对比度增强
+      tags:
+      - 图像对比度增强
+  /creation/defogging:
+    post:
+      consumes:
+      - application/json
+      description: 用于图像去雾
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 图像去雾成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 图像去雾失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 图像去雾
+      tags:
+      - 图像去雾
   /creation/upload/image:
     post:
       consumes:
@@ -444,6 +528,27 @@ paths:
       summary: 上传创作图片
       tags:
       - 上传创作图片
+  /creation/zoom/pro:
+    post:
+      consumes:
+      - application/json
+      description: 用于图像无损放大
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 图像无损放大成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 图像无损放大失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 图像无损放大
+      tags:
+      - 图像无损放大
   /gallery:
     get:
       consumes:

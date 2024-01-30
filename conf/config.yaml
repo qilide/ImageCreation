@@ -45,3 +45,7 @@ apiKeys:
   - "OHc2ydJXgBs1klbPC8kspt3PrswLpEs0n-qBflwsZzw"
   - "xflPjF7W10dlu3ajhPXK4_IeW5flUyfxb3yfRmM1WfQ"
   - "B4dTWWYOFcnwTlYYWDJb8ZhnF8hAqsl5RXa_KVhENrM"
+
+creationKeys:
+  api_key: "SmZui0dD3Z5soC04Q0OP6V13"
+  secret_key: "U9yISUIZBzzuP9KmpwlDDDGDRXiw9Gjx"

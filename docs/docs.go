@@ -539,6 +539,142 @@ const docTemplate = `{
                 }
             }
         },
+        "/creation/clarity/enhancement": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于图像清晰度增强",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图像清晰度增强"
+                ],
+                "summary": "图像清晰度增强",
+                "responses": {
+                    "200": {
+                        "description": "图像清晰度增强成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "图像清晰度增强失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
+        "/creation/color/enhancement": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于图像色彩增强",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图像色彩增强"
+                ],
+                "summary": "图像色彩增强",
+                "responses": {
+                    "200": {
+                        "description": "图像色彩增强成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "图像色彩增强失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
+        "/creation/contrast/enhancement": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于图像对比度增强",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图像对比度增强"
+                ],
+                "summary": "图像对比度增强",
+                "responses": {
+                    "200": {
+                        "description": "图像对比度增强成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "图像对比度增强失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
+        "/creation/defogging": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于图像去雾",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图像去雾"
+                ],
+                "summary": "图像去雾",
+                "responses": {
+                    "200": {
+                        "description": "图像去雾成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "图像去雾失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
         "/creation/upload/image": {
             "post": {
                 "security": [
@@ -572,6 +708,40 @@ const docTemplate = `{
                     },
                     "402": {
                         "description": "请上传文件",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
+        "/creation/zoom/pro": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于图像无损放大",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图像无损放大"
+                ],
+                "summary": "图像无损放大",
+                "responses": {
+                    "200": {
+                        "description": "图像无损放大成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "图像无损放大失败",
                         "schema": {
                             "$ref": "#/definitions/response.Information"
                         }

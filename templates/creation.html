@@ -121,19 +121,28 @@
                       </div>
                     </div>
                   </div>
-                  <br>
                   <div class="text-center" id="image-info"></div>
                   <div class="text-center" id="msg"></div>
-                  <br>
-                  <div class="col-lg-10 text-center" style="margin: 40px 0">
-                    <button type="button" class="btn btn-success col-lg-2" style="margin: 10px;height: 110%;">添加水印</button>
-                    <button type="button" class="btn btn-success col-lg-2" style="margin: 10px;height: 110%;">裁剪图片</button>
-                    <button type="button" class="btn btn-success col-lg-2" style="margin: 10px;height: 110%;">增加滤镜</button>
-                    <button type="button" class="btn btn-success col-lg-2" style="margin: 10px;height: 110%;">提升分辨率</button>
+                  <div class="text-center" style="display: none" id="current-image-id"></div>
+                  <div class="col-lg-8 text-center" style="margin: 20px 0">
+                    <button type="button" class="btn btn-outline-light col-lg-2" style="margin: 10px;height: 105%;">撤销</button>
+                    <button type="button" class="btn btn-outline-light col-lg-2" style="margin: 10px;height: 105%;">原始</button>
+                    <button type="button" class="btn btn-outline-light col-lg-2" style="margin: 10px;height: 105%;">保存</button>
                   </div>
-                  <div class="col-lg-8 text-center" style="margin: 40px 0">
-                    <button type="button" class="btn btn-outline-light col-lg-3" style="margin: 10px;height: 105%;">撤销</button>
-                    <button type="button" class="btn btn-outline-light col-lg-3" style="margin: 10px;height: 105%;">保存</button>
+                  <div class="col-lg-10 text-center" style="margin: 40px 0">
+                    <button type="button" class="btn btn-success col-lg-3 general-recognition" style="margin: 10px;height: 110%;">通用物体和场景识别</button>
+                    <button type="button" class="btn btn-success col-lg-3 clarity-enhancement" style="margin: 10px;height: 110%;">图像清晰度增强</button>
+                    <button type="button" class="btn btn-success col-lg-3 color-enhancement" style="margin: 10px;height: 110%;">图像色彩增强</button>
+                  </div>
+                  <div class="col-lg-10 text-center" style="margin: 40px 0">
+                    <button type="button" class="btn btn-success col-lg-3 contrast-enhancement" style="margin: 10px;height: 110%;">图像对比度增强</button>
+                    <button type="button" class="btn btn-success col-lg-3 zoom-pro" style="margin: 10px;height: 110%;">图像无损放大</button>
+                    <button type="button" class="btn btn-success col-lg-3 defogging" style="margin: 10px;height: 110%;">图像去雾</button>
+                  </div>
+                  <div class="col-lg-10 text-center" style="margin: 40px 0">
+                    <button type="button" class="btn btn-success col-lg-3 animated-portraits" style="margin: 10px;height: 110%;">人像动漫化</button>
+                    <button type="button" class="btn btn-success col-lg-3 style-conversion" style="margin: 10px;height: 110%;">图像风格转换</button>
+                    <button type="button" class="btn btn-success col-lg-3 custom-style" style="margin: 10px;height: 110%;">自定义图像风格</button>
                   </div>
                 </div>
               </div>
@@ -147,10 +156,10 @@
                   <a href="#" class="details-link">
                     <div class="profile mt-auto">
                       <img src="" class="testimonial-img" alt="">
-                      <h3>添加水印</h3>
+                      <h3>通用物体和场景识别</h3>
                     </div>
                     <p>
-                      无论您是专业的摄影师还是热爱摄影的爱好者，我们都欢迎您在这里分享您的作品。让我们一起用图片讲述故事，创造美好的视觉体验！
+                      该请求用于通用物体及场景识别，即对于输入的一张图片，输出图片中的多个物体及场景标签。
                     </p>
                     <div class="stars">
                       <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
@@ -163,10 +172,10 @@
                   <a href="#" class="details-link">
                     <div class="profile mt-auto">
                       <img src="" class="testimonial-img" alt="">
-                      <h3>裁剪图片</h3>
+                      <h3>图像清晰度增强</h3>
                     </div>
                     <p>
-                      无论您是专业的摄影师还是热爱摄影的爱好者，我们都欢迎您在这里分享您的作品。让我们一起用图片讲述故事，创造美好的视觉体验！
+                      对压缩后的模糊图像实现智能快速去噪，优化图像纹理细节，使画面更加自然清晰。
                     </p>
                     <div class="stars">
                       <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
@@ -179,10 +188,10 @@
                   <a href="#" class="details-link">
                     <div class="profile mt-auto">
                       <img src="" class="testimonial-img" alt="">
-                      <h3>增加滤镜</h3>
+                      <h3>图像色彩增强</h3>
                     </div>
                     <p>
-                      无论您是专业的摄影师还是热爱摄影的爱好者，我们都欢迎您在这里分享您的作品。让我们一起用图片讲述故事，创造美好的视觉体验！
+                      可智能调节图片的色彩饱和度、亮度、对比度，使得图片内容细节、色彩更加逼真，可用于提升网站图片、手机相册图片、视频封面图片的质量。
                     </p>
                     <div class="stars">
                       <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
@@ -195,10 +204,10 @@
                   <a href="#" class="details-link">
                     <div class="profile mt-auto">
                       <img src="" class="testimonial-img" alt="">
-                      <h3>提升分辨率</h3>
+                      <h3>图像对比度增强</h3>
                     </div>
                     <p>
-                      无论您是专业的摄影师还是热爱摄影的爱好者，我们都欢迎您在这里分享您的作品。让我们一起用图片讲述故事，创造美好的视觉体验！
+                      调整过暗或者过亮图像的对比度，使图像更加鲜明。
                     </p>
                     <div class="stars">
                       <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
@@ -211,10 +220,74 @@
                   <a href="#" class="details-link">
                     <div class="profile mt-auto">
                       <img src="" class="testimonial-img" alt="">
-                      <h3>图片压缩</h3>
+                      <h3>图像无损放大</h3>
                     </div>
                     <p>
-                      无论您是专业的摄影师还是热爱摄影的爱好者，我们都欢迎您在这里分享您的作品。让我们一起用图片讲述故事，创造美好的视觉体验！
+                      输入一张图片，可以在尽量保持图像质量的条件下，将图像在长宽方向各放大两倍。
+                    </p>
+                    <div class="stars">
+                      <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                  </a>
+                </div>
+              </div><!-- End testimonial item -->
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <a href="#" class="details-link">
+                    <div class="profile mt-auto">
+                      <img src="" class="testimonial-img" alt="">
+                      <h3>图像去雾</h3>
+                    </div>
+                    <p>
+                      对浓雾天气下拍摄，导致细节无法辨认的图像进行去雾处理，还原更清晰真实的图像。
+                    </p>
+                    <div class="stars">
+                      <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                  </a>
+                </div>
+              </div><!-- End testimonial item -->
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <a href="#" class="details-link">
+                    <div class="profile mt-auto">
+                      <img src="" class="testimonial-img" alt="">
+                      <h3>人像动漫化</h3>
+                    </div>
+                    <p>
+                      运用世界领先的对抗生成网络，结合人脸检测、头发分割、人像分割等技术，为用户量身定制千人千面的二次元动漫形象，并且可通过参数设置，生成戴口罩的二次元动漫人像。
+                    </p>
+                    <div class="stars">
+                      <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                  </a>
+                </div>
+              </div><!-- End testimonial item -->
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <a href="#" class="details-link">
+                    <div class="profile mt-auto">
+                      <img src="" class="testimonial-img" alt="">
+                      <h3>图像风格转换</h3>
+                    </div>
+                    <p>
+                      可将图像转化成卡通画、铅笔画、彩色铅笔画，或者哥特油画、彩色糖块油画、呐喊油画、神奈川冲浪里油画、奇异油画、薰衣草油画等共计9种风格，可用于开展趣味活动，或集成到美图应用中对图像进行风格转换。
+                    </p>
+                    <div class="stars">
+                      <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                  </a>
+                </div>
+              </div><!-- End testimonial item -->
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                  <a href="#" class="details-link">
+                    <div class="profile mt-auto">
+                      <img src="" class="testimonial-img" alt="">
+                      <h3>自定义图像风格</h3>
+                    </div>
+                    <p>
+                      支持自定义风格图+待处理图片进行风格迁移处理，自定义图片的风格，同时也提供30种艺术风格供选择，可用于开展趣味活动，或集成到美图应用中对图像进行风格转换。
                     </p>
                     <div class="stars">
                       <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
@@ -349,7 +422,6 @@
     // 上传文件
     $('#inputGroupFileAddon04').click(function () {
       let token = window.sessionStorage.getItem('token');
-      console.log(token);
       let image = $('#inputGroupFile04')[0].files[0];
       let msg = $('#msg');
       if (token === null){
@@ -382,10 +454,270 @@
             msg,
             data
           } = res;
-          console.log(data);
           document.getElementById('creating-image').src = data.imageInfo.path;
           window.sessionStorage.setItem('origin-image-id', data.imageInfo.id);
+          $('#current-image-id').text(data.imageInfo.id);
           $('#image-info').text("图片宽度："+data.img.Width+"像素，高度："+data.img.Height+"像素");
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      });
+    });
+    // 图像清晰度增强
+    $('.clarity-enhancement').click(function () {
+      let token = window.sessionStorage.getItem('token');
+      let imageId = document.getElementById('current-image-id').textContent
+      let msg = $('#msg');
+      if (token === null){
+        msg.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      let imagePath = document.getElementById('creating-image').src;
+      console.log(imagePath);
+      if (imageId===null || imageId===""){
+        msg.text("请上传文件后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      let formData = new FormData();
+      formData.append('userId', token);
+      formData.append('imageId', imageId);
+      formData.append('imagePath', imagePath);
+      $.ajax({
+        url: `/creation/clarity/enhancement`,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (res) {
+          const {
+            code,
+            msg,
+            data
+          } = res;
+          console.log(data);
+          console.log(msg);
+          document.getElementById('creating-image').src = data.imageInfo.path;
+          $('#current-image-id').text(data.imageInfo.id);
+          $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            $('#msg').text(""); // 清空元素的文本内容
+          }, 5000); // 5000毫秒 = 5秒
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      });
+    });
+    // 图像色彩增强
+    $('.color-enhancement').click(function () {
+      let token = window.sessionStorage.getItem('token');
+      let imageId = document.getElementById('current-image-id').textContent
+      let msg = $('#msg');
+      if (token === null){
+        msg.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      let imagePath = document.getElementById('creating-image').src;
+      console.log(imagePath);
+      if (imageId===null || imageId===""){
+        msg.text("请上传文件后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      let formData = new FormData();
+      formData.append('userId', token);
+      formData.append('imageId', imageId);
+      formData.append('imagePath', imagePath);
+      $.ajax({
+        url: `/creation/color/enhancement`,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (res) {
+          const {
+            code,
+            msg,
+            data
+          } = res;
+          console.log(data);
+          console.log(msg);
+          document.getElementById('creating-image').src = data.imageInfo.path;
+          $('#current-image-id').text(data.imageInfo.id);
+          $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            $('#msg').text(""); // 清空元素的文本内容
+          }, 5000); // 5000毫秒 = 5秒
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      });
+    });
+    // 图像对比度增强
+    $('.contrast-enhancement').click(function () {
+      let token = window.sessionStorage.getItem('token');
+      let imageId = document.getElementById('current-image-id').textContent
+      let msg = $('#msg');
+      if (token === null){
+        msg.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      let imagePath = document.getElementById('creating-image').src;
+      console.log(imagePath);
+      if (imagePath === "" || imageId===null || imageId===""){
+        msg.text("请上传文件后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      let formData = new FormData();
+      formData.append('userId', token);
+      formData.append('imageId', imageId);
+      formData.append('imagePath', imagePath);
+      $.ajax({
+        url: `/creation/contrast/enhancement`,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (res) {
+          const {
+            code,
+            msg,
+            data
+          } = res;
+          console.log(data);
+          console.log(msg);
+          document.getElementById('creating-image').src = data.imageInfo.path;
+          $('#current-image-id').text(data.imageInfo.id);
+          $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            $('#msg').text(""); // 清空元素的文本内容
+          }, 5000); // 5000毫秒 = 5秒
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      });
+    });
+    // 图像无损放大
+    $('.zoom-pro').click(function () {
+      let token = window.sessionStorage.getItem('token');
+      let imageId = document.getElementById('current-image-id').textContent
+      let msg = $('#msg');
+      if (token === null){
+        msg.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      let imagePath = document.getElementById('creating-image').src;
+      console.log(imagePath);
+      if (imageId===null || imageId===""){
+        msg.text("请上传文件后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      let formData = new FormData();
+      formData.append('userId', token);
+      formData.append('imageId', imageId);
+      formData.append('imagePath', imagePath);
+      $.ajax({
+        url: `/creation/zoom/pro`,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (res) {
+          const {
+            code,
+            msg,
+            data
+          } = res;
+          console.log(data);
+          console.log(msg);
+          document.getElementById('creating-image').src = data.imageInfo.path;
+          $('#current-image-id').text(data.imageInfo.id);
+          $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            $('#msg').text(""); // 清空元素的文本内容
+          }, 5000); // 5000毫秒 = 5秒
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      });
+    });
+    // 图像去雾
+    $('.defogging').click(function () {
+      let token = window.sessionStorage.getItem('token');
+      let imageId = document.getElementById('current-image-id').textContent
+      let msg = $('#msg');
+      if (token === null){
+        msg.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      let imagePath = document.getElementById('creating-image').src;
+      console.log(imagePath);
+      if (imageId===null || imageId===""){
+        msg.text("请上传文件后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      let formData = new FormData();
+      formData.append('userId', token);
+      formData.append('imageId', imageId);
+      formData.append('imagePath', imagePath);
+      $.ajax({
+        url: `/creation/defogging`,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (res) {
+          const {
+            code,
+            msg,
+            data
+          } = res;
+          console.log(data);
+          console.log(msg);
+          document.getElementById('creating-image').src = data.imageInfo.path;
+          $('#current-image-id').text(data.imageInfo.id);
+          $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            $('#msg').text(""); // 清空元素的文本内容
+          }, 5000); // 5000毫秒 = 5秒
         },
         error: function (error) {
           console.log(error)

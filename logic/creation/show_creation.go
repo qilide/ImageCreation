@@ -4,13 +4,22 @@ import (
 	"ImageCreation/dao/mysql"
 	"ImageCreation/models"
 	"ImageCreation/pkg/snowflake"
+	"encoding/base64"
+	"encoding/json"
+	"errors"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 	image2 "image"
-	_ "image/jpeg" // 导入图片格式支持
+	_ "image/jpeg"
 	_ "image/png"
+	"io/ioutil"
 	"mime/multipart"
+	"net/http"
+	url2 "net/url"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -56,4 +65,120 @@ func (sc ShowCreation) SetUploadImage(c *gin.Context, userID string, image multi
 	}
 	info, err := mysql.CreateUploadImage(imageInfo)
 	return info, img, err
+}
+
+// ImageEnhancement 图像增强接口
+// 适用于 图像无损放大 图像去雾 图像对比度增强 图像清晰度增强 图像色彩增强等功能
+func (sc ShowCreation) ImageEnhancement(userId, imageId, imagePath, apiUrl, operation string) (models.Creation, error) {
+	url := apiUrl + GetAccessToken()
+	imageBase64, err := GetFileContentAsBase64(imagePath)
+	if err != nil {
+		return models.Creation{}, err
+	}
+	payload := strings.NewReader(fmt.Sprintf("image=%s", imageBase64))
+	client := &http.Client{}
+	req, err := http.NewRequest("POST", url, payload)
+	if err != nil {
+		return models.Creation{}, err
+	}
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Add("Accept", "application/json")
+
+	res, err := client.Do(req)
+	if err != nil {
+		return models.Creation{}, err
+	}
+	defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return models.Creation{}, err
+	}
+	// 解析 JSON 数据
+	var data map[string]interface{}
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return models.Creation{}, err
+	}
+	// 获取 image 字段的值
+	imageResultBase64, ok := data["image"].(string)
+	if !ok {
+		return models.Creation{}, errors.New("无法获取 image 字段的值")
+	}
+	var sf snowflake.Snowflake
+	id := sf.NextVal()
+	strInt64 := strconv.FormatInt(id, 10)
+	resultImageId, _ := strconv.Atoi(strInt64[:len(strInt64)-2])
+	path := "./static/creation/created/" + strconv.Itoa(resultImageId) + ".jpg"
+	pathSave := "/static/creation/created/" + strconv.Itoa(resultImageId) + ".jpg"
+	err = SaveBase64ToImage(path, imageResultBase64)
+	if err != nil {
+		return models.Creation{}, err
+	}
+	userId1, err := strconv.ParseInt(userId, 10, 64)
+	imageId1, err := strconv.ParseInt(imageId, 10, 64)
+	imageCreation := models.Creation{
+		ID:         resultImageId,
+		UserId:     int(userId1),
+		ImageId:    int(imageId1),
+		Path:       pathSave,
+		CreateTime: time.Now(),
+		UpdateTime: time.Now(),
+		IsActive:   1,
+		Operation:  operation,
+	}
+	imageInfo, err := mysql.CreateCreationImage(imageCreation)
+	if err != nil {
+		return models.Creation{}, err
+	}
+	return imageInfo, nil
+}
+
+// GetFileContentAsBase64 获取文件base64编码
+// param string  path 文件路径
+// return string base64编码信息，不带文件头
+func GetFileContentAsBase64(path string) (string, error) {
+	srcByte, err := ioutil.ReadFile(path)
+	if err != nil {
+		return "", err
+	}
+	return url2.QueryEscape(base64.StdEncoding.EncodeToString(srcByte)), nil
+}
+
+// GetAccessToken 使用 AK，SK 生成鉴权签名（Access Token）
+// return string 鉴权签名信息（Access Token）
+func GetAccessToken() string {
+	url := "https://aip.baidubce.com/oauth/2.0/token"
+	API_KEY := viper.GetString("creationKeys.api_key")
+	SECRET_KEY := viper.GetString("creationKeys.secret_key")
+	postData := fmt.Sprintf("grant_type=client_credentials&client_id=%s&client_secret=%s", API_KEY, SECRET_KEY)
+	resp, err := http.Post(url, "application/x-www-form-urlencoded", strings.NewReader(postData))
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+	accessTokenObj := map[string]string{}
+	json.Unmarshal(body, &accessTokenObj)
+	return accessTokenObj["access_token"]
+}
+
+// SaveBase64ToImage 根据Base64字符串保存图片到指定位置
+func SaveBase64ToImage(outputPath string, base64String string) error {
+	// 将Base64字符串解码为字节数组
+	imageData, err := base64.StdEncoding.DecodeString(base64String)
+	if err != nil {
+		return err
+	}
+	// 保存图像文件
+	err = ioutil.WriteFile(outputPath, imageData, 0644)
+	if err != nil {
+		return err
+	}
+	return nil
 }
