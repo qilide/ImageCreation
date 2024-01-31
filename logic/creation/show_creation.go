@@ -222,6 +222,67 @@ func (sc ShowCreation) ImageGeneralRecognition(userId, imageId, imagePath string
 	return imageInfo, nil
 }
 
+// ImageEffects 图像特效接口
+// 适用于 图像风格转换 人像动漫化 自定义图像风格等功能
+func (sc ShowCreation) ImageEffects(userId, imageId, url, operation string, payload *strings.Reader) (models.Creation, error) {
+	client := &http.Client{}
+	req, err := http.NewRequest("POST", url, payload)
+	if err != nil {
+		return models.Creation{}, err
+	}
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Add("Accept", "application/json")
+
+	res, err := client.Do(req)
+	if err != nil {
+		return models.Creation{}, err
+	}
+	defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return models.Creation{}, err
+	}
+	// 解析 JSON 数据
+	var data map[string]interface{}
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return models.Creation{}, err
+	}
+	// 获取 image 字段的值
+	imageResultBase64, ok := data["image"].(string)
+	if !ok {
+		return models.Creation{}, errors.New("无法获取 image 字段的值")
+	}
+	var sf snowflake.Snowflake
+	id := sf.NextVal()
+	strInt64 := strconv.FormatInt(id, 10)
+	resultImageId, _ := strconv.Atoi(strInt64[:len(strInt64)-2])
+	path := "./static/creation/created/" + strconv.Itoa(resultImageId) + ".jpg"
+	pathSave := "/static/creation/created/" + strconv.Itoa(resultImageId) + ".jpg"
+	err = SaveBase64ToImage(path, imageResultBase64)
+	if err != nil {
+		return models.Creation{}, err
+	}
+	userId1, err := strconv.ParseInt(userId, 10, 64)
+	imageId1, err := strconv.ParseInt(imageId, 10, 64)
+	imageCreation := models.Creation{
+		ID:         resultImageId,
+		UserId:     int(userId1),
+		ImageId:    int(imageId1),
+		Path:       pathSave,
+		CreateTime: time.Now(),
+		UpdateTime: time.Now(),
+		IsActive:   1,
+		Operation:  operation,
+	}
+	imageInfo, err := mysql.CreateCreationImage(imageCreation)
+	if err != nil {
+		return models.Creation{}, err
+	}
+	return imageInfo, nil
+}
+
 // GetFileContentAsBase64 获取文件base64编码
 // param string  path 文件路径
 // return string base64编码信息，不带文件头

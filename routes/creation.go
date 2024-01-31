@@ -22,9 +22,9 @@ func CreationRoute(CreationRoute *gin.RouterGroup) {
 	// 图像去雾
 	CreationRoute.POST("/defogging", creation.Defogging)
 	// 人像动漫化
-	CreationRoute.POST("/animated/portraits", creation.UploadImage)
+	CreationRoute.POST("/animated/portraits", creation.AnimatedPortraits)
 	// 图像风格转换
-	CreationRoute.POST("/style/conversion", creation.UploadImage)
+	CreationRoute.POST("/style/conversion", creation.StyleConversion)
 	// 自定义图像风格
-	CreationRoute.POST("/custom/style", creation.UploadImage)
+	CreationRoute.POST("/custom/style", creation.CustomStyle)
 }

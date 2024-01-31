@@ -539,6 +539,40 @@ const docTemplate = `{
                 }
             }
         },
+        "/creation/animated/portraits": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于人像动漫化",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "人像动漫化"
+                ],
+                "summary": "人像动漫化",
+                "responses": {
+                    "200": {
+                        "description": "人像动漫化成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "人像动漫化失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
         "/creation/clarity/enhancement": {
             "post": {
                 "security": [
@@ -641,6 +675,40 @@ const docTemplate = `{
                 }
             }
         },
+        "/creation/custom/style": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于自定义图像风格",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "自定义图像风格"
+                ],
+                "summary": "自定义图像风格",
+                "responses": {
+                    "200": {
+                        "description": "自定义图像风格成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "自定义图像风格失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
         "/creation/defogging": {
             "post": {
                 "security": [
@@ -668,6 +736,40 @@ const docTemplate = `{
                     },
                     "401": {
                         "description": "图像去雾失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
+        "/creation/style/conversion": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于图像风格转换",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图像风格转换"
+                ],
+                "summary": "图像风格转换",
+                "responses": {
+                    "200": {
+                        "description": "图像风格转换成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "图像风格转换失败",
                         "schema": {
                             "$ref": "#/definitions/response.Information"
                         }

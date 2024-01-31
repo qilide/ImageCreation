@@ -146,9 +146,41 @@
                     <button type="button" class="btn btn-success col-lg-3 defogging" style="margin: 10px;height: 110%;">图像去雾</button>
                   </div>
                   <div class="col-lg-10 text-center" style="margin: 40px 0">
-                    <button type="button" class="btn btn-success col-lg-3 animated-portraits" style="margin: 10px;height: 110%;">人像动漫化</button>
-                    <button type="button" class="btn btn-success col-lg-3 style-conversion" style="margin: 10px;height: 110%;">图像风格转换</button>
-                    <button type="button" class="btn btn-success col-lg-3 custom-style" style="margin: 10px;height: 110%;">自定义图像风格</button>
+<!--                    <button type="button" class="btn btn-success col-lg-3 animated-portraits" style="margin: 10px;height: 110%;">人像动漫化</button>-->
+                    <div class="btn-group col-lg-3" style="margin: 10px;height: 110%;">
+                      <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        人像动漫化
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><button class="dropdown-item animated-portraits" name="anime" type="button">二次元动漫图</button></li>
+                        <li><button class="dropdown-item animated-portraits" name="anime_mask" type="button">戴口罩的二次元动漫图</button></li>
+                      </ul>
+                    </div>
+<!--                    <button type="button" class="btn btn-success col-lg-3 style-conversion" style="margin: 10px;height: 110%;">图像风格转换</button>-->
+                    <div class="btn-group col-lg-3" style="margin: 10px;height: 110%;">
+                      <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        图像风格转换
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><button class="dropdown-item style-conversion" name="cartoon" type="button">卡通画风格</button></li>
+                        <li><button class="dropdown-item style-conversion" name="pencil" type="button">铅笔风格</button></li>
+                        <li><button class="dropdown-item style-conversion" name="color_pencil" type="button">彩色铅笔画风格</button></li>
+                        <li><button class="dropdown-item style-conversion" name="warm" type="button">彩色糖块油画风格</button></li>
+                        <li><button class="dropdown-item style-conversion" name="wave" type="button">神奈川冲浪里油画风格</button></li>
+                        <li><button class="dropdown-item style-conversion" name="lavender" type="button">薰衣草油画风格</button></li>
+                        <li><button class="dropdown-item style-conversion" name="mononoke" type="button">奇异油画风格</button></li>
+                        <li><button class="dropdown-item style-conversion" name="scream" type="button">呐喊油画风格</button></li>
+                        <li><button class="dropdown-item style-conversion" name="gothic" type="button">哥特油画风格</button></li>
+                      </ul>
+                    </div>
+                    <button type="button" class="btn btn-success col-lg-3 custom-style-text" style="margin: 10px;height: 110%;">自定义图像风格</button>
+                  </div>
+                  <div class="col-lg-5 text-center" style="display: none" id="custom-style-info">
+                    <div class="input-group mb-3">
+                      <input type="file" class="form-control" id="inputGroupFile" aria-describedby="inputGroupFileAddon" aria-label="Upload">
+                      <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon">生成</button>
+                      <button class="btn btn-outline-secondary" type="button" id="custom-style-cancel">取消</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -165,7 +197,7 @@
                       <h3>通用物体和场景识别</h3>
                     </div>
                     <p>
-                      该请求用于通用物体及场景识别，即对于输入的一张图片，输出图片中的多个物体及场景标签。
+                      该请求用于通用物体及场景识别，即对于输入的一张图片，输出图片中的物体及场景标签。
                     </p>
                     <div class="stars">
                       <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
@@ -261,7 +293,7 @@
                       <h3>人像动漫化</h3>
                     </div>
                     <p>
-                      运用世界领先的对抗生成网络，结合人脸检测、头发分割、人像分割等技术，为用户量身定制千人千面的二次元动漫形象，并且可通过参数设置，生成戴口罩的二次元动漫人像。
+                      运用世界领先的对抗生成网络，结合人脸检测、头发分割、人像分割等技术，为用户量身定制千人千面的二次元动漫形象，并可以生成戴口罩的二次元动漫人像。
                     </p>
                     <div class="stars">
                       <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
@@ -293,7 +325,7 @@
                       <h3>自定义图像风格</h3>
                     </div>
                     <p>
-                      支持自定义风格图+待处理图片进行风格迁移处理，自定义图片的风格，同时也提供30种艺术风格供选择，可用于开展趣味活动，或集成到美图应用中对图像进行风格转换。
+                      支持自定义风格图+待处理图片进行风格迁移处理，自定义图片的风格，可用于开展趣味活动，或集成到美图应用中对图像进行风格转换。
                     </p>
                     <div class="stars">
                       <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
@@ -483,7 +515,6 @@
         return
       }
       let imagePath = document.getElementById('creating-image').src;
-      console.log(imagePath);
       if (imageId===null || imageId===""){
         msg.text("请上传文件后重试！");
         setTimeout(function clearContent() {
@@ -543,7 +574,6 @@
         return
       }
       let imagePath = document.getElementById('creating-image').src;
-      console.log(imagePath);
       if (imageId===null || imageId===""){
         msg.text("请上传文件后重试！");
         setTimeout(function clearContent() {
@@ -551,6 +581,7 @@
         }, 5000); // 5000毫秒 = 5秒
         return
       }
+      msg.text("正在图像清晰度增强中。。。");
       let formData = new FormData();
       formData.append('userId', token);
       formData.append('imageId', imageId);
@@ -595,7 +626,6 @@
         return
       }
       let imagePath = document.getElementById('creating-image').src;
-      console.log(imagePath);
       if (imageId===null || imageId===""){
         msg.text("请上传文件后重试！");
         setTimeout(function clearContent() {
@@ -603,6 +633,7 @@
         }, 5000); // 5000毫秒 = 5秒
         return
       }
+      msg.text("正在图像色彩增强中。。。");
       let formData = new FormData();
       formData.append('userId', token);
       formData.append('imageId', imageId);
@@ -647,7 +678,6 @@
         return
       }
       let imagePath = document.getElementById('creating-image').src;
-      console.log(imagePath);
       if (imagePath === "" || imageId===null || imageId===""){
         msg.text("请上传文件后重试！");
         setTimeout(function clearContent() {
@@ -655,6 +685,7 @@
         }, 5000); // 5000毫秒 = 5秒
         return
       }
+      msg.text("正在图像对比度增强中。。。");
       let formData = new FormData();
       formData.append('userId', token);
       formData.append('imageId', imageId);
@@ -699,7 +730,6 @@
         return
       }
       let imagePath = document.getElementById('creating-image').src;
-      console.log(imagePath);
       if (imageId===null || imageId===""){
         msg.text("请上传文件后重试！");
         setTimeout(function clearContent() {
@@ -707,6 +737,7 @@
         }, 5000); // 5000毫秒 = 5秒
         return
       }
+      msg.text("正在图像无损放大中。。。");
       let formData = new FormData();
       formData.append('userId', token);
       formData.append('imageId', imageId);
@@ -751,7 +782,6 @@
         return
       }
       let imagePath = document.getElementById('creating-image').src;
-      console.log(imagePath);
       if (imageId===null || imageId===""){
         msg.text("请上传文件后重试！");
         setTimeout(function clearContent() {
@@ -759,6 +789,7 @@
         }, 5000); // 5000毫秒 = 5秒
         return
       }
+      msg.text("正在图像去雾中。。。");
       let formData = new FormData();
       formData.append('userId', token);
       formData.append('imageId', imageId);
@@ -780,6 +811,186 @@
           console.log(msg);
           document.getElementById('creating-image').src = data.imageInfo.path;
           $('#current-image-id').text(data.imageInfo.id);
+          $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            $('#msg').text(""); // 清空元素的文本内容
+          }, 5000); // 5000毫秒 = 5秒
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      });
+    });
+    // 图像风格转换
+    $('.style-conversion').click(function () {
+      let token = window.sessionStorage.getItem('token');
+      let imageId = document.getElementById('current-image-id').textContent
+      let style = $(this).attr('name');
+      console.log('点击的下拉菜单项name属性值：', style);
+      let msg = $('#msg');
+      if (token === null){
+        msg.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      let imagePath = document.getElementById('creating-image').src;
+      if (imageId===null || imageId===""){
+        msg.text("请上传文件后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      msg.text("正在图像风格转换中。。。");
+      let formData = new FormData();
+      formData.append('userId', token);
+      formData.append('imageId', imageId);
+      formData.append('imagePath', imagePath);
+      formData.append('style', style);
+      $.ajax({
+        url: `/creation/style/conversion`,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (res) {
+          const {
+            code,
+            msg,
+            data
+          } = res;
+          console.log(data);
+          console.log(msg);
+          document.getElementById('creating-image').src = data.imageInfo.path;
+          $('#current-image-id').text(data.imageInfo.id);
+          $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            $('#msg').text(""); // 清空元素的文本内容
+          }, 5000); // 5000毫秒 = 5秒
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      });
+    });
+    // 人像动漫化
+    $('.animated-portraits').click(function () {
+      let token = window.sessionStorage.getItem('token');
+      let imageId = document.getElementById('current-image-id').textContent
+      let type = $(this).attr('name');
+      console.log('点击的下拉菜单项name属性值：', type);
+      let msg = $('#msg');
+      if (token === null){
+        msg.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      let imagePath = document.getElementById('creating-image').src;
+      if (imageId===null || imageId===""){
+        msg.text("请上传文件后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      msg.text("正在人像动漫化中。。。");
+      let formData = new FormData();
+      formData.append('userId', token);
+      formData.append('imageId', imageId);
+      formData.append('imagePath', imagePath);
+      formData.append('type', type);
+      $.ajax({
+        url: `/creation/animated/portraits`,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (res) {
+          const {
+            code,
+            msg,
+            data
+          } = res;
+          console.log(data);
+          console.log(msg);
+          document.getElementById('creating-image').src = data.imageInfo.path;
+          $('#current-image-id').text(data.imageInfo.id);
+          $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            $('#msg').text(""); // 清空元素的文本内容
+          }, 5000); // 5000毫秒 = 5秒
+        },
+        error: function (error) {
+          console.log(error)
+        }
+      });
+    });
+    // 自定义图像风格操作显示
+    $('.custom-style-text').click(function () {
+      document.getElementById('custom-style-info').style.display="block";
+    });
+    // 自定义图像风格操作显示
+    $('#custom-style-cancel').click(function () {
+      document.getElementById('custom-style-info').style.display="none";
+    });
+    // 自定义图像风格
+    $('#inputGroupFileAddon').click(function () {
+      let token = window.sessionStorage.getItem('token');
+      let imageId = document.getElementById('current-image-id').textContent
+      let image = $('#inputGroupFile')[0].files[0];
+      let msg = $('#msg');
+      if (token === null){
+        msg.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      let imagePath = document.getElementById('creating-image').src;
+      if (imageId===null || imageId===""){
+        msg.text("请上传文件后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      if (image === undefined){
+        msg.text("请上传目标图像风格文件后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 3000毫秒 = 3秒
+        return
+      }
+      msg.text("正在自定义图像风格中。。。");
+      let formData = new FormData();
+      formData.append('userId', token);
+      formData.append('imageId', imageId);
+      formData.append('imagePath', imagePath);
+      formData.append('image', image);
+      $.ajax({
+        url: `/creation/custom/style`,
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (res) {
+          const {
+            code,
+            msg,
+            data
+          } = res;
+          console.log(data);
+          console.log(msg);
+          document.getElementById('creating-image').src = data.imageInfo.path;
+          $('#current-image-id').text(data.imageInfo.id);
+          document.getElementById('custom-style-info').style.display="none";
           $('#msg').text(msg);
           setTimeout(function clearContent() {
             $('#msg').text(""); // 清空元素的文本内容

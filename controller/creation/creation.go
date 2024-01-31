@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/url"
+	"os"
 	"strings"
 )
 
@@ -219,5 +220,144 @@ func Defogging(c *gin.Context) {
 		return
 	}
 	response.Json(c, 200, "图像去雾成功", gin.H{"imageInfo": imageInfo})
+	return
+}
+
+// AnimatedPortraits 人像动漫化
+// @Summary 人像动漫化
+// @Description 用于人像动漫化
+// @Tags 人像动漫化
+// @Accept application/json
+// @Produce application/json
+// @Security ApiKeyAuth
+// @Success 200 {object}  response.Information "人像动漫化成功"
+// @failure 401 {object}  response.Information "人像动漫化失败"
+// @Router /creation/animated/portraits [POST]
+func AnimatedPortraits(c *gin.Context) {
+	userID := c.PostForm("userId")
+	imageID := c.PostForm("imageId")
+	imagePath := c.PostForm("imagePath")
+	type1 := c.PostForm("type")
+	prefix := "/static/"
+	index := strings.Index(imagePath, prefix)
+	// 提取路径部分
+	path := "./static/" + imagePath[index+len(prefix):]
+	var sc creation.ShowCreation
+	apiUrl := "https://aip.baidubce.com/rest/2.0/image-process/v1/selfie_anime?access_token=" + creation.GetAccessToken()
+	imageBase64, err := creation.GetFileContentAsBase64(path)
+	if err != nil {
+		fmt.Println(err)
+		response.Json(c, 200, "人像动漫化失败", err)
+		return
+	}
+	var payload *strings.Reader
+	if type1 == "anime" {
+		payload = strings.NewReader(fmt.Sprintf("type=%s&image=%s", type1, imageBase64))
+	} else {
+		payload = strings.NewReader(fmt.Sprintf("type=%s&mask_id=1&image=%s", type1, imageBase64))
+	}
+	imageInfo, err := sc.ImageEffects(userID, imageID, apiUrl, "人像动漫化", payload)
+	if err != nil {
+		fmt.Println(err)
+		response.Json(c, 200, "人像动漫化失败", err)
+		return
+	}
+	response.Json(c, 200, "人像动漫化成功", gin.H{"imageInfo": imageInfo})
+	return
+}
+
+// StyleConversion 图像风格转换
+// @Summary 图像风格转换
+// @Description 用于图像风格转换
+// @Tags 图像风格转换
+// @Accept application/json
+// @Produce application/json
+// @Security ApiKeyAuth
+// @Success 200 {object}  response.Information "图像风格转换成功"
+// @failure 401 {object}  response.Information "图像风格转换失败"
+// @Router /creation/style/conversion [POST]
+func StyleConversion(c *gin.Context) {
+	userID := c.PostForm("userId")
+	imageID := c.PostForm("imageId")
+	imagePath := c.PostForm("imagePath")
+	style := c.PostForm("style")
+	prefix := "/static/"
+	index := strings.Index(imagePath, prefix)
+	// 提取路径部分
+	path := "./static/" + imagePath[index+len(prefix):]
+	var sc creation.ShowCreation
+	apiUrl := "https://aip.baidubce.com/rest/2.0/image-process/v1/style_trans?access_token=" + creation.GetAccessToken()
+	imageBase64, err := creation.GetFileContentAsBase64(path)
+	if err != nil {
+		fmt.Println(err)
+		response.Json(c, 200, "图像风格转换失败", err)
+		return
+	}
+	payload := strings.NewReader(fmt.Sprintf("option=%s&image=%s", style, imageBase64))
+	imageInfo, err := sc.ImageEffects(userID, imageID, apiUrl, "图像风格转换", payload)
+	if err != nil {
+		fmt.Println(err)
+		response.Json(c, 200, "图像风格转换失败", err)
+		return
+	}
+	response.Json(c, 200, "图像风格转换成功", gin.H{"imageInfo": imageInfo})
+	return
+}
+
+// CustomStyle 自定义图像风格
+// @Summary 自定义图像风格
+// @Description 用于自定义图像风格
+// @Tags 自定义图像风格
+// @Accept application/json
+// @Produce application/json
+// @Security ApiKeyAuth
+// @Success 200 {object}  response.Information "自定义图像风格成功"
+// @failure 401 {object}  response.Information "自定义图像风格失败"
+// @Router /creation/custom/style [POST]
+func CustomStyle(c *gin.Context) {
+	userID := c.PostForm("userId")
+	imageID := c.PostForm("imageId")
+	imagePath := c.PostForm("imagePath")
+	image, header, _ := c.Request.FormFile("image")
+	defer image.Close()
+	// 将文件保存到指定的路径，这里保存在当前目录下的 uploads 文件夹中
+	savePath := "./static/creation/custom_style/"
+	savePath1 := savePath + header.Filename
+	// 如果目录不存在，则创建目录
+	if _, err := os.Stat(savePath); os.IsNotExist(err) {
+		err := os.Mkdir(savePath, 0755)
+		if err != nil {
+			fmt.Println(err)
+			response.Json(c, 200, "自定义图像风格失败", err)
+			return
+		}
+	}
+	err := c.SaveUploadedFile(header, savePath1)
+	imageBase641, err := creation.GetFileContentAsBase64(savePath1)
+	if err != nil {
+		fmt.Println(err)
+		response.Json(c, 200, "自定义图像风格失败", err)
+		return
+	}
+	prefix := "/static/"
+	index := strings.Index(imagePath, prefix)
+	// 提取路径部分
+	path := "./static/" + imagePath[index+len(prefix):]
+	var sc creation.ShowCreation
+	apiUrl := "https://aip.baidubce.com/rest/2.0/image-process/v1/customize_stylization?access_token=" + creation.GetAccessToken()
+	imageBase64, err := creation.GetFileContentAsBase64(path)
+	if err != nil {
+		fmt.Println(err)
+		response.Json(c, 200, "自定义图像风格失败", err)
+		return
+	}
+	payload := strings.NewReader(fmt.Sprintf("style=%s&image=%s", imageBase641, imageBase64))
+	imageInfo, err := sc.ImageEffects(userID, imageID, apiUrl, "自定义图像风格", payload)
+	if err != nil {
+		fmt.Println(err)
+		response.Json(c, 200, "自定义图像风格失败", err)
+		return
+	}
+	response.Json(c, 200, "自定义图像风格成功", gin.H{"imageInfo": imageInfo})
 	return
 }
