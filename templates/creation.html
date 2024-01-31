@@ -130,56 +130,50 @@
                   </div>
                   <div class="text-center" id="msg"></div>
                   <div class="text-center" style="display: none" id="current-image-id"></div>
-                  <div class="col-lg-8 text-center" style="margin: 20px 0">
-                    <button type="button" class="btn btn-outline-light col-lg-3" id="revoke-image" style="margin: 10px;height: 105%;">撤销</button>
-                    <button type="button" class="btn btn-outline-light col-lg-3" id="save-image" style="margin: 10px;height: 105%;">保存</button>
-                  </div>
-                  <div class="col-lg-10 text-center" style="margin: 40px 0">
-                    <button type="button" class="btn btn-success col-lg-3 general-recognition" id="general-recognition" style="margin: 10px;height: 110%;">通用物体和场景识别</button>
-                    <button type="button" class="btn btn-success col-lg-3 clarity-enhancement" id="clarity-enhancement" style="margin: 10px;height: 110%;">图像清晰度增强</button>
-                    <button type="button" class="btn btn-success col-lg-3 color-enhancement" id="color-enhancement" style="margin: 10px;height: 110%;">图像色彩增强</button>
-                  </div>
-                  <div class="col-lg-10 text-center" style="margin: 40px 0">
-                    <button type="button" class="btn btn-success col-lg-3 contrast-enhancement" id="contrast-enhancement" style="margin: 10px;height: 110%;">图像对比度增强</button>
-                    <button type="button" class="btn btn-success col-lg-3 zoom-pro" id="zoom-pro" style="margin: 10px;height: 110%;">图像无损放大</button>
-                    <button type="button" class="btn btn-success col-lg-3 defogging" id="defogging" style="margin: 10px;height: 110%;">图像去雾</button>
-                  </div>
-                  <div class="col-lg-10 text-center" style="margin: 40px 0">
-<!--                    <button type="button" class="btn btn-success col-lg-3 animated-portraits" style="margin: 10px;height: 110%;">人像动漫化</button>-->
-                    <div class="btn-group col-lg-3" style="margin: 10px;height: 110%;">
-                      <button type="button" class="btn btn-success dropdown-toggle" id="animated-portraits" data-bs-toggle="dropdown" aria-expanded="false">
-                        人像动漫化
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li><button class="dropdown-item animated-portraits" name="anime" type="button">二次元动漫图</button></li>
-                        <li><button class="dropdown-item animated-portraits" name="anime_mask" type="button">戴口罩的二次元动漫图</button></li>
-                      </ul>
-                    </div>
-<!--                    <button type="button" class="btn btn-success col-lg-3 style-conversion" style="margin: 10px;height: 110%;">图像风格转换</button>-->
-                    <div class="btn-group col-lg-3" style="margin: 10px;height: 110%;">
-                      <button type="button" class="btn btn-success dropdown-toggle" id="style-conversion" data-bs-toggle="dropdown" aria-expanded="false">
-                        图像风格转换
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li><button class="dropdown-item style-conversion" name="cartoon" type="button">卡通画风格</button></li>
-                        <li><button class="dropdown-item style-conversion" name="pencil" type="button">铅笔风格</button></li>
-                        <li><button class="dropdown-item style-conversion" name="color_pencil" type="button">彩色铅笔画风格</button></li>
-                        <li><button class="dropdown-item style-conversion" name="warm" type="button">彩色糖块油画风格</button></li>
-                        <li><button class="dropdown-item style-conversion" name="wave" type="button">神奈川冲浪里油画风格</button></li>
-                        <li><button class="dropdown-item style-conversion" name="lavender" type="button">薰衣草油画风格</button></li>
-                        <li><button class="dropdown-item style-conversion" name="mononoke" type="button">奇异油画风格</button></li>
-                        <li><button class="dropdown-item style-conversion" name="scream" type="button">呐喊油画风格</button></li>
-                        <li><button class="dropdown-item style-conversion" name="gothic" type="button">哥特油画风格</button></li>
-                      </ul>
-                    </div>
-                    <button type="button" class="btn btn-success col-lg-3 custom-style-text" id="custom-style-text" style="margin: 10px;height: 110%;">自定义图像风格</button>
-                  </div>
-                  <div class="col-lg-5 text-center" style="display: none" id="custom-style-info">
-                    <div class="input-group mb-3">
-                      <input type="file" class="form-control" id="inputGroupFile" aria-describedby="inputGroupFileAddon" aria-label="Upload">
-                      <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon">生成</button>
-                      <button class="btn btn-outline-secondary" type="button" id="custom-style-cancel">取消</button>
-                    </div>
+                  <button type="button" class="btn btn-outline-light col-lg-3" id="revoke-image" style="margin: 20px;height: 60px;">撤销</button>
+                  <button type="button" class="btn btn-outline-light col-lg-3" id="save-image" style="margin: 20px;height: 60px;">保存</button>
+                  <div class="container">
+                    <div class="row justify-content-center">
+                        <button type="button" class="btn btn-success col-lg-3 general-recognition" id="general-recognition" style="margin: 20px;height: 60px;">通用物体和场景识别</button>
+                        <button type="button" class="btn btn-success col-lg-3 clarity-enhancement" id="clarity-enhancement" style="margin: 20px;height: 60px;">图像清晰度增强</button>
+                        <button type="button" class="btn btn-success col-lg-3 color-enhancement" id="color-enhancement" style="margin: 20px;height: 60px;">图像色彩增强</button>
+                        <button type="button" class="btn btn-success col-lg-3 contrast-enhancement" id="contrast-enhancement" style="margin: 20px;height: 60px;">图像对比度增强</button>
+                        <button type="button" class="btn btn-success col-lg-3 zoom-pro" id="zoom-pro" style="margin: 20px;height: 60px;">图像无损放大</button>
+                        <button type="button" class="btn btn-success col-lg-3 defogging" id="defogging" style="margin: 20px;height: 60px;">图像去雾</button>
+                        <div class="btn-group col-lg-3  p-0" style="margin: 20px;height: 60px;">
+                          <button type="button" class="btn btn-success dropdown-toggle" id="animated-portraits" data-bs-toggle="dropdown" aria-expanded="false">
+                            人像动漫化
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li><button class="dropdown-item animated-portraits" name="anime" type="button">二次元动漫图</button></li>
+                            <li><button class="dropdown-item animated-portraits" name="anime_mask" type="button">戴口罩的二次元动漫图</button></li>
+                          </ul>
+                        </div>
+                        <div class="btn-group col-lg-3  p-0" style="margin: 20px;height: 60px;">
+                          <button type="button" class="btn btn-success dropdown-toggle" id="style-conversion" data-bs-toggle="dropdown" aria-expanded="false">
+                            图像风格转换
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li><button class="dropdown-item style-conversion" name="cartoon" type="button">卡通画风格</button></li>
+                            <li><button class="dropdown-item style-conversion" name="pencil" type="button">铅笔风格</button></li>
+                            <li><button class="dropdown-item style-conversion" name="color_pencil" type="button">彩色铅笔画风格</button></li>
+                            <li><button class="dropdown-item style-conversion" name="warm" type="button">彩色糖块油画风格</button></li>
+                            <li><button class="dropdown-item style-conversion" name="wave" type="button">神奈川冲浪里油画风格</button></li>
+                            <li><button class="dropdown-item style-conversion" name="lavender" type="button">薰衣草油画风格</button></li>
+                            <li><button class="dropdown-item style-conversion" name="mononoke" type="button">奇异油画风格</button></li>
+                            <li><button class="dropdown-item style-conversion" name="scream" type="button">呐喊油画风格</button></li>
+                            <li><button class="dropdown-item style-conversion" name="gothic" type="button">哥特油画风格</button></li>
+                          </ul>
+                        </div>
+                        <button type="button" class="btn btn-success col-lg-3 custom-style-text" id="custom-style-text" style="margin: 20px;height: 60px;">自定义图像风格</button>
+                      </div>
+                      <div class="col-lg-5 text-center" style="display: none" id="custom-style-info">
+                        <div class="input-group mb-3">
+                          <input type="file" class="form-control" id="inputGroupFile" aria-describedby="inputGroupFileAddon" aria-label="Upload">
+                          <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon">生成</button>
+                          <button class="btn btn-outline-secondary" type="button" id="custom-style-cancel">取消</button>
+                        </div>
+                      </div>
                   </div>
                 </div>
               </div>
