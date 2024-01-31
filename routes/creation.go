@@ -9,6 +9,8 @@ import (
 func CreationRoute(CreationRoute *gin.RouterGroup) {
 	// 上传创作图片
 	CreationRoute.POST("/upload/image", creation.UploadImage)
+	// 撤销图像
+	CreationRoute.POST("/revoke", creation.Revoke)
 	// 通用物体和场景识别
 	CreationRoute.POST("/general/recognition", creation.GeneralRecognition)
 	// 图像清晰度增强

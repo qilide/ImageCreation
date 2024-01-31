@@ -5,10 +5,42 @@ import (
 	"ImageCreation/logic/creation"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"net/url"
 	"os"
+	"strconv"
 	"strings"
 )
+
+// PageCreation 显示创作页面
+// @Summary 显示创作页面
+// @Description 用于显示创作页面
+// @Tags 显示创作页面
+// @Accept application/json
+// @Produce application/json
+// @Security ApiKeyAuth
+// @Success 200 {object}  response.Information "显示创作页面成功"
+// @failure 401 {object}  response.Information "显示创作页面失败"
+// @Router /creation [GET]
+func PageCreation(c *gin.Context) {
+	page := c.Query("page")
+	if page == "" || len(page) == 0 {
+		page = "1"
+	}
+	var sc creation.ShowCreation
+	if imageInfos, err := sc.GetCreationImage(); err != nil {
+		c.HTML(http.StatusOK, "errors.html", err)
+	} else {
+		var pages []int
+		for i := 1; i < len(imageInfos)/8+1; i++ {
+			pages = append(pages, i)
+		}
+		page1, _ := strconv.Atoi(page)
+		creationImages := imageInfos[(page1-1)*8 : page1*8]
+		c.HTML(http.StatusOK, "creation.html", gin.H{"ImageInfo": creationImages, "Pages": pages})
+	}
+	return
+}
 
 // UploadImage 上传创作图片
 // @Summary 上传创作图片
@@ -35,6 +67,30 @@ func UploadImage(c *gin.Context) {
 		return
 	}
 	response.Json(c, 200, "上传创作图片成功", gin.H{"imageInfo": imageInfo, "img": img})
+	return
+}
+
+// Revoke 回撤图像
+// @Summary 回撤图像
+// @Description 用于回撤图像
+// @Tags 回撤图像
+// @Accept application/json
+// @Produce application/json
+// @Security ApiKeyAuth
+// @Success 200 {object}  response.Information "回撤图像成功"
+// @failure 401 {object}  response.Information "回撤图像失败"
+// @Router /creation/revoke [POST]
+func Revoke(c *gin.Context) {
+	imageId := c.PostForm("origin_image_id")
+	fmt.Println(imageId)
+	var sc creation.ShowCreation
+	imageInfo, err := sc.RevokeImage(imageId)
+	if err != nil {
+		fmt.Println(err)
+		response.Json(c, 200, "回撤图像失败", err)
+		return
+	}
+	response.Json(c, 200, "回撤图像成功", gin.H{"imageInfo": imageInfo})
 	return
 }
 

@@ -419,6 +419,27 @@ paths:
       summary: 显示我的收藏图片
       tags:
       - 显示我的收藏图片
+  /creation:
+    get:
+      consumes:
+      - application/json
+      description: 用于显示创作页面
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 显示创作页面成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 显示创作页面失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 显示创作页面
+      tags:
+      - 显示创作页面
   /creation/animated/portraits:
     post:
       consumes:
@@ -545,6 +566,27 @@ paths:
       summary: 图像去雾
       tags:
       - 图像去雾
+  /creation/revoke:
+    post:
+      consumes:
+      - application/json
+      description: 用于回撤图像
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 回撤图像成功
+          schema:
+            $ref: '#/definitions/response.Information'
+        "401":
+          description: 回撤图像失败
+          schema:
+            $ref: '#/definitions/response.Information'
+      security:
+      - ApiKeyAuth: []
+      summary: 回撤图像
+      tags:
+      - 回撤图像
   /creation/style/conversion:
     post:
       consumes:

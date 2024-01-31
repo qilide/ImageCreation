@@ -131,24 +131,23 @@
                   <div class="text-center" id="msg"></div>
                   <div class="text-center" style="display: none" id="current-image-id"></div>
                   <div class="col-lg-8 text-center" style="margin: 20px 0">
-                    <button type="button" class="btn btn-outline-light col-lg-2" style="margin: 10px;height: 105%;">撤销</button>
-                    <button type="button" class="btn btn-outline-light col-lg-2" style="margin: 10px;height: 105%;">原始</button>
-                    <button type="button" class="btn btn-outline-light col-lg-2" style="margin: 10px;height: 105%;">保存</button>
+                    <button type="button" class="btn btn-outline-light col-lg-3" id="revoke-image" style="margin: 10px;height: 105%;">撤销</button>
+                    <button type="button" class="btn btn-outline-light col-lg-3" id="save-image" style="margin: 10px;height: 105%;">保存</button>
                   </div>
                   <div class="col-lg-10 text-center" style="margin: 40px 0">
-                    <button type="button" class="btn btn-success col-lg-3 general-recognition" style="margin: 10px;height: 110%;">通用物体和场景识别</button>
-                    <button type="button" class="btn btn-success col-lg-3 clarity-enhancement" style="margin: 10px;height: 110%;">图像清晰度增强</button>
-                    <button type="button" class="btn btn-success col-lg-3 color-enhancement" style="margin: 10px;height: 110%;">图像色彩增强</button>
+                    <button type="button" class="btn btn-success col-lg-3 general-recognition" id="general-recognition" style="margin: 10px;height: 110%;">通用物体和场景识别</button>
+                    <button type="button" class="btn btn-success col-lg-3 clarity-enhancement" id="clarity-enhancement" style="margin: 10px;height: 110%;">图像清晰度增强</button>
+                    <button type="button" class="btn btn-success col-lg-3 color-enhancement" id="color-enhancement" style="margin: 10px;height: 110%;">图像色彩增强</button>
                   </div>
                   <div class="col-lg-10 text-center" style="margin: 40px 0">
-                    <button type="button" class="btn btn-success col-lg-3 contrast-enhancement" style="margin: 10px;height: 110%;">图像对比度增强</button>
-                    <button type="button" class="btn btn-success col-lg-3 zoom-pro" style="margin: 10px;height: 110%;">图像无损放大</button>
-                    <button type="button" class="btn btn-success col-lg-3 defogging" style="margin: 10px;height: 110%;">图像去雾</button>
+                    <button type="button" class="btn btn-success col-lg-3 contrast-enhancement" id="contrast-enhancement" style="margin: 10px;height: 110%;">图像对比度增强</button>
+                    <button type="button" class="btn btn-success col-lg-3 zoom-pro" id="zoom-pro" style="margin: 10px;height: 110%;">图像无损放大</button>
+                    <button type="button" class="btn btn-success col-lg-3 defogging" id="defogging" style="margin: 10px;height: 110%;">图像去雾</button>
                   </div>
                   <div class="col-lg-10 text-center" style="margin: 40px 0">
 <!--                    <button type="button" class="btn btn-success col-lg-3 animated-portraits" style="margin: 10px;height: 110%;">人像动漫化</button>-->
                     <div class="btn-group col-lg-3" style="margin: 10px;height: 110%;">
-                      <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      <button type="button" class="btn btn-success dropdown-toggle" id="animated-portraits" data-bs-toggle="dropdown" aria-expanded="false">
                         人像动漫化
                       </button>
                       <ul class="dropdown-menu">
@@ -158,7 +157,7 @@
                     </div>
 <!--                    <button type="button" class="btn btn-success col-lg-3 style-conversion" style="margin: 10px;height: 110%;">图像风格转换</button>-->
                     <div class="btn-group col-lg-3" style="margin: 10px;height: 110%;">
-                      <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      <button type="button" class="btn btn-success dropdown-toggle" id="style-conversion" data-bs-toggle="dropdown" aria-expanded="false">
                         图像风格转换
                       </button>
                       <ul class="dropdown-menu">
@@ -173,7 +172,7 @@
                         <li><button class="dropdown-item style-conversion" name="gothic" type="button">哥特油画风格</button></li>
                       </ul>
                     </div>
-                    <button type="button" class="btn btn-success col-lg-3 custom-style-text" style="margin: 10px;height: 110%;">自定义图像风格</button>
+                    <button type="button" class="btn btn-success col-lg-3 custom-style-text" id="custom-style-text" style="margin: 10px;height: 110%;">自定义图像风格</button>
                   </div>
                   <div class="col-lg-5 text-center" style="display: none" id="custom-style-info">
                     <div class="input-group mb-3">
@@ -232,7 +231,7 @@
                       可智能调节图片的色彩饱和度、亮度、对比度，使得图片内容细节、色彩更加逼真，可用于提升网站图片、手机相册图片、视频封面图片的质量。
                     </p>
                     <div class="stars">
-                      <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                     </div>
                   </a>
                 </div>
@@ -248,7 +247,7 @@
                       调整过暗或者过亮图像的对比度，使图像更加鲜明。
                     </p>
                     <div class="stars">
-                      <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                     </div>
                   </a>
                 </div>
@@ -264,7 +263,7 @@
                       输入一张图片，可以在尽量保持图像质量的条件下，将图像在长宽方向各放大两倍。
                     </p>
                     <div class="stars">
-                      <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                     </div>
                   </a>
                 </div>
@@ -280,7 +279,7 @@
                       对浓雾天气下拍摄，导致细节无法辨认的图像进行去雾处理，还原更清晰真实的图像。
                     </p>
                     <div class="stars">
-                      <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                     </div>
                   </a>
                 </div>
@@ -352,46 +351,27 @@
         <section id="gallery" class="gallery">
           <div class="container-fluid">
             <div class="row gy-4 justify-content-center">
+              {{ range $idx,$image := .ImageInfo}}
+              <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="gallery-item h-100 thumbnail">
+                  <img src="{{$image.Path}}" style="max-width:100%;height:100%" alt="">
+                  <div class="gallery-links d-flex align-items-center justify-content-center">
+                    <a href="{{$image.Path}}" title="" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                  </div>
+                </div>
+              </div><!-- End Gallery Item -->
+              {{ end }}
 
-              <div class="col-xl-3 col-lg-4 col-md-6">
-                <div class="gallery-item h-100">
-                  <img src="/static/pictures/people/4pxycrNRhvg.jpg" style="max-width:100%;height:100%" alt="">
-                  <div class="gallery-links d-flex align-items-center justify-content-center">
-                    <a href="#" title="" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
-                    <a href="/gallery-single?id=" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                  </div>
-                </div>
-              </div><!-- End Gallery Item -->
-
-              <div class="col-xl-3 col-lg-4 col-md-6">
-                <div class="gallery-item h-100">
-                  <img src="/static/pictures/people/5aGUyCW_PJw.jpg" style="max-width:100%;height:100%" alt="">
-                  <div class="gallery-links d-flex align-items-center justify-content-center">
-                    <a href="#" title="" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
-                    <a href="/gallery-single?id=" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                  </div>
-                </div>
-              </div><!-- End Gallery Item -->
-              <div class="col-xl-3 col-lg-4 col-md-6">
-                <div class="gallery-item h-100">
-                  <img src="/static/pictures/people/1Nxq_3rp-PE.jpg" style="max-width:100%;height:100%" alt="">
-                  <div class="gallery-links d-flex align-items-center justify-content-center">
-                    <a href="#" title="" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
-                    <a href="/gallery-single?id=" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                  </div>
-                </div>
-              </div><!-- End Gallery Item -->
-              <div class="col-xl-3 col-lg-4 col-md-6">
-                <div class="gallery-item h-100">
-                  <img src="/static/pictures/people/2PQs7LlDRgE.jpg" style="max-width:100%;height:100%" alt="">
-                  <div class="gallery-links d-flex align-items-center justify-content-center">
-                    <a href="#" title="" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
-                    <a href="/gallery-single?id=" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                  </div>
-                </div>
-              </div><!-- End Gallery Item -->
+              <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                  {{ range $idx,$info :=  .Pages }}
+                  <li class="page-item"><a class="page-link" href="/creation?&page={{$info}}">{{$info}}</a></li>
+                  {{ end }}
+                </ul>
+              </nav>
 
             </div>
+
           </div>
         </section><!-- End Gallery Section -->
 
@@ -494,14 +474,78 @@
           } = res;
           document.getElementById('creating-image').src = data.imageInfo.path;
           window.sessionStorage.setItem('origin-image-id', data.imageInfo.id);
+          window.sessionStorage.setItem('origin-image-path', data.imageInfo.path);
           $('#current-image-id').text(data.imageInfo.id);
           $('#image-info').text("图片宽度："+data.img.Width+"像素，高度："+data.img.Height+"像素");
+          $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            $('#msg').text(""); // 清空元素的文本内容
+          }, 5000); // 5000毫秒 = 5秒
         },
         error: function (error) {
           console.log(error)
         }
       });
     });
+    // 撤销图像
+    $('#revoke-image').click(function () {
+      let token = window.sessionStorage.getItem('token');
+      let origin_image_id = window.sessionStorage.getItem('origin-image-id');
+      let origin_image_path = window.sessionStorage.getItem('origin-image-path');
+      let msg = $('#msg');
+      if (token === null){
+        msg.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 3000毫秒 = 3秒
+        return
+      }
+      if (origin_image_path === null){
+        msg.text("请上传文件后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 3000毫秒 = 3秒
+        return
+      }
+      document.getElementById('creating-image').src = origin_image_path;
+      $('#current-image-id').text(origin_image_id);
+      msg.text("回撤图片成功");
+      setTimeout(function clearContent() {
+        msg.text(""); // 清空元素的文本内容
+      }, 5000); // 5000毫秒 = 5秒
+    });
+    // 保存图片
+    $('#save-image').click(function () {
+      let token = window.sessionStorage.getItem('token');
+      let imageId = document.getElementById('current-image-id').textContent
+      let msg = $('#msg');
+      if (token === null){
+        msg.text("请登录后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 3000毫秒 = 3秒
+        return
+      }
+      if (imageId===null || imageId===""){
+        msg.text("请上传文件后重试！");
+        setTimeout(function clearContent() {
+          msg.text(""); // 清空元素的文本内容
+        }, 5000); // 5000毫秒 = 5秒
+        return
+      }
+      let imagePath = document.getElementById('creating-image');
+      let imageName = getImageNameFromSrc(imagePath.src);
+      // 创建一个下载链接并触发点击下载
+      let downloadLink = document.createElement('a');
+      downloadLink.href = imagePath.src;
+      downloadLink.download = imageName;  // 指定下载的文件名
+      downloadLink.click();
+    });
+    // 从图片链接的src属性中提取文件名
+    function getImageNameFromSrc(src) {
+      var matches = src.match(/\/([^/]+)$/); // 从 URL 中提取最后一个斜杠后面的部分
+      return matches ? matches[1] : 'downloaded_image.jpg'; // 如果没有匹配到，默认使用 'downloaded_image.jpg'
+    }
     // 通用物体和场景识别
     $('.general-recognition').click(function () {
       let token = window.sessionStorage.getItem('token');
@@ -523,6 +567,7 @@
         return
       }
       msg.text("正在图像识别中。。。");
+      document.getElementById('general-recognition').disabled=true // 3秒内不能点击
       let formData = new FormData();
       formData.append('userId', token);
       formData.append('imageId', imageId);
@@ -545,13 +590,25 @@
           if (msg==="通用物体和场景识别成功"){
             document.getElementById('recognition-info').style.display = "block";
             $('#recognition-base').text("识别名称："+data.imageInfo.keyword+"；识别标签："+data.imageInfo.root+"；识别准确率："+data.imageInfo.score);
-            $('#recognition-baike-url').text("百度百科页面链接："+data.imageInfo.baike_url);
-            document.getElementById('recognition-baike-url').href = data.imageInfo.baike_url;
-            $('#recognition-image-url').text("百科图片链接："+data.imageInfo.image_url);
-            document.getElementById('recognition-image-url').href = data.imageInfo.image_url;
-            $('#recognition-description').text("百科内容描述："+data.imageInfo.description);
+            console.log(data.imageInfo.baike_url)
+            console.log(data.imageInfo.image_url)
+            console.log(data.imageInfo.description)
+            if (data.imageInfo.baike_url!==""){
+              $('#recognition-baike-url').text("百度百科页面链接："+data.imageInfo.baike_url);
+              document.getElementById('recognition-baike-url').href = data.imageInfo.baike_url;
+            }
+            if (data.imageInfo.image_url!=="") {
+              $('#recognition-image-url').text("百科图片链接：" + data.imageInfo.image_url);
+              document.getElementById('recognition-image-url').href = data.imageInfo.image_url;
+            }
+            if (data.imageInfo.description!=="") {
+              $('#recognition-description').text("百科内容描述：" + data.imageInfo.description);
+            }
           }
           $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            document.getElementById('general-recognition').disabled=false // 3秒内不能点击
+          }, 3000); // 3000毫秒 = 3秒
           setTimeout(function clearContent() {
             $('#msg').text(""); // 清空元素的文本内容
           }, 5000); // 5000毫秒 = 5秒
@@ -582,6 +639,7 @@
         return
       }
       msg.text("正在图像清晰度增强中。。。");
+      document.getElementById('clarity-enhancement').disabled=true // 3秒内不能点击
       let formData = new FormData();
       formData.append('userId', token);
       formData.append('imageId', imageId);
@@ -604,6 +662,9 @@
           document.getElementById('creating-image').src = data.imageInfo.path;
           $('#current-image-id').text(data.imageInfo.id);
           $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            document.getElementById('clarity-enhancement').disabled=false // 3秒内不能点击
+          }, 3000); // 3000毫秒 = 3秒
           setTimeout(function clearContent() {
             $('#msg').text(""); // 清空元素的文本内容
           }, 5000); // 5000毫秒 = 5秒
@@ -634,6 +695,7 @@
         return
       }
       msg.text("正在图像色彩增强中。。。");
+      document.getElementById('color-enhancement').disabled=true // 3秒内不能点击
       let formData = new FormData();
       formData.append('userId', token);
       formData.append('imageId', imageId);
@@ -656,6 +718,9 @@
           document.getElementById('creating-image').src = data.imageInfo.path;
           $('#current-image-id').text(data.imageInfo.id);
           $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            document.getElementById('color-enhancement').disabled=false // 3秒内不能点击
+          }, 3000); // 3000毫秒 = 3秒
           setTimeout(function clearContent() {
             $('#msg').text(""); // 清空元素的文本内容
           }, 5000); // 5000毫秒 = 5秒
@@ -686,6 +751,7 @@
         return
       }
       msg.text("正在图像对比度增强中。。。");
+      document.getElementById('contrast-enhancement').disabled=true // 3秒内不能点击
       let formData = new FormData();
       formData.append('userId', token);
       formData.append('imageId', imageId);
@@ -708,6 +774,9 @@
           document.getElementById('creating-image').src = data.imageInfo.path;
           $('#current-image-id').text(data.imageInfo.id);
           $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            document.getElementById('contrast-enhancement').disabled=false // 3秒内不能点击
+          }, 3000); // 3000毫秒 = 3秒
           setTimeout(function clearContent() {
             $('#msg').text(""); // 清空元素的文本内容
           }, 5000); // 5000毫秒 = 5秒
@@ -738,6 +807,7 @@
         return
       }
       msg.text("正在图像无损放大中。。。");
+      document.getElementById('zoom-pro').disabled=true // 3秒内不能点击
       let formData = new FormData();
       formData.append('userId', token);
       formData.append('imageId', imageId);
@@ -760,6 +830,9 @@
           document.getElementById('creating-image').src = data.imageInfo.path;
           $('#current-image-id').text(data.imageInfo.id);
           $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            document.getElementById('zoom-pro').disabled=false // 3秒内不能点击
+          }, 3000); // 3000毫秒 = 3秒
           setTimeout(function clearContent() {
             $('#msg').text(""); // 清空元素的文本内容
           }, 5000); // 5000毫秒 = 5秒
@@ -790,6 +863,7 @@
         return
       }
       msg.text("正在图像去雾中。。。");
+      document.getElementById('defogging').disabled=true // 3秒内不能点击
       let formData = new FormData();
       formData.append('userId', token);
       formData.append('imageId', imageId);
@@ -813,6 +887,9 @@
           $('#current-image-id').text(data.imageInfo.id);
           $('#msg').text(msg);
           setTimeout(function clearContent() {
+            document.getElementById('defogging').disabled=false // 3秒内不能点击
+          }, 3000); // 3000毫秒 = 3秒
+          setTimeout(function clearContent() {
             $('#msg').text(""); // 清空元素的文本内容
           }, 5000); // 5000毫秒 = 5秒
         },
@@ -826,7 +903,6 @@
       let token = window.sessionStorage.getItem('token');
       let imageId = document.getElementById('current-image-id').textContent
       let style = $(this).attr('name');
-      console.log('点击的下拉菜单项name属性值：', style);
       let msg = $('#msg');
       if (token === null){
         msg.text("请登录后重试！");
@@ -844,6 +920,7 @@
         return
       }
       msg.text("正在图像风格转换中。。。");
+      document.getElementById('style-conversion').disabled=true // 3秒内不能点击
       let formData = new FormData();
       formData.append('userId', token);
       formData.append('imageId', imageId);
@@ -868,6 +945,9 @@
           $('#current-image-id').text(data.imageInfo.id);
           $('#msg').text(msg);
           setTimeout(function clearContent() {
+            document.getElementById('style-conversion').disabled=false // 3秒内不能点击
+          }, 3000); // 3000毫秒 = 3秒
+          setTimeout(function clearContent() {
             $('#msg').text(""); // 清空元素的文本内容
           }, 5000); // 5000毫秒 = 5秒
         },
@@ -881,7 +961,6 @@
       let token = window.sessionStorage.getItem('token');
       let imageId = document.getElementById('current-image-id').textContent
       let type = $(this).attr('name');
-      console.log('点击的下拉菜单项name属性值：', type);
       let msg = $('#msg');
       if (token === null){
         msg.text("请登录后重试！");
@@ -899,6 +978,7 @@
         return
       }
       msg.text("正在人像动漫化中。。。");
+      document.getElementById('animated-portraits').disabled=true // 3秒内不能点击
       let formData = new FormData();
       formData.append('userId', token);
       formData.append('imageId', imageId);
@@ -922,6 +1002,9 @@
           document.getElementById('creating-image').src = data.imageInfo.path;
           $('#current-image-id').text(data.imageInfo.id);
           $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            document.getElementById('animated-portraits').disabled=false // 3秒内不能点击
+          }, 3000); // 3000毫秒 = 3秒
           setTimeout(function clearContent() {
             $('#msg').text(""); // 清空元素的文本内容
           }, 5000); // 5000毫秒 = 5秒
@@ -968,6 +1051,7 @@
         return
       }
       msg.text("正在自定义图像风格中。。。");
+      document.getElementById('custom-style-text').disabled=true // 3秒内不能点击
       let formData = new FormData();
       formData.append('userId', token);
       formData.append('imageId', imageId);
@@ -992,6 +1076,9 @@
           $('#current-image-id').text(data.imageInfo.id);
           document.getElementById('custom-style-info').style.display="none";
           $('#msg').text(msg);
+          setTimeout(function clearContent() {
+            document.getElementById('custom-style-text').disabled=false // 3秒内不能点击
+          }, 3000); // 3000毫秒 = 3秒
           setTimeout(function clearContent() {
             $('#msg').text(""); // 清空元素的文本内容
           }, 5000); // 5000毫秒 = 5秒

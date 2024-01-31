@@ -26,6 +26,11 @@ import (
 type ShowCreation struct {
 }
 
+// GetCreationImage 获取二次创作图片
+func (sc ShowCreation) GetCreationImage() ([]models.Creation, error) {
+	return mysql.GetCreations()
+}
+
 // SetUploadImage 上传图片
 func (sc ShowCreation) SetUploadImage(c *gin.Context, userID string, image multipart.File, header *multipart.FileHeader) (models.Image, image2.Config, error) {
 	var sf snowflake.Snowflake
@@ -65,6 +70,11 @@ func (sc ShowCreation) SetUploadImage(c *gin.Context, userID string, image multi
 	}
 	info, err := mysql.CreateUploadImage(imageInfo)
 	return info, img, err
+}
+
+// RevokeImage 回撤图片
+func (sc ShowCreation) RevokeImage(imageId string) (models.Creation, error) {
+	return mysql.GetCreateImage(imageId)
 }
 
 // ImageEnhancement 图像增强接口

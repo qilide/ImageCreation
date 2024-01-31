@@ -530,6 +530,40 @@
                 }
             }
         },
+        "/creation": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于显示创作页面",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "显示创作页面"
+                ],
+                "summary": "显示创作页面",
+                "responses": {
+                    "200": {
+                        "description": "显示创作页面成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "显示创作页面失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
         "/creation/animated/portraits": {
             "post": {
                 "security": [
@@ -727,6 +761,40 @@
                     },
                     "401": {
                         "description": "图像去雾失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    }
+                }
+            }
+        },
+        "/creation/revoke": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "用于回撤图像",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "回撤图像"
+                ],
+                "summary": "回撤图像",
+                "responses": {
+                    "200": {
+                        "description": "回撤图像成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Information"
+                        }
+                    },
+                    "401": {
+                        "description": "回撤图像失败",
                         "schema": {
                             "$ref": "#/definitions/response.Information"
                         }
